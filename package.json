@@ -23,6 +23,7 @@
   ],
   "main": "./lib",
   "dependencies": {
+    "kerouac-sitemap": "^0.1.1",
     "package-json": "^4.0.1"
   },
   "devDependencies": {
