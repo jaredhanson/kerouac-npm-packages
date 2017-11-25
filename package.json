@@ -23,6 +23,8 @@
   ],
   "main": "./lib",
   "dependencies": {
+    "github": "^12.0.5",
+    "hosted-git-info": "^2.5.0",
     "js-yaml": "^3.10.0",
     "kerouac-sitemap": "^0.1.1",
     "package-json": "^4.0.1"
