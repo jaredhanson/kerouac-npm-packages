@@ -45,7 +45,7 @@ describe('handlers/show', function() {
     });
     
     var handler = $require('../../lib/handlers/show',
-      { 'package-json': packageJsonStub, '../scm/github': scmStub });
+      { 'package-json': packageJsonStub, '../scm': scmStub });
     
     
     var page, layout, err;
@@ -64,12 +64,9 @@ describe('handlers/show', function() {
         .dispatch();
     });
     
-    it('should load metadata from npm', function() {
+    it('should load metadata from remote repositories', function() {
       expect(packageJsonStub.getCall(0).args[0]).to.equal('passport-openid');
-    });
-    
-    it('should load metadata from scm', function() {
-      expect(scmStub.get.getCall(0).args[0]).to.deep.equal({ name: 'passport-openid', owner: 'jaredhanson' });
+      expect(scmStub.get.getCall(0).args[0]).to.equal('git://github.com/jaredhanson/passport-openid.git');
     });
   
     it('should set metadata', function() {
