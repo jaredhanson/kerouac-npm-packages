@@ -6,7 +6,7 @@ var github = require('../../lib/scm/github');
 
 describe('scm/github', function() {
   
-  describe.only('get repository', function() {
+  describe('get repository', function() {
     var api;
     
     function GitHubApiStub(opts) {
@@ -155,6 +155,68 @@ describe('scm/github', function() {
       expect(repo.createdAt).to.deep.equal(new Date(Date.parse('2014-05-27T23:35:07.000Z')));
       expect(repo.modifiedAt).to.deep.equal(new Date(Date.parse('2017-07-20T20:27:19.000Z')));
     });
-  });
+  }); // get repository
+  
+  describe('get repository that is not found', function() {
+    var api;
+    
+    function GitHubApiStub(opts) {
+      api = this;
+      this._opts = opts;
+      this.repos = { get: function(opts, cb) {
+        api._getopts = opts;
+        
+        return cb({
+          message: '{"message":"Not Found","documentation_url":"https://developer.github.com/v3"}',
+          code: 404,
+          status: 'Not Found',
+          headers: 
+           { date: 'Mon, 27 Nov 2017 22:23:59 GMT',
+             'content-type': 'application/json; charset=utf-8',
+             'content-length': '77',
+             connection: 'close',
+             server: 'GitHub.com',
+             status: '404 Not Found',
+             'x-ratelimit-limit': '5000',
+             'x-ratelimit-remaining': '4998',
+             'x-ratelimit-reset': '1511824994',
+             'x-oauth-scopes': 'public_repo',
+             'x-accepted-oauth-scopes': 'repo',
+             'x-github-media-type': 'github.drax-preview; format=json',
+             'access-control-expose-headers': 'ETag, Link, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval',
+             'access-control-allow-origin': '*',
+             'content-security-policy': 'default-src \'none\'',
+             'strict-transport-security': 'max-age=31536000; includeSubdomains; preload',
+             'x-content-type-options': 'nosniff',
+             'x-frame-options': 'deny',
+             'x-xss-protection': '1; mode=block',
+             'x-runtime-rack': '0.031205',
+             'x-github-request-id': 'E227:13A17:3E4F:4FD3:5A1C907F' }
+        })
+      } };
+    }
+    
+    
+    var repo;
+    before(function(done) {
+      var github = $require('../../lib/scm/github', { 'github': GitHubApiStub });
+      
+      github.get({ project: 'passport-notfound', user: 'johndoe' }, function(err, r) {
+        if (err) { return done(err); }
+        repo = r;
+        done();
+      });
+    });
+    
+    it('should initialize GitHub API', function() {
+      expect(api._opts).to.deep.equal({});
+    });
+    
+    it('should get repository', function() {
+      expect(api._getopts).to.deep.equal({ repo: 'passport-notfound', owner: 'johndoe' });
+      
+      expect(repo).to.equal(undefined)
+    });
+  }); // get repository that is not found
   
 });
