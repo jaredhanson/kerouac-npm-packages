@@ -26,7 +26,7 @@ describe('handlers/show', function() {
       readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
       homepage: 'https://github.com/jaredhanson/passport-openid',
       keywords: [
-        'openid'
+        'passport', 'openid', 'identity'
       ],
       bugs: {
         url: 'http://github.com/jaredhanson/passport-openid/issues'
@@ -67,6 +67,10 @@ describe('handlers/show', function() {
     it('should load metadata from npm', function() {
       expect(packageJsonStub.getCall(0).args[0]).to.equal('passport-openid');
     });
+    
+    it('should load metadata from scm', function() {
+      expect(scmStub.get.getCall(0).args[0]).to.deep.equal({ name: 'passport-openid', owner: 'jaredhanson' });
+    });
   
     it('should set metadata', function() {
       expect(page.package).to.equal(true);
@@ -74,7 +78,17 @@ describe('handlers/show', function() {
     
     it('should render with locals', function() {
       expect(page.locals.name).to.equal('passport-openid');
-      //expect(page.locals.content).to.equal('<p>This post was written using Markdown.</p>\n');
+      expect(page.locals.description).to.equal('OpenID authentication strategy for Passport.');
+      expect(page.locals.keywords).to.deep.equal([ 'passport', 'openid', 'identity' ]);
+      expect(page.locals.homepage).to.equal('https://github.com/jaredhanson/passport-openid');
+      expect(page.locals.version).to.equal('0.4.0');
+      expect(page.locals.licence).to.equal(undefined);
+      expect(page.locals.createdAt).to.deep.equal(new Date(Date.parse('2011-11-04T00:28:17.973Z')));
+      expect(page.locals.modifiedAt).to.deep.equal(new Date(Date.parse('2017-08-30T14:29:54.769Z')));
+    });
+    
+    it('should render layout', function() {
+      expect(layout).to.equal('package');
     });
   });
   
