@@ -30,6 +30,7 @@
     "moment": "^2.20.1",
     "npm-user": "^3.0.1",
     "package-json": "^4.0.1",
+    "pkg-downloads": "^2.3.1",
     "request": "^2.83.0",
     "spdx-license-list": "^3.0.1"
   },
