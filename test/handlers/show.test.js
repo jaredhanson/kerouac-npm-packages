@@ -2,7 +2,7 @@ var $require = require('proxyquire');
 var chai = require('chai');
 var sinon = require('sinon');
 var kerouac = require('kerouac')
-var handler = require('../../lib/handlers/show');
+var handler = require('../../app/handlers/show');
 
 
 describe('handlers/show', function() {
@@ -44,7 +44,7 @@ describe('handlers/show', function() {
       modifiedAt: new Date(Date.parse('2017-09-16T23:34:19.000Z'))
     });
     
-    var handler = $require('../../lib/handlers/show',
+    var handler = $require('../../app/handlers/show',
       { 'package-json': packageJsonStub, '../scm': scmStub });
     
     

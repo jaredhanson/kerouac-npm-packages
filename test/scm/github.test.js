@@ -1,7 +1,7 @@
 var $require = require('proxyquire');
 var chai = require('chai');
 var sinon = require('sinon');
-var github = require('../../lib/scm/github');
+var github = require('../../app/scm/github');
 
 
 describe('scm/github', function() {
@@ -130,7 +130,7 @@ describe('scm/github', function() {
     
     var repo;
     before(function(done) {
-      var github = $require('../../lib/scm/github', { 'github': GitHubApiStub });
+      var github = $require('../../app/scm/github', { 'github': GitHubApiStub });
       
       github.get({ project: 'passport-slack', user: 'mjpearson' }, function(err, r) {
         if (err) { return done(err); }
@@ -199,7 +199,7 @@ describe('scm/github', function() {
     
     var repo;
     before(function(done) {
-      var github = $require('../../lib/scm/github', { 'github': GitHubApiStub });
+      var github = $require('../../app/scm/github', { 'github': GitHubApiStub });
       
       github.get({ project: 'passport-notfound', user: 'johndoe' }, function(err, r) {
         if (err) { return done(err); }
