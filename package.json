@@ -22,6 +22,12 @@
     }
   ],
   "main": "./app",
+  "assembly": {
+    "namespace": "io.modulate/comp/lang/javascript",
+    "components": [
+      "site"
+    ]
+  },
   "dependencies": {
     "github": "^12.0.5",
     "hosted-git-info": "^2.5.0",
