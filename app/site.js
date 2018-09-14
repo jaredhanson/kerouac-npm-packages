@@ -78,3 +78,8 @@ exports = module.exports = function(dir, options) {
   
   return site;
 };
+
+exports['@implements'] = [
+  'http://i.kerouacjs.org/Site',
+  'http://io.modulate/comp/lang/javascript/packages/WWWSite'
+];
