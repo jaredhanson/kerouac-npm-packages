@@ -1,6 +1,6 @@
 /* global describe, it */
 
-var packages = require('..');
+var packages = require('../app/site');
 var Queue = require('./stubs/queue');
 
 
