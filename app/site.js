@@ -3,7 +3,7 @@ var kerouac = require('kerouac')
   , path = require('path');
 
 
-exports = module.exports = function(showHandler) {
+exports = module.exports = function(showHandler, allHandler) {
   var dir = 'data/packages';
   var options = {};
   
@@ -25,8 +25,8 @@ exports = module.exports = function(showHandler) {
   
   site.page('/:name.html', showHandler);
   
-  site.page('/-/v1/all.json', require('./handlers/api/v1/all')(limit));
-  site.page('/-/v1/all/:page.json', require('./handlers/api/v1/all')(limit));
+  site.page('/-/v1/all.json', allHandler);
+  site.page('/-/v1/all/:page.json', allHandler);
   if (fs.existsSync(featured)) {
     site.page('/-/v1/feeds/featured.json', require('./handlers/api/v1/feeds/featured')(featured));
   }
@@ -84,5 +84,6 @@ exports['@implements'] = [
   'http://io.modulate/comp/lang/javascript/packages/WWWSite'
 ];
 exports['@require'] = [
-  './handlers/show'
+  './handlers/show',
+  './handlers/api/v1/all'
 ];

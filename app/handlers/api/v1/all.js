@@ -23,6 +23,7 @@ var uri = require('url');
  * particularly clear or consistent itself.
  */
 exports = module.exports = function(limit) {
+  var limit = 25;
   
   function filter(page, next) {
     var packages = page.site.pages.filter(function(p) {
@@ -104,3 +105,5 @@ exports = module.exports = function(limit) {
     render
   ];
 };
+
+exports['@require'] = [];
