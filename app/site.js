@@ -3,7 +3,7 @@ var kerouac = require('kerouac')
   , path = require('path');
 
 
-exports = module.exports = function(showHandler, allHandler) {
+exports = module.exports = function(showHandler, allHandler, featuredHandler) {
   var dir = 'data/packages';
   var options = {};
   
@@ -28,7 +28,7 @@ exports = module.exports = function(showHandler, allHandler) {
   site.page('/-/v1/all.json', allHandler);
   site.page('/-/v1/all/:page.json', allHandler);
   if (fs.existsSync(featured)) {
-    site.page('/-/v1/feeds/featured.json', require('./handlers/api/v1/feeds/featured')(featured));
+    site.page('/-/v1/feeds/featured.json', featuredHandler);
   }
   
   site.page('/sitemap.xml', require('kerouac-sitemap')());
@@ -85,5 +85,6 @@ exports['@implements'] = [
 ];
 exports['@require'] = [
   './handlers/show',
-  './handlers/api/v1/all'
+  './handlers/api/v1/all',
+  './handlers/api/v1/feeds/featured'
 ];

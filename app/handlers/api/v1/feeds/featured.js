@@ -1,9 +1,13 @@
 var fs = require('fs')
+  , path = require('path')
   , uri = require('url')
   , YAML = require('js-yaml');
 
 
-exports = module.exports = function(file) {
+exports = module.exports = function() {
+  var dir = 'data/packages';
+  var file = path.join(dir, '_feeds', 'featured.yaml');
+  
   
   function initialize(page, next) {
     page._internals = {};
@@ -107,3 +111,5 @@ exports = module.exports = function(file) {
     render
   ];
 }
+
+exports['@require'] = [];
