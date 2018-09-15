@@ -3,9 +3,9 @@ var kerouac = require('kerouac')
   , path = require('path');
 
 
-exports = module.exports = function(dir, options) {
-  dir = dir || 'data/packages';
-  options = options || {};
+exports = module.exports = function(showHandler) {
+  var dir = 'data/packages';
+  var options = {};
   
   var limit = options.limit || 25
     , featured = path.join(dir, '_feeds', 'featured.yaml');
@@ -23,7 +23,7 @@ exports = module.exports = function(dir, options) {
   
   //site.page('/all.html', require('./handlers/list')());
   
-  site.page('/:name.html', require('./handlers/show')(dir));
+  site.page('/:name.html', showHandler);
   
   site.page('/-/v1/all.json', require('./handlers/api/v1/all')(limit));
   site.page('/-/v1/all/:page.json', require('./handlers/api/v1/all')(limit));
@@ -82,4 +82,7 @@ exports = module.exports = function(dir, options) {
 exports['@implements'] = [
   'http://i.kerouacjs.org/Site',
   'http://io.modulate/comp/lang/javascript/packages/WWWSite'
+];
+exports['@require'] = [
+  './handlers/show'
 ];

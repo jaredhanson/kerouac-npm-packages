@@ -11,6 +11,8 @@ var kerouac = require('kerouac')
 
 
 exports = module.exports = function(dir) {
+  var dir = 'data/packages';
+  
   
   function initialize(page, next) {
     page._internals = {};
@@ -197,8 +199,8 @@ exports = module.exports = function(dir) {
   
   
   return [
-    kerouac.manifest(),
-    kerouac.canonicalURL(),
+    //kerouac.manifest(),
+    //kerouac.canonicalURL(),
     initialize,
     loadDataRecord,
     loadMetadataFromNPM,
@@ -210,3 +212,5 @@ exports = module.exports = function(dir) {
     errorHandler
   ];
 };
+
+exports['@require'] = [];
