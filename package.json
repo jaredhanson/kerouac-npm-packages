@@ -39,7 +39,8 @@
     "package-json": "^4.0.1",
     "pkg-downloads": "^2.3.1",
     "request": "^2.83.0",
-    "spdx-license-list": "^3.0.1"
+    "spdx-license-list": "^3.0.1",
+    "utils-merge": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^3.0.0",

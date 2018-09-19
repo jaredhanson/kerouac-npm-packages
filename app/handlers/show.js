@@ -24,6 +24,7 @@ exports = module.exports = function(packageRegistry) {
     console.log(page.params)
     
     packageRegistry.read(page.params.name, function(err, pkg) {
+      console.log('FETCHED!!!!');
       console.log(err);
       console.log(pkg);
     });
