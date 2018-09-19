@@ -3,7 +3,7 @@ var kerouac = require('kerouac')
   , path = require('path');
 
 
-exports = module.exports = function(showHandler, allHandler, featuredHandler) {
+exports = module.exports = function(showHandler, allHandler, featuredHandler, packageRegistry) {
   var dir = 'data/packages';
   var options = {};
   
@@ -35,6 +35,22 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler) {
   
   site.bind(function(done) {
     var self = this;
+    
+    packageRegistry.list(function(err, pkgs) {
+      if (err) { return done(err); }
+      
+      console.log(pkgs);
+      
+      var i, len;
+      for (i = 0, len = pkgs.length; i < len; ++i) {
+        self.add('/' + pkgs[i].id + '.html');
+      }
+    
+      done();
+    });
+    
+    
+    return;
     
     fs.readdir(dir, function(err, files) {
       if (err && err.code == 'ENOENT') {
@@ -81,10 +97,11 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler) {
 
 exports['@implements'] = [
   'http://i.kerouacjs.org/Site',
-  'http://io.modulate/comp/lang/javascript/packages/WWWSite'
+  'http://io.modulate.com/comp/lang/javascript/packages/WWWSite'
 ];
 exports['@require'] = [
   './handlers/show',
   './handlers/api/v1/all',
-  './handlers/api/v1/feeds/featured'
+  './handlers/api/v1/feeds/featured',
+  'http://io.modulate.com/comp/lang/javascript/PackageRegistry'
 ];

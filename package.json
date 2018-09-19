@@ -25,7 +25,8 @@
   "assembly": {
     "namespace": "io.modulate/comp/lang/javascript",
     "components": [
-      "site"
+      "site",
+      "packages/registry/local"
     ]
   },
   "dependencies": {
