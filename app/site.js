@@ -43,7 +43,7 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler, pa
       
       var i, len;
       for (i = 0, len = pkgs.length; i < len; ++i) {
-        self.add('/' + pkgs[i].id + '.html');
+        self.add('/' + pkgs[i].name + '.html');
       }
     
       done();

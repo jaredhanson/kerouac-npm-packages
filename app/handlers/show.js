@@ -10,13 +10,23 @@ var kerouac = require('kerouac')
   , licenses = require('spdx-license-list');
 
 
-exports = module.exports = function(dir) {
+exports = module.exports = function(packageRegistry) {
   var dir = 'data/packages';
   
   
   function initialize(page, next) {
     page._internals = {};
     next();
+  }
+  
+  function fetchPackage(page, next) {
+    console.log('FETCH PACKAGE');
+    console.log(page.params)
+    
+    packageRegistry.read(page.params.name, function(err, pkg) {
+      console.log(err);
+      console.log(pkg);
+    });
   }
   
   function loadDataRecord(page, next) {
@@ -202,6 +212,7 @@ exports = module.exports = function(dir) {
     //kerouac.manifest(),
     //kerouac.canonicalURL(),
     initialize,
+    fetchPackage,
     loadDataRecord,
     loadMetadataFromNPM,
     //loadUserMetadata,
@@ -213,4 +224,6 @@ exports = module.exports = function(dir) {
   ];
 };
 
-exports['@require'] = [];
+exports['@require'] = [
+  'http://io.modulate.com/comp/lang/javascript/PackageRegistry'
+];
