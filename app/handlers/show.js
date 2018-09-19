@@ -20,13 +20,23 @@ exports = module.exports = function(packageRegistry) {
   }
   
   function fetchPackage(page, next) {
-    console.log('FETCH PACKAGE');
-    console.log(page.params)
-    
     packageRegistry.read(page.params.name, function(err, pkg) {
-      console.log('FETCHED!!!!');
-      console.log(err);
-      console.log(pkg);
+      page.locals._id = page.params.name;
+      if (pkg.unpublished || pkg.ignore) { return page.skip(); }
+
+      page._internals.package = pkg;
+      page.locals.name = pkg.name;
+      page.locals.description = pkg.description;
+
+      page.locals.createdAt = pkg.ctime;
+      page.locals.modifiedAt = pkg.mtime;
+      page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
+
+      page.locals.license = {};
+      page.locals.license.name = 'foo';
+      page.locals.license.url = 'foobar';
+
+      next();
     });
   }
   
@@ -143,10 +153,11 @@ exports = module.exports = function(packageRegistry) {
       , pkg = page._internals.package
       , repository = pkg.repository;
     if (!repository) {
-      if (!rec.repository) {
-        return next();
-      }
-      repository = { url: rec.repository };
+      return next();
+      //if (!rec.repository) {
+      //  return next();
+      //}
+      //repository = { url: rec.repository };
     }
     
     SCM.get(repository.url, function(err, repo) {
@@ -214,8 +225,8 @@ exports = module.exports = function(packageRegistry) {
     //kerouac.canonicalURL(),
     initialize,
     fetchPackage,
-    loadDataRecord,
-    loadMetadataFromNPM,
+    //loadDataRecord,
+    //loadMetadataFromNPM,
     //loadUserMetadata,
     loadNPMDownloadCounts,
     loadRepositoryMetadata,
