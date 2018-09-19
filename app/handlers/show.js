@@ -21,7 +21,7 @@ exports = module.exports = function(packageRegistry) {
   
   function fetchPackage(page, next) {
     packageRegistry.read(page.params.name, function(err, pkg) {
-      page.locals._id = page.params.name;
+      //page.locals._id = page.params.name;
       if (pkg.unpublished || pkg.ignore) { return page.skip(); }
 
       page._internals.package = pkg;
@@ -178,7 +178,7 @@ exports = module.exports = function(packageRegistry) {
   function renderReadMe(page, next) {
     var pkg = page._internals.package
       , readme = pkg.readme;
-    if (!readme) {
+    if (!readme && page.locals.version) {
       // sometimes npm doesn't set the root level readme property
       readme = pkg.versions[page.locals.version].readme
     }
@@ -228,8 +228,8 @@ exports = module.exports = function(packageRegistry) {
     //loadDataRecord,
     //loadMetadataFromNPM,
     //loadUserMetadata,
-    loadNPMDownloadCounts,
-    loadRepositoryMetadata,
+    //loadNPMDownloadCounts,
+    //loadRepositoryMetadata,
     renderReadMe,
     render,
     errorHandler

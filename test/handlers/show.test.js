@@ -1,8 +1,81 @@
-var $require = require('proxyquire');
 var chai = require('chai');
+var expect = require('chai').expect;
 var sinon = require('sinon');
-var kerouac = require('kerouac')
-var handler = require('../../app/handlers/show');
+var factory = require('../../app/handlers/show');
+
+
+describe('handlers/show', function() {
+  
+  it('should export factory function', function() {
+    expect(factory).to.be.a('function');
+  });
+  
+  it('should be annotated', function() {
+    expect(factory['@implements']).to.be.undefined;
+    expect(factory['@singleton']).to.be.undefined;
+  });
+  
+  
+  describe('handler', function() {
+    var packageRegistry = {
+      read: function(){}
+    };
+    
+    
+    describe('with posts named using bare slugs', function() {
+      var page, layout, err;
+      
+      before(function() {
+        sinon.stub(packageRegistry, 'read').yields(null, {
+          name: 'passport-openid',
+          description: 'OpenID authentication strategy for Passport.',
+          versions: {},
+          //readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
+          ctime: new Date('2011-11-04T00:28:17.973Z'),
+          mtime: new Date('2017-08-30T14:29:54.769Z')
+        });
+      });
+    
+      after(function() {
+        packageRegistry.read.restore();
+      });
+      
+      before(function(done) {
+        chai.kerouac.handler(factory(packageRegistry))
+          .page(function(page) {
+            page.params = { name: 'passport-openid' };
+          })
+          .render(function(p, l) {
+            page = p;
+            layout = l;
+            done();
+          })
+          .dispatch();
+      });
+      
+      it('should set locals', function() {
+        expect(page.locals).to.deep.equal({
+          title: 'passport-openid',
+          name: 'passport-openid',
+          description: 'OpenID authentication strategy for Passport.',
+          readme: '<p>Sadly, this package has no README.</p>',
+          "license": {
+            "name": "foo",
+            "url": "foobar"
+          },
+          createdAt: new Date('2011-11-04T00:28:17.973Z'),
+          modifiedAt: new Date('2017-08-30T14:29:54.769Z'),
+          modifiedTimeAgo: 'a year ago'
+        });
+      });
+    });
+    
+  });
+  
+});
+
+
+
 
 
 /*

@@ -44,13 +44,19 @@ describe('NpmRegistry', function() {
       
       var pkg;
       before(function(done) {
-
-        registry.read('foo', function(err, p) {
+        registry.read('passport-openid', function(err, p) {
           if (err) { return done(err); }
           pkg = p;
           done();
         })
       })
+      
+      it('should call package-json correctly', function() {
+        expect(packageJsonStub.callCount).to.equal(1);
+        var call = packageJsonStub.getCall(0)
+        expect(call.args[0]).to.equal('passport-openid');
+        expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
+      });
       
       it('should read package', function() {
         expect(pkg).to.deep.equal({
