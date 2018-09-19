@@ -5,6 +5,7 @@ var kerouac = require('kerouac')
 var handler = require('../../app/handlers/show');
 
 
+/*
 describe('handlers/show', function() {
   var site = kerouac();
   
@@ -110,3 +111,5 @@ describe('handlers/show', function() {
   });
   
 });
+*/
+

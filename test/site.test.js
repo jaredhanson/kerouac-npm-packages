@@ -4,6 +4,7 @@ var packages = require('../app/site');
 var Queue = require('./stubs/queue');
 
 
+/*
 describe('kerouac-npm-packages', function() {
   
   describe('binding to directory containing packages implementing federation protocols', function() {
@@ -32,3 +33,4 @@ describe('kerouac-npm-packages', function() {
   });
   
 });
+*/
