@@ -10,7 +10,7 @@ var kerouac = require('kerouac')
   , LICENSES = require('spdx-license-list');
 
 
-exports = module.exports = function(packageRegistry, proj) {
+exports = module.exports = function(packageRegistry, project) {
   var dir = 'data/packages';
   
   
@@ -141,7 +141,7 @@ exports = module.exports = function(packageRegistry, proj) {
     var repo = page.locals.repository
     if (!repo) { return next(); }
     
-    proj.info(repo.url, { protocol: repo.type }, function(err, repo) {
+    project.info(repo.url, { protocol: repo.type }, function(err, repo) {
       if (err) { return next(err); }
       
       // TODO: clean this up, so its not on locals.
@@ -243,5 +243,5 @@ exports = module.exports = function(packageRegistry, proj) {
 
 exports['@require'] = [
   'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry',
-  'http://schemas.modulate.io/js/develop/proj'
+  'http://schemas.modulate.io/js/developer/project'
 ];

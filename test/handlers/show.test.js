@@ -133,6 +133,13 @@ describe('handlers/show', function() {
         expect(call.args[0]).to.equal('passport-facebook');
       });
       
+      it('should get project info', function() {
+        expect(project.info.callCount).to.equal(1);
+        var call = project.info.getCall(0)
+        expect(call.args[0]).to.equal('git://github.com/jaredhanson/passport-facebook.git');
+        expect(call.args[1]).to.deep.equal({ protocol: 'git' });
+      });
+      
       it('should set locals', function() {
         expect(page.locals).to.deep.equal({
           title: 'passport-facebook',
@@ -213,6 +220,13 @@ describe('handlers/show', function() {
         expect(packageRegistry.read.callCount).to.equal(1);
         var call = packageRegistry.read.getCall(0)
         expect(call.args[0]).to.equal('passport-openid');
+      });
+      
+      it('should get project info', function() {
+        expect(project.info.callCount).to.equal(1);
+        var call = project.info.getCall(0)
+        expect(call.args[0]).to.equal('git://github.com/jaredhanson/passport-openid.git');
+        expect(call.args[1]).to.deep.equal({ protocol: 'git' });
       });
       
       it('should set locals', function() {

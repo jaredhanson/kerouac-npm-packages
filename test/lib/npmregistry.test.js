@@ -170,6 +170,19 @@ describe('NpmRegistry', function() {
         expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
       });
       
+      it('should call pkg-downloads correctly', function() {
+        expect(pkgDownloadsStub.callCount).to.equal(3);
+        var call = pkgDownloadsStub.getCall(0)
+        expect(call.args[0]).to.equal('passport-facebook');
+        expect(call.args[1]).to.deep.equal({ period: 'day' });
+        call = pkgDownloadsStub.getCall(1)
+        expect(call.args[0]).to.equal('passport-facebook');
+        expect(call.args[1]).to.deep.equal({ period: 'week' });
+        call = pkgDownloadsStub.getCall(2)
+        expect(call.args[0]).to.equal('passport-facebook');
+        expect(call.args[1]).to.deep.equal({ period: 'month' });
+      });
+      
       it('should read package', function() {
         expect(pkg).to.deep.equal({
           name: 'passport-facebook',
@@ -279,7 +292,8 @@ describe('NpmRegistry', function() {
       pkgDownloadsStub.onThirdCall().resolves(23844);
       
       var NpmRegistry = $require('../../lib/npmregistry',
-        { 'package-json': packageJsonStub });
+        { 'package-json': packageJsonStub,
+          'pkg-downloads': pkgDownloadsStub });
       var registry = new NpmRegistry();
       
       
@@ -297,6 +311,19 @@ describe('NpmRegistry', function() {
         var call = packageJsonStub.getCall(0)
         expect(call.args[0]).to.equal('passport-openid');
         expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
+      });
+      
+      it('should call pkg-downloads correctly', function() {
+        expect(pkgDownloadsStub.callCount).to.equal(3);
+        var call = pkgDownloadsStub.getCall(0)
+        expect(call.args[0]).to.equal('passport-openid');
+        expect(call.args[1]).to.deep.equal({ period: 'day' });
+        call = pkgDownloadsStub.getCall(1)
+        expect(call.args[0]).to.equal('passport-openid');
+        expect(call.args[1]).to.deep.equal({ period: 'week' });
+        call = pkgDownloadsStub.getCall(2)
+        expect(call.args[0]).to.equal('passport-openid');
+        expect(call.args[1]).to.deep.equal({ period: 'month' });
       });
       
       it('should read package', function() {
