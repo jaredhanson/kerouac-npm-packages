@@ -97,11 +97,11 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler, pa
 
 exports['@implements'] = [
   'http://i.kerouacjs.org/Site',
-  'http://io.modulate.com/comp/lang/javascript/packages/WWWSite'
+  'http://schemas.modulate.io/js/comp/lang/javascript/packages/WWWSite'
 ];
 exports['@require'] = [
   './handlers/show',
   './handlers/api/v1/all',
   './handlers/api/v1/feeds/featured',
-  'http://io.modulate.com/comp/lang/javascript/PackageRegistry'
+  'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry'
 ];

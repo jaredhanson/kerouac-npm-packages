@@ -15,7 +15,7 @@ describe('packages/registry/local', function() {
   });
   
   it('should be annotated', function() {
-    expect(factory['@implements']).to.equal('http://io.modulate.com/comp/lang/javascript/PackageRegistry');
+    expect(factory['@implements']).to.equal('http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry');
     expect(factory['@singleton']).to.be.true;
   });
   

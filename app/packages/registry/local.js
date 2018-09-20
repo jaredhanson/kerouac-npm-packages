@@ -6,6 +6,6 @@ exports = module.exports = function() {
   return new LocalCuratedRegistry(npm);
 };
 
-exports['@implements'] = 'http://io.modulate.com/comp/lang/javascript/PackageRegistry';
+exports['@implements'] = 'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry';
 exports['@singleton'] = true;
 exports['@require'] = [];

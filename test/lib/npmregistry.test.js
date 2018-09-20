@@ -278,6 +278,10 @@ describe('NpmRegistry', function() {
           keywords: [ 'passport', 'openid', 'identity' ],
           versions: {},
           homepage: 'https://github.com/jaredhanson/passport-openid',
+          repository: {
+            type: 'git',
+            url: 'git://github.com/jaredhanson/passport-openid.git'
+          },
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',

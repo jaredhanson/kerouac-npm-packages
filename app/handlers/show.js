@@ -10,7 +10,7 @@ var kerouac = require('kerouac')
   , LICENSES = require('spdx-license-list');
 
 
-exports = module.exports = function(packageRegistry) {
+exports = module.exports = function(packageRegistry, proj) {
   var dir = 'data/packages';
   
   
@@ -30,6 +30,7 @@ exports = module.exports = function(packageRegistry) {
       if (pkg['dist-tags']) {
         page.locals.version = pkg['dist-tags']['latest'];
       }
+      page.locals.repository = pkg.repository;
       if (pkg.license) {
         page.locals.license = pkg.license;
         var license = LICENSES[pkg.license.type];
@@ -136,6 +137,23 @@ exports = module.exports = function(packageRegistry) {
   }
   
   function loadRepositoryMetadata(page, next) {
+    var repo = page.locals.repository
+    if (!repo) { return next(); }
+    
+    proj.info(repo.url, { protocol: repo.type }, function(err, repo) {
+      if (err) { return next(err); }
+      
+      // TODO: clean this up, so its not on locals.
+      if (!repo) {
+        page.locals.repository = pkg.repository;
+        return next();
+      }
+      page.locals.repository = repo;
+      next();
+    });
+    return;
+    
+    
     var rec = page._internals.record
       , pkg = page._internals.package
       , repository = pkg.repository;
@@ -215,7 +233,7 @@ exports = module.exports = function(packageRegistry) {
     //loadDataRecord,
     //loadMetadataFromNPM,
     //loadUserMetadata,
-    //loadRepositoryMetadata,
+    loadRepositoryMetadata,
     renderReadMe,
     render,
     errorHandler
@@ -223,5 +241,6 @@ exports = module.exports = function(packageRegistry) {
 };
 
 exports['@require'] = [
-  'http://io.modulate.com/comp/lang/javascript/PackageRegistry'
+  'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry',
+  'http://schemas.modulate.io/js/develop/proj'
 ];
