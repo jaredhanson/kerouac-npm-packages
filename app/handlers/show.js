@@ -30,6 +30,7 @@ exports = module.exports = function(packageRegistry, proj) {
       if (pkg['dist-tags']) {
         page.locals.version = pkg['dist-tags']['latest'];
       }
+      page.locals.homepage = pkg.homepage;
       page.locals.repository = pkg.repository;
       if (pkg.license) {
         page.locals.license = pkg.license;
@@ -145,10 +146,10 @@ exports = module.exports = function(packageRegistry, proj) {
       
       // TODO: clean this up, so its not on locals.
       if (!repo) {
-        page.locals.repository = pkg.repository;
+        //page.locals.repository = pkg.repository;
         return next();
       }
-      page.locals.repository = repo;
+      //page.locals.repository = repo;
       next();
     });
     return;
