@@ -59,18 +59,19 @@ describe('handlers/show', function() {
           name: 'passport-openid',
           description: 'OpenID authentication strategy for Passport.',
           readme: '<p>Sadly, this package has no README.</p>',
-          "license": {
-            "name": "foo",
-            "url": "foobar"
-          },
+          license: undefined,
           createdAt: new Date('2011-11-04T00:28:17.973Z'),
           modifiedAt: new Date('2017-08-30T14:29:54.769Z'),
           modifiedTimeAgo: 'a year ago'
         });
       });
-    });
+      
+      it('should render layout', function() {
+        expect(layout).to.equal('package');
+      });
+    }); // with posts named using bare slugs
     
-  });
+  }); // handler
   
 });
 

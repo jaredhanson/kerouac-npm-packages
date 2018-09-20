@@ -32,10 +32,7 @@ exports = module.exports = function(packageRegistry) {
       page.locals.modifiedAt = pkg.mtime;
       page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
 
-      page.locals.license = {};
-      page.locals.license.name = 'foo';
-      page.locals.license.url = 'foobar';
-
+      page.locals.license = pkg.license;
       next();
     });
   }
