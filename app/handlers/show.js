@@ -1,12 +1,5 @@
-var kerouac = require('kerouac')
-  , path = require('path')
-  , fs = require('fs')
-  , moment = require('moment')
-  , YAML = require('js-yaml')
-  , PackageMeta = require('package-json')
+var moment = require('moment')
   , npmUser = require('npm-user')
-  , npmDownloads = require('pkg-downloads')
-  , SCM = require('../scm')
   , LICENSES = require('spdx-license-list');
 
 
