@@ -137,14 +137,20 @@ describe('NpmRegistry', function() {
           'passport', 'facebook', 'identity'
         ],
         bugs: {
-          url: 'http://github.com/jaredhanson/passport-openid/issues'
+          url: 'http://github.com/jaredhanson/passport-facebook/issues'
         },
         homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
         license: 'MIT'
       });
       
+      var pkgDownloadsStub = sinon.stub()
+      pkgDownloadsStub.onFirstCall().resolves(7657);
+      pkgDownloadsStub.onSecondCall().resolves(28650);
+      pkgDownloadsStub.onThirdCall().resolves(183283);
+      
       var NpmRegistry = $require('../../lib/npmregistry',
-        { 'package-json': packageJsonStub });
+        { 'package-json': packageJsonStub,
+          'pkg-downloads': pkgDownloadsStub });
       var registry = new NpmRegistry();
       
       
@@ -182,6 +188,10 @@ describe('NpmRegistry', function() {
                  'authentication',
                  'identity' ],
               homepage: undefined,
+              repository: {
+                type: 'git',
+                url: 'git://github.com/jaredhanson/passport-facebook.git'
+              },
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -199,6 +209,10 @@ describe('NpmRegistry', function() {
                  'authentication',
                  'identity' ],
               homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+              repository: {
+                type: 'git',
+                url: 'git://github.com/jaredhanson/passport-facebook.git'
+              },
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -208,6 +222,10 @@ describe('NpmRegistry', function() {
             }
           },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+          repository: {
+            type: 'git',
+            url: 'git://github.com/jaredhanson/passport-facebook.git'
+          },
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
@@ -217,6 +235,11 @@ describe('NpmRegistry', function() {
             type: 'MIT'
           },
           readme: '# passport-facebook\n\n',
+          downloads: {
+            'last-day': 7657,
+            'last-week': 28650,
+            'last-month': 183283
+          },
           ctime: new Date('2011-10-23T22:27:46.568Z'),
           mtime: new Date('2018-08-03T00:35:46.879Z')
         });
@@ -249,6 +272,11 @@ describe('NpmRegistry', function() {
         },
         homepage: 'https://github.com/jaredhanson/passport-openid'
       });
+      
+      var pkgDownloadsStub = sinon.stub()
+      pkgDownloadsStub.onFirstCall().resolves(1029);
+      pkgDownloadsStub.onSecondCall().resolves(4004);
+      pkgDownloadsStub.onThirdCall().resolves(23844);
       
       var NpmRegistry = $require('../../lib/npmregistry',
         { 'package-json': packageJsonStub });
@@ -288,6 +316,11 @@ describe('NpmRegistry', function() {
             url: 'http://www.jaredhanson.net/'
           },
           readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
+          downloads: {
+            'last-day': 1029,
+            'last-week': 4004,
+            'last-month': 23844
+          },
           ctime: new Date('2011-11-04T00:28:17.973Z'),
           mtime: new Date('2017-08-30T14:29:54.769Z')
         });
