@@ -90,7 +90,7 @@ describe('handlers/show', function() {
       before(function(done) {
         chai.kerouac.handler(factory(packageRegistry))
           .page(function(page) {
-            page.params = { name: 'passport-openid' };
+            page.params = { name: 'passport-facebook' };
           })
           .render(function(p, l) {
             page = p;
@@ -103,7 +103,7 @@ describe('handlers/show', function() {
       it('should read from package repository', function() {
         expect(packageRegistry.read.callCount).to.equal(1);
         var call = packageRegistry.read.getCall(0)
-        expect(call.args[0]).to.equal('passport-openid');
+        expect(call.args[0]).to.equal('passport-facebook');
       });
       
       it('should set locals', function() {
