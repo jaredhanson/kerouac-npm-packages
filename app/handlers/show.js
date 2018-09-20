@@ -52,33 +52,6 @@ exports = module.exports = function(packageRegistry, project) {
     });
   }
   
-  function loadMetadataFromNPM(page, next) {
-    var rec = page._internals.record;
-    
-    PackageMeta(rec.name, { fullMetadata: true, allVersions: true })
-      .then(function(pkg) {
-        page._internals.package = pkg;
-        
-        page.locals.name = pkg.name;
-        page.locals.description = pkg.description;
-        page.locals.keywords = pkg.keywords;
-        page.locals.homepage = pkg.homepage;
-        if (pkg['dist-tags']) {
-          page.locals.version = pkg['dist-tags']['latest'];
-        }
-        page.locals.license = { type: pkg.license };
-        var license = LICENSES[pkg.license];
-        if (license) {
-          page.locals.license.name = license.name;
-          page.locals.license.url = license.url;
-        }
-        page.locals.createdAt = new Date(Date.parse(pkg.time.created));
-        page.locals.modifiedAt = new Date(Date.parse(pkg.time.modified));
-        page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
-      })
-      .then(next, next);
-  }
-  
   function loadUserMetadata(page, next) {
     var pkg = page._internals.package
       , user;
@@ -184,7 +157,6 @@ exports = module.exports = function(packageRegistry, project) {
     //kerouac.canonicalURL(),
     initialize,
     fetchPackage,
-    //loadMetadataFromNPM,
     //loadUserMetadata,
     loadRepositoryMetadata,
     renderReadMe,
