@@ -223,7 +223,7 @@ describe('NpmRegistry', function() {
       });
     }); // package
     
-    describe('package without versions', function() {
+    describe('package without license and versions', function() {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-openid',
         description: 'OpenID authentication strategy for Passport.',
@@ -288,7 +288,7 @@ describe('NpmRegistry', function() {
           mtime: new Date('2017-08-30T14:29:54.769Z')
         });
       });
-    }); // package without versions
+    }); // package without license and versions
     
   }); // #read
     

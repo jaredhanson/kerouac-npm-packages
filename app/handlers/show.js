@@ -7,7 +7,7 @@ var kerouac = require('kerouac')
   , npmUser = require('npm-user')
   , npmDownloads = require('pkg-downloads')
   , SCM = require('../scm')
-  , licenses = require('spdx-license-list');
+  , LICENSES = require('spdx-license-list');
 
 
 exports = module.exports = function(packageRegistry) {
@@ -27,12 +27,22 @@ exports = module.exports = function(packageRegistry) {
       page._internals.package = pkg;
       page.locals.name = pkg.name;
       page.locals.description = pkg.description;
+      if (pkg['dist-tags']) {
+        page.locals.version = pkg['dist-tags']['latest'];
+      }
+      if (pkg.license) {
+        page.locals.license = pkg.license;
+        var license = LICENSES[pkg.license.type];
+        if (license) {
+          page.locals.license.name = license.name;
+          page.locals.license.url = license.url;
+        }
+      }
 
       page.locals.createdAt = pkg.ctime;
       page.locals.modifiedAt = pkg.mtime;
       page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
 
-      page.locals.license = pkg.license;
       next();
     });
   }
@@ -67,7 +77,7 @@ exports = module.exports = function(packageRegistry) {
           page.locals.version = pkg['dist-tags']['latest'];
         }
         page.locals.license = { type: pkg.license };
-        var license = licenses[pkg.license];
+        var license = LICENSES[pkg.license];
         if (license) {
           page.locals.license.name = license.name;
           page.locals.license.url = license.url;
