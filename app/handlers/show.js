@@ -52,21 +52,6 @@ exports = module.exports = function(packageRegistry, project) {
     });
   }
   
-  function loadDataRecord(page, next) {
-    var file = path.resolve(dir, page.params.name + '.yaml');
-    
-    fs.readFile(file, 'utf8', function(err, data) {
-      if (err) { return next(err); }
-      
-      var record = YAML.safeLoad(data);
-      page._internals.record = record;
-      page.locals._id = page.params.name;
-      
-      if (record.unpublished || record.ignore) { return page.skip(); }
-      next();
-    });
-  }
-  
   function loadMetadataFromNPM(page, next) {
     var rec = page._internals.record;
     
@@ -141,42 +126,10 @@ exports = module.exports = function(packageRegistry, project) {
     var repo = page.locals.repository
     if (!repo) { return next(); }
     
-    project.info(repo.url, { protocol: repo.type }, function(err, repo) {
+    project.info(repo.url, { protocol: repo.type }, function(err, proj) {
       if (err) { return next(err); }
       
-      // TODO: clean this up, so its not on locals.
-      if (!repo) {
-        //page.locals.repository = pkg.repository;
-        return next();
-      }
-      //page.locals.repository = repo;
-      next();
-    });
-    return;
-    
-    
-    var rec = page._internals.record
-      , pkg = page._internals.package
-      , repository = pkg.repository;
-    if (!repository) {
-      return next();
-      //if (!rec.repository) {
-      //  return next();
-      //}
-      //repository = { url: rec.repository };
-    }
-    
-    SCM.get(repository.url, function(err, repo) {
-      if (err) {
-        console.log(err);
-        return next(err);
-      }
-      
-      if (!repo) {
-        page.locals.repository = pkg.repository;
-        return next();
-      }
-      page.locals.repository = repo;
+      // TODO: set favorite counts and the like as locals
       next();
     });
   }
@@ -231,7 +184,6 @@ exports = module.exports = function(packageRegistry, project) {
     //kerouac.canonicalURL(),
     initialize,
     fetchPackage,
-    //loadDataRecord,
     //loadMetadataFromNPM,
     //loadUserMetadata,
     loadRepositoryMetadata,
