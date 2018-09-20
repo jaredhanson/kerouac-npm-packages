@@ -38,7 +38,10 @@ exports = module.exports = function(packageRegistry) {
           page.locals.license.url = license.url;
         }
       }
-
+      if (pkg.downloads) {
+        page.locals.downloads = pkg.downloads;
+      }
+      
       page.locals.createdAt = pkg.ctime;
       page.locals.modifiedAt = pkg.mtime;
       page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
