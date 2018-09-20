@@ -17,6 +17,94 @@ describe('NpmRegistry', function() {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
         'dist-tags': { latest: '2.1.1' },
+        versions: {
+          '0.1.0': {
+            name: 'passport-facebook',
+            version: '0.1.0',
+            description: 'Facebook authentication strategy for Passport.',
+            author: 
+             { name: 'Jared Hanson',
+               email: 'jaredhanson@gmail.com',
+               url: 'http://www.jaredhanson.net/' },
+            repository: 
+             { type: 'git',
+               url: 'git://github.com/jaredhanson/passport-facebook.git' },
+            main: './lib/passport-facebook',
+            dependencies: { 'passport-oauth': '>= 0.1.0' },
+            engines: { node: '>= 0.4.0' },
+            keywords: 
+             [ 'passport',
+               'facebook',
+               'auth',
+               'authn',
+               'authentication',
+               'identity' ],
+            _npmJsonOpts: 
+             { file: '/Users/jaredhanson/.npm/passport-facebook/0.1.0/package/package.json',
+               wscript: false,
+               contributors: false,
+               serverjs: false },
+            _id: 'passport-facebook@0.1.0',
+            devDependencies: {},
+            _engineSupported: true,
+            _npmVersion: '1.0.20',
+            _nodeVersion: 'v0.4.10',
+            _defaultsLoaded: true,
+            dist: 
+             { shasum: '6e9fb3354505849dda60db4a093112359d675941',
+               tarball: 'https://registry.npmjs.org/passport-facebook/-/passport-facebook-0.1.0.tgz' },
+            scripts: {},
+            maintainers: [ { name: 'jaredhanson', email: 'jaredhanson@gmail.com' } ],
+            directories: {}
+          },
+          '2.1.1': {
+            name: 'passport-facebook',
+            version: '2.1.1',
+            description: 'Facebook authentication strategy for Passport.',
+            keywords: 
+             [ 'passport',
+               'facebook',
+               'auth',
+               'authn',
+               'authentication',
+               'identity' ],
+            author: 
+             { name: 'Jared Hanson',
+               email: 'jaredhanson@gmail.com',
+               url: 'http://www.jaredhanson.net/' },
+            repository: 
+             { type: 'git',
+               url: 'git://github.com/jaredhanson/passport-facebook.git' },
+            bugs: { url: 'http://github.com/jaredhanson/passport-facebook/issues' },
+            license: 'MIT',
+            licenses: [ { type: 'MIT', url: 'http://opensource.org/licenses/MIT' } ],
+            main: './lib',
+            dependencies: { 'passport-oauth2': '1.x.x' },
+            devDependencies: 
+             { 'make-node': '0.3.x',
+               mocha: '1.x.x',
+               chai: '2.x.x',
+               'chai-passport-strategy': '1.x.x' },
+            engines: { node: '>= 0.4.0' },
+            scripts: { test: 'mocha --require test/bootstrap/node test/*.test.js' },
+            gitHead: '2b74dd0eff976e85b029178e8012cb3703231112',
+            homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+            _id: 'passport-facebook@2.1.1',
+            _shasum: 'c39d0b52ae4d59163245a4e21a7b9b6321303311',
+            _from: '.',
+            _npmVersion: '2.14.7',
+            _nodeVersion: '4.2.1',
+            _npmUser: { name: 'jaredhanson', email: 'jaredhanson@gmail.com' },
+            maintainers: [ { name: 'jaredhanson', email: 'jaredhanson@gmail.com' } ],
+            dist: 
+             { shasum: 'c39d0b52ae4d59163245a4e21a7b9b6321303311',
+               tarball: 'https://registry.npmjs.org/passport-facebook/-/passport-facebook-2.1.1.tgz' },
+            _npmOperationalInternal: 
+             { host: 'packages-16-east.internal.npmjs.com',
+               tmp: 'tmp/passport-facebook-2.1.1.tgz_1463512414599_0.7715082890354097' },
+            directories: {}
+          }
+        },
         time: {
           modified: '2018-08-03T00:35:46.879Z',
           created: '2011-10-23T22:27:46.568Z',
@@ -81,12 +169,51 @@ describe('NpmRegistry', function() {
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
-          versions: {},
+          versions: {
+            '0.1.0': {
+              name: 'passport-facebook',
+              description: 'Facebook authentication strategy for Passport.',
+              keywords: 
+               [ 'passport',
+                 'facebook',
+                 'auth',
+                 'authn',
+                 'authentication',
+                 'identity' ],
+              homepage: undefined,
+              author: 
+               { name: 'Jared Hanson',
+                 email: 'jaredhanson@gmail.com',
+                 url: 'http://www.jaredhanson.net/' },
+              readme: undefined
+            },
+            '2.1.1': {
+              name: 'passport-facebook',
+              description: 'Facebook authentication strategy for Passport.',
+              keywords: 
+               [ 'passport',
+                 'facebook',
+                 'auth',
+                 'authn',
+                 'authentication',
+                 'identity' ],
+              homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+              author: 
+               { name: 'Jared Hanson',
+                 email: 'jaredhanson@gmail.com',
+                 url: 'http://www.jaredhanson.net/' },
+              license: { type: 'MIT' },
+              readme: undefined
+            }
+          },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
             url: 'http://www.jaredhanson.net/'
+          },
+          license: {
+            type: 'MIT'
           },
           readme: '# passport-facebook\n\n',
           ctime: new Date('2011-10-23T22:27:46.568Z'),
