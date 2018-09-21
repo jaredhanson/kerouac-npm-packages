@@ -263,6 +263,10 @@ describe('NpmRegistry', function() {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-openid',
         description: 'OpenID authentication strategy for Passport.',
+        maintainers: [{
+          name: 'jaredhanson',
+          email: 'jaredhanson@gmail.com'
+        }],
         time: {
           modified: '2017-08-30T14:29:54.769Z',
           created: '2011-11-04T00:28:17.973Z',

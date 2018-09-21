@@ -20,6 +20,7 @@ exports = module.exports = function(packageRegistry, project) {
       page._internals.package = pkg;
       page.locals.name = pkg.name;
       page.locals.description = pkg.description;
+      page.locals.keywords = pkg.keywords;
       if (pkg['dist-tags']) {
         page.locals.version = pkg['dist-tags']['latest'];
       }
@@ -99,6 +100,7 @@ exports = module.exports = function(packageRegistry, project) {
         //Unsupported to locate adapter for: git@git.sankuai.com/~wangshijun/passport-meituan.git
         return next();
       }
+      if (!proj) { return next(); }
       
       // TODO: set favorite counts and the like as locals
       page.locals.repository.favoriteCount = proj.favoriteCount;

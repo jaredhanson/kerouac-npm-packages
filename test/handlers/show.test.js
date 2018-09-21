@@ -145,6 +145,7 @@ describe('handlers/show', function() {
           title: 'passport-facebook',
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
+          keywords: [ 'passport', 'facebook', 'identity' ],
           version: '2.1.1',
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
@@ -178,6 +179,7 @@ describe('handlers/show', function() {
         sinon.stub(packageRegistry, 'read').yields(null, {
           name: 'passport-openid',
           description: 'OpenID authentication strategy for Passport.',
+          keywords: [ 'passport', 'openid', 'identity' ],
           versions: {},
           homepage: 'https://github.com/jaredhanson/passport-openid',
           repository: {
@@ -237,6 +239,7 @@ describe('handlers/show', function() {
           title: 'passport-openid',
           name: 'passport-openid',
           description: 'OpenID authentication strategy for Passport.',
+          keywords: [ 'passport', 'openid', 'identity' ],
           homepage: 'https://github.com/jaredhanson/passport-openid',
           repository: {
             type: 'git',
