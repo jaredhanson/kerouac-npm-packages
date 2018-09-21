@@ -12,7 +12,7 @@ describe('NpmRegistry', function() {
   
   describe('#read', function() {
     
-    describe('package', function() {
+    describe('passport with latest version', function() {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
@@ -105,6 +105,10 @@ describe('NpmRegistry', function() {
             directories: {}
           }
         },
+        maintainers: [{
+          name: 'jaredhanson',
+          email: 'jaredhanson@gmail.com'
+        }],
         time: {
           modified: '2018-08-03T00:35:46.879Z',
           created: '2011-10-23T22:27:46.568Z',
@@ -280,14 +284,19 @@ describe('NpmRegistry', function() {
           type: 'git',
           url: 'git://github.com/jaredhanson/passport-openid.git'
         },
+        users: {
+          'draschke': true,
+          'ivan.marquez': true,
+          'themadjoker': true
+        },
         readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
+        homepage: 'https://github.com/jaredhanson/passport-openid',
         keywords: [
           'passport', 'openid', 'identity'
         ],
         bugs: {
           url: 'http://github.com/jaredhanson/passport-openid/issues'
-        },
-        homepage: 'https://github.com/jaredhanson/passport-openid'
+        }
       });
       
       var pkgDownloadsStub = sinon.stub()
