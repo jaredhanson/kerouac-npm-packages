@@ -39,11 +39,15 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler, pa
     packageRegistry.list(function(err, pkgs) {
       if (err) { return done(err); }
       
-      console.log(pkgs);
-      
-      var i, len;
+      var npages
+        , i, len;
       for (i = 0, len = pkgs.length; i < len; ++i) {
         self.add('/' + pkgs[i].name + '.html');
+      }
+    
+      npages = Math.ceil(pkgs.length / limit)
+      for (i = 1; i < npages; i++) {
+        self.add('/-/v1/all/' + (i + 1) + '.json'); // add 1 for 1-based indexing
       }
     
       done();
