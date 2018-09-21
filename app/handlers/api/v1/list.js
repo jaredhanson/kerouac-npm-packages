@@ -69,7 +69,9 @@ exports = module.exports = function(limit) {
         if (p.locals.repository.createdAt) { json.repository.created = p.locals.repository.createdAt.toISOString(); }
         if (p.locals.repository.modifiedAt) { json.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
       }
-      json.license = p.locals.license.type;
+      if (p.locals.license) {
+        json.license = p.locals.license.type;
+      }
       json.time = {
         created: p.locals.createdAt.toISOString(),
         modified: p.locals.modifiedAt.toISOString()
