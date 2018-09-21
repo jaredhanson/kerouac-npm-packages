@@ -101,6 +101,9 @@ exports = module.exports = function(packageRegistry, project) {
       }
       
       // TODO: set favorite counts and the like as locals
+      page.locals.repository.favoriteCount = proj.favoriteCount;
+      page.locals.repository.subscriberCount = proj.subscriberCount;
+      page.locals.repository.forkCount = proj.forkCount;
       next();
     });
   }

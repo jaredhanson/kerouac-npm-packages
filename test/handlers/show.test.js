@@ -149,7 +149,10 @@ describe('handlers/show', function() {
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
-            url: 'git://github.com/jaredhanson/passport-facebook.git'
+            url: 'git://github.com/jaredhanson/passport-facebook.git',
+            favoriteCount: 1062,
+            subscriberCount: 49,
+            forkCount: 417
           },
           license: {
             type: 'MIT',
@@ -237,7 +240,10 @@ describe('handlers/show', function() {
           homepage: 'https://github.com/jaredhanson/passport-openid',
           repository: {
             type: 'git',
-            url: 'git://github.com/jaredhanson/passport-openid.git'
+            url: 'git://github.com/jaredhanson/passport-openid.git',
+            favoriteCount: 63,
+            subscriberCount: 6,
+            forkCount: 72
           },
           readme: '<p>Sadly, this package has no README.</p>',
           createdAt: new Date('2011-11-04T00:28:17.973Z'),
