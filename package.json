@@ -34,7 +34,7 @@
     "kerouac-sitemap": "^0.4.2",
     "moment": "^2.20.1",
     "npm-user": "^3.0.1",
-    "package-json": "^4.0.1",
+    "package-json": "^5.0.0",
     "pkg-downloads": "^2.3.1",
     "request": "^2.83.0",
     "spdx-license-list": "^3.0.1",

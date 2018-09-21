@@ -93,7 +93,12 @@ exports = module.exports = function(packageRegistry, project) {
     if (!repo) { return next(); }
     
     project.info(repo.url, { protocol: repo.type }, function(err, proj) {
-      if (err) { return next(err); }
+      //if (err) { return next(err); }
+      if (err) {
+        // TODO: Handle unsupported location error correctly
+        //Unsupported to locate adapter for: git@git.sankuai.com/~wangshijun/passport-meituan.git
+        return next();
+      }
       
       // TODO: set favorite counts and the like as locals
       next();
