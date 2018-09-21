@@ -63,7 +63,7 @@ exports['@implements'] = [
 ];
 exports['@require'] = [
   './handlers/show',
-  './handlers/api/v1/all',
+  './handlers/api/v1/list',
   './handlers/api/v1/feeds/featured',
   'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry'
 ];
