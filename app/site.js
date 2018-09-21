@@ -52,49 +52,7 @@ exports = module.exports = function(showHandler, allHandler, featuredHandler, pa
     
       done();
     });
-    
-    
-    return;
-    
-    fs.readdir(dir, function(err, files) {
-      if (err && err.code == 'ENOENT') {
-        return done();
-      } else if (err) { return done(err); }
-      
-      
-      //files = [ 'passport-facebook.yaml', 'passport-http-bearer.yaml' ];
-      //console.log(files)
-      
-      
-      var idx = 0, count = 0
-        , file, name, ext;
-      
-      (function iter(err) {
-        if (err) {
-          return done(err);
-        }
-        
-        file = files[idx++];
-        if (!file) {
-          var pages = Math.ceil(count / limit)
-            , i;
-          for (i = 1; i < pages; i++) {
-            self.add('/-/v1/all/' + (i + 1) + '.json'); // add 1 for 1-based indexing
-          }
-          return done();
-        }
-        
-        ext = path.extname(file);
-        name = path.basename(file, ext);
-        
-        if (ext !== '.yaml') { return iter(); }
-        
-        self.add('/' + name + '.html');
-        count++;
-        iter();
-      })();
-    });
-  })
+  });
   
   return site;
 };
