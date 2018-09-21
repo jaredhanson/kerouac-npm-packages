@@ -187,7 +187,7 @@ describe('NpmRegistry', function() {
         expect(call.args[1]).to.deep.equal({ period: 'month' });
       });
       
-      it('should read package', function() {
+      it('should yield package', function() {
         expect(pkg).to.deep.equal({
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
@@ -261,7 +261,7 @@ describe('NpmRegistry', function() {
           mtime: new Date('2018-08-03T00:35:46.879Z')
         });
       });
-    }); // package
+    }); // passport with latest version
     
     describe('package without license and versions', function() {
       var packageJsonStub = sinon.stub().resolves({
@@ -339,7 +339,7 @@ describe('NpmRegistry', function() {
         expect(call.args[1]).to.deep.equal({ period: 'month' });
       });
       
-      it('should read package', function() {
+      it('should yield package', function() {
         expect(pkg).to.deep.equal({
           name: 'passport-openid',
           description: 'OpenID authentication strategy for Passport.',
