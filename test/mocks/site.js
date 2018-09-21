@@ -4,12 +4,12 @@ var EventEmitter = require('events').EventEmitter
 
 function Site() {
   EventEmitter.call(this);
-  this._pages = [];
+  this._routes = [];
 }
 util.inherits(Site, EventEmitter);
 
 Site.prototype.page = function(path, handler) {
-  this._pages.push({ path: path, handler: handler });
+  this._routes.push({ path: path, handler: handler });
   return this;
 }
 
