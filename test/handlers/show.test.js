@@ -84,6 +84,9 @@ describe('handlers/show', function() {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git'
           },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-facebook/issues'
+          },
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
@@ -160,6 +163,9 @@ describe('handlers/show', function() {
             subscriberCount: 49,
             forkCount: 417
           },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-facebook/issues'
+          },
           license: {
             type: 'MIT',
             name: 'MIT License',
@@ -195,6 +201,9 @@ describe('handlers/show', function() {
           repository: {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git'
+          },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-openid/issues'
           },
           author: {
             name: 'Jared Hanson',
@@ -267,6 +276,9 @@ describe('handlers/show', function() {
             favoriteCount: 63,
             subscriberCount: 6,
             forkCount: 72
+          },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-openid/issues'
           },
           readme: '<p>Sadly, this package has no README.</p>',
           downloads: {

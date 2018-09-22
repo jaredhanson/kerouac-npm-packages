@@ -55,9 +55,11 @@ exports = module.exports = function(limit) {
       json.package.version = p.locals.version;
       json.package.description = p.locals.description;
       json.package.keywords = p.locals.keywords;
-      json.package.homepage = p.locals.homepage;
+      json.package.links = {};
+      json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.locals.name);
+      json.package.links.homepage = p.locals.homepage;
       if (p.locals.repository) {
-        if (!json.package.homepage) { json.package.homepage = p.locals.repository.homepage; }
+        json.package.links.repository = p.locals.repository.url;
         json.package.repository = {};
         json.package.repository.type = p.locals.repository.type;
         json.package.repository.url = p.locals.repository.url;
@@ -66,6 +68,9 @@ exports = module.exports = function(limit) {
         json.package.repository.forkCount = p.locals.repository.forkCount;
         if (p.locals.repository.createdAt) { json.package.repository.created = p.locals.repository.createdAt.toISOString(); }
         if (p.locals.repository.modifiedAt) { json.package.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
+      }
+      if (p.locals.bugs) {
+        json.package.links.bugs = p.locals.bugs.url;
       }
       if (p.locals.license) {
         json.package.license = p.locals.license.type;

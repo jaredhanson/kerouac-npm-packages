@@ -30,6 +30,7 @@ exports = module.exports = function(packageRegistry, project) {
       }
       page.locals.homepage = pkg.homepage;
       page.locals.repository = pkg.repository;
+      page.locals.bugs = pkg.bugs;
       if (pkg.license) {
         page.locals.license = pkg.license;
         var license = LICENSES[pkg.license.type];

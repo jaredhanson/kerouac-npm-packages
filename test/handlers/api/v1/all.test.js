@@ -40,6 +40,9 @@ describe('handlers/api/v1/all', function() {
                     subscriberCount: 49,
                     forkCount: 417
                   },
+                  bugs: {
+                    url: 'http://github.com/jaredhanson/passport-facebook/issues'
+                  },
                   license: {
                     type: 'MIT',
                     name: 'MIT License',
@@ -79,7 +82,12 @@ describe('handlers/api/v1/all', function() {
           '          "facebook",',
           '          "identity"',
           '        ],',
-          '        "homepage": "https://github.com/jaredhanson/passport-facebook#readme",',
+          '        "links": {',
+          '          "npm": "https://www.npmjs.com/package/passport-facebook",',
+          '          "homepage": "https://github.com/jaredhanson/passport-facebook#readme",',
+          '          "repository": "git://github.com/jaredhanson/passport-facebook.git",',
+          '          "bugs": "http://github.com/jaredhanson/passport-facebook/issues"',
+          '        },',
           '        "repository": {',
           '          "type": "git",',
           '          "url": "git://github.com/jaredhanson/passport-facebook.git",',

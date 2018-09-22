@@ -208,6 +208,7 @@ describe('NpmRegistry', function() {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
               },
+              bugs: undefined,
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -229,6 +230,9 @@ describe('NpmRegistry', function() {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
               },
+              bugs: {
+                url: 'http://github.com/jaredhanson/passport-facebook/issues'
+              },
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -247,6 +251,9 @@ describe('NpmRegistry', function() {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
             url: 'http://www.jaredhanson.net/'
+          },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
           license: {
             type: 'MIT'
@@ -349,6 +356,9 @@ describe('NpmRegistry', function() {
           repository: {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git'
+          },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-openid/issues'
           },
           author: {
             name: 'Jared Hanson',
