@@ -5,3 +5,22 @@
  *
  *  https://registry.npmjs.org/-/all
  */
+
+
+exports = module.exports = function() {
+  var uri = require('url');
+  
+  function render(page, next) {
+    var json = {};
+    
+    page.write(JSON.stringify(json, null, 2));
+    page.end();
+  }
+  
+  
+  return [
+    render
+  ];
+};
+
+exports['@require'] = [];

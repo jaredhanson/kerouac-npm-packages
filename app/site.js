@@ -38,7 +38,7 @@
  *   * npm API v1
  *     /-/v1/search
  */
-exports = module.exports = function(showHandler, allHandler, promotedHandler, packageRegistry) {
+exports = module.exports = function(showHandler, api_allHandler, api_v1_allHandler, api_v1_promotedHandler, packageRegistry) {
   var kerouac = require('kerouac')
     , fs = require('fs')
     , path = require('path');
@@ -63,11 +63,16 @@ exports = module.exports = function(showHandler, allHandler, promotedHandler, pa
   
   //site.page('/all.html', require('./handlers/list')());
   
+  // HTML pages
   site.page('/:name.html', showHandler);
   
-  site.page('/-/v1/all.json', allHandler);
-  site.page('/-/v1/all/:page.json', allHandler);
-  site.page('/-/v1/promoted.json', promotedHandler);
+  // npm Meta API
+  site.page('/-/all.json', api_allHandler);
+  
+  // npm API v1
+  site.page('/-/v1/all.json', api_v1_allHandler);
+  site.page('/-/v1/all/:page.json', api_v1_allHandler);
+  site.page('/-/v1/promoted.json', api_v1_promotedHandler);
   
   site.page('/sitemap.xml', require('kerouac-sitemap')());
   
@@ -82,12 +87,10 @@ exports = module.exports = function(showHandler, allHandler, promotedHandler, pa
       for (i = 0, len = pkgs.length; i < len; ++i) {
         self.add('/' + pkgs[i].name + '.html');
       }
-    
       npages = Math.ceil(pkgs.length / limit)
       for (i = 1; i < npages; i++) {
         self.add('/-/v1/all/' + (i + 1) + '.json'); // add 1 for 1-based indexing
       }
-    
       done();
     });
   });
@@ -101,6 +104,7 @@ exports['@implements'] = [
 ];
 exports['@require'] = [
   './handlers/show',
+  './handlers/api/all',
   './handlers/api/v1/all',
   './handlers/api/v1/promoted',
   'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry'
