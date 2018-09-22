@@ -86,7 +86,8 @@ exports = module.exports = function() {
       }
       if (p.locals.count) {
         // The "counts" property is not available in npm's implementation.  The
-        // keys used are inspired by Schema.org's interaction statistics.
+        // keys available on this object are inspired by Schema.org's interaction
+        // statistics.
         //   https://schema.org/interactionStatistic
         //   https://schema.org/InteractionCounter
         //   https://schema.org/SubscribeAction
@@ -98,6 +99,15 @@ exports = module.exports = function() {
         }
       }
       if (p.locals.downloads) {
+        // The "downloads" property is not available in npm's implementation.
+        // The key name was chosen to mirror the path used by npm in their API
+        // endpoint for obtaining download counts, `https://api.npmjs.org/downloads/point/{period}[/{package}]`.
+        //
+        // Information regarding how npm calculates download counts can be found at:
+        //   - [package download counts](https://github.com/npm/registry/blob/master/docs/download-counts.md)
+        //   - [Download counts are back!](https://blog.npmjs.org/post/78719826768/download-counts-are-back)
+        //   - [numeric precision matters: how npm download counts work](https://blog.npmjs.org/post/92574016600/numeric-precision-matters-how-npm-download-counts)
+        //   - [npm/download-counts](https://github.com/npm/download-counts)
         json.downloads = {
           'last-day': p.locals.downloads['last-day'],
           'last-week': p.locals.downloads['last-week'],
