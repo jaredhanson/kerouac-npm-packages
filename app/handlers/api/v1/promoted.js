@@ -45,7 +45,6 @@ exports = module.exports = function() {
           'last-month': p.locals.downloads['last-month']
         }
       }
-      
       return json;
     });
     
