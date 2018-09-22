@@ -1,8 +1,8 @@
 /**
  * API v1: List all packages.
  *
- * This handler generates a list of all packages, and is one of the resources
- * that make up API v1.
+ * This component provides a handler that generates a (optionally paged) list of
+ * all packages, and is one of the resources that make up API v1.
  *
  * API v1 takes inspiration from npm's Registry API.  This API has evolved in,
  * what appears from the outside, to be a rather ad-hoc manner from npm's
