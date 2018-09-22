@@ -56,7 +56,8 @@ describe('handlers/api/v1/all', function() {
                     forks: 417
                   },
                   createdAt: new Date('2011-10-23T22:27:46.568Z'),
-                  modifiedAt: new Date('2018-08-03T00:35:46.879Z')
+                  modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
+                  publishedAt: new Date('2016-05-17T19:13:37.644Z')
                 }
               }
             ];
@@ -84,6 +85,7 @@ describe('handlers/api/v1/all', function() {
           '          "facebook",',
           '          "identity"',
           '        ],',
+          '        "date": "2016-05-17T19:13:37.644Z",',
           '        "links": {',
           '          "npm": "https://www.npmjs.com/package/passport-facebook",',
           '          "homepage": "https://github.com/jaredhanson/passport-facebook#readme",',

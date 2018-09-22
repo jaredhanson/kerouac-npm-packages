@@ -265,7 +265,8 @@ describe('NpmRegistry', function() {
             'last-month': 183283
           },
           ctime: new Date('2011-10-23T22:27:46.568Z'),
-          mtime: new Date('2018-08-03T00:35:46.879Z')
+          mtime: new Date('2018-08-03T00:35:46.879Z'),
+          ptime: new Date('2016-05-17T19:13:37.644Z')
         });
       });
     }); // passport with latest version

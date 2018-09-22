@@ -55,6 +55,9 @@ exports = module.exports = function(limit) {
       json.package.version = p.locals.version;
       json.package.description = p.locals.description;
       json.package.keywords = p.locals.keywords;
+      if (p.locals.publishedAt) {
+        json.package.date = p.locals.publishedAt.toISOString();
+      }
       json.package.links = {};
       json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.locals.name);
       json.package.links.homepage = p.locals.homepage;

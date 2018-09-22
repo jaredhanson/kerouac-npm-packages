@@ -45,6 +45,7 @@ exports = module.exports = function(packageRegistry, project) {
       
       page.locals.createdAt = pkg.ctime;
       page.locals.modifiedAt = pkg.mtime;
+      page.locals.publishedAt = pkg.ptime;
       page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
 
       next();
