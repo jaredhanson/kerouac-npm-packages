@@ -60,14 +60,18 @@ exports = module.exports = function(limit) {
       json.package.links.homepage = p.locals.homepage;
       if (p.locals.repository) {
         json.package.links.repository = p.locals.repository.url;
-        //json.package.repository.favoriteCount = p.locals.repository.favoriteCount;
-        //json.package.repository.subscriberCount = p.locals.repository.subscriberCount;
-        //json.package.repository.forkCount = p.locals.repository.forkCount;
         //if (p.locals.repository.createdAt) { json.package.repository.created = p.locals.repository.createdAt.toISOString(); }
         //if (p.locals.repository.modifiedAt) { json.package.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
       }
       if (p.locals.bugs) {
         json.package.links.bugs = p.locals.bugs.url;
+      }
+      if (p.locals.count) {
+        json.count = {
+          favorites: p.locals.count.favorites,
+          subscribers: p.locals.count.subscribers,
+          forks: p.locals.count.forks
+        }
       }
       if (p.locals.downloads) {
         json.downloads = {

@@ -36,9 +36,6 @@ describe('handlers/api/v1/all', function() {
                   repository: {
                     type: 'git',
                     url: 'git://github.com/jaredhanson/passport-facebook.git',
-                    favoriteCount: 1062,
-                    subscriberCount: 49,
-                    forkCount: 417
                   },
                   bugs: {
                     url: 'http://github.com/jaredhanson/passport-facebook/issues'
@@ -52,6 +49,11 @@ describe('handlers/api/v1/all', function() {
                     'last-day': 7657,
                     'last-week': 28650,
                     'last-month': 183283
+                  },
+                  count: {
+                    favorites: 1062,
+                    subscribers: 49,
+                    forks: 417
                   },
                   createdAt: new Date('2011-10-23T22:27:46.568Z'),
                   modifiedAt: new Date('2018-08-03T00:35:46.879Z')
@@ -88,6 +90,11 @@ describe('handlers/api/v1/all', function() {
           '          "repository": "git://github.com/jaredhanson/passport-facebook.git",',
           '          "bugs": "http://github.com/jaredhanson/passport-facebook/issues"',
           '        }',
+          '      },',
+          '      "count": {',
+          '        "favorites": 1062,',
+          '        "subscribers": 49,',
+          '        "forks": 417',
           '      },',
           '      "downloads": {',
           '        "last-day": 7657,',

@@ -159,9 +159,6 @@ describe('handlers/show', function() {
           repository: {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git',
-            favoriteCount: 1062,
-            subscriberCount: 49,
-            forkCount: 417
           },
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
@@ -176,6 +173,11 @@ describe('handlers/show', function() {
             'last-day': 7657,
             'last-week': 28650,
             'last-month': 183283
+          },
+          count: {
+            favorites: 1062,
+            subscribers: 49,
+            forks: 417
           },
           createdAt: new Date('2011-10-23T22:27:46.568Z'),
           modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
@@ -273,9 +275,6 @@ describe('handlers/show', function() {
           repository: {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git',
-            favoriteCount: 63,
-            subscriberCount: 6,
-            forkCount: 72
           },
           bugs: {
             url: 'http://github.com/jaredhanson/passport-openid/issues'
@@ -285,6 +284,11 @@ describe('handlers/show', function() {
             'last-day': 1029,
             'last-week': 4004,
             'last-month': 23844
+          },
+          count: {
+            favorites: 63,
+            subscribers: 6,
+            forks: 72
           },
           createdAt: new Date('2011-11-04T00:28:17.973Z'),
           modifiedAt: new Date('2017-08-30T14:29:54.769Z'),
