@@ -27,7 +27,7 @@ exports = module.exports = function(limit) {
   
   function filter(page, next) {
     var packages = page.site.pages.filter(function(p) {
-      return p.package == true;
+      return (p.meta && p.meta.package == true);
     });
     
     var i = page.params.page ? parseInt(page.params.page - 1) : 0

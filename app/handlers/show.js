@@ -9,6 +9,10 @@ exports = module.exports = function(packageRegistry, project) {
   
   function initialize(page, next) {
     page._internals = {};
+    
+    page.meta = {
+      package: true
+    }
     next();
   }
   
@@ -144,8 +148,6 @@ exports = module.exports = function(packageRegistry, project) {
   
   function render(page, next) {
     page.locals.title = page.locals.name;
-    page.package = true;
-    
     page.render('package');
   }
   
