@@ -25,7 +25,7 @@ describe('handlers/show', function() {
     };
     
     
-    describe('package', function() {
+    describe('passport with latest version', function() {
       var page, layout, err;
       
       before(function() {
@@ -33,7 +33,6 @@ describe('handlers/show', function() {
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
-          'dist-tags': { latest: '2.1.1' },
           versions: {
             '0.1.0': {
               name: 'passport-facebook',
@@ -79,6 +78,7 @@ describe('handlers/show', function() {
               readme: undefined
             }
           },
+          'dist-tags': { latest: '2.1.1' },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
@@ -93,6 +93,11 @@ describe('handlers/show', function() {
             type: 'MIT'
           },
           //readme: '# passport-facebook\n\n',
+          downloads: {
+            'last-day': 7657,
+            'last-week': 28650,
+            'last-month': 183283
+          },
           ctime: new Date('2011-10-23T22:27:46.568Z'),
           mtime: new Date('2018-08-03T00:35:46.879Z')
         });
@@ -127,13 +132,13 @@ describe('handlers/show', function() {
           .dispatch();
       });
       
-      it('should read from package repository', function() {
+      it('should read package from repository', function() {
         expect(packageRegistry.read.callCount).to.equal(1);
         var call = packageRegistry.read.getCall(0)
         expect(call.args[0]).to.equal('passport-facebook');
       });
       
-      it('should get project info', function() {
+      it('should fetch project info', function() {
         expect(project.info.callCount).to.equal(1);
         var call = project.info.getCall(0)
         expect(call.args[0]).to.equal('git://github.com/jaredhanson/passport-facebook.git');
@@ -161,6 +166,11 @@ describe('handlers/show', function() {
             url: 'http://www.opensource.org/licenses/MIT'
           },
           readme: '<p>Sadly, this package has no README.</p>',
+          downloads: {
+            'last-day': 7657,
+            'last-week': 28650,
+            'last-month': 183283
+          },
           createdAt: new Date('2011-10-23T22:27:46.568Z'),
           modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
           modifiedTimeAgo: '2 months ago'
@@ -172,7 +182,7 @@ describe('handlers/show', function() {
       });
     }); // package
     
-    describe('package without license and versions', function() {
+    describe('package without dist-tags and license', function() {
       var page, layout, err;
       
       before(function() {
@@ -186,7 +196,17 @@ describe('handlers/show', function() {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git'
           },
+          author: {
+            name: 'Jared Hanson',
+            email: 'jaredhanson@gmail.com',
+            url: 'http://www.jaredhanson.net/'
+          },
           //readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
+          downloads: {
+            'last-day': 1029,
+            'last-week': 4004,
+            'last-month': 23844
+          },
           ctime: new Date('2011-11-04T00:28:17.973Z'),
           mtime: new Date('2017-08-30T14:29:54.769Z')
         });
@@ -221,13 +241,13 @@ describe('handlers/show', function() {
           .dispatch();
       });
       
-      it('should read from package repository', function() {
+      it('should read package from repository', function() {
         expect(packageRegistry.read.callCount).to.equal(1);
         var call = packageRegistry.read.getCall(0)
         expect(call.args[0]).to.equal('passport-openid');
       });
       
-      it('should get project info', function() {
+      it('should fetch project info', function() {
         expect(project.info.callCount).to.equal(1);
         var call = project.info.getCall(0)
         expect(call.args[0]).to.equal('git://github.com/jaredhanson/passport-openid.git');
@@ -249,6 +269,11 @@ describe('handlers/show', function() {
             forkCount: 72
           },
           readme: '<p>Sadly, this package has no README.</p>',
+          downloads: {
+            'last-day': 1029,
+            'last-week': 4004,
+            'last-month': 23844
+          },
           createdAt: new Date('2011-11-04T00:28:17.973Z'),
           modifiedAt: new Date('2017-08-30T14:29:54.769Z'),
           modifiedTimeAgo: 'a year ago'

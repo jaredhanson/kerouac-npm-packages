@@ -192,7 +192,6 @@ describe('NpmRegistry', function() {
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
-          'dist-tags': { latest: '2.1.1' },
           versions: {
             '0.1.0': {
               name: 'passport-facebook',
@@ -238,6 +237,7 @@ describe('NpmRegistry', function() {
               readme: undefined
             }
           },
+          'dist-tags': { latest: '2.1.1' },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
