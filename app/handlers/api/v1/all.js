@@ -63,8 +63,6 @@ exports = module.exports = function(limit) {
       json.package.links.homepage = p.locals.homepage;
       if (p.locals.repository) {
         json.package.links.repository = p.locals.repository.url;
-        //if (p.locals.repository.createdAt) { json.package.repository.created = p.locals.repository.createdAt.toISOString(); }
-        //if (p.locals.repository.modifiedAt) { json.package.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
       }
       if (p.locals.bugs) {
         json.package.links.bugs = p.locals.bugs.url;
