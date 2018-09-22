@@ -68,6 +68,9 @@ exports = module.exports = function() {
       if (p.locals.bugs) {
         json.package.links.bugs = p.locals.bugs.url;
       }
+      if (p.locals.flags) {
+        json.flags = p.locals.flags;
+      }
       if (p.locals.count) {
         json.count = {
           favorites: p.locals.count.favorites,
