@@ -35,18 +35,20 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
   
     it('should add routes', function() {
-      expect(site._routes.length).to.equal(4);
+      expect(site._routes.length).to.equal(5);
       expect(site._routes[0].path).to.equal('/:name.html');
       expect(site._routes[0].handler).to.equal(showHandler);
       expect(site._routes[1].path).to.equal('/-/v1/all.json');
       expect(site._routes[1].handler).to.equal(allHandler);
       expect(site._routes[2].path).to.equal('/-/v1/all/:page.json');
       expect(site._routes[2].handler).to.equal(allHandler);
-      expect(site._routes[3].path).to.equal('/sitemap.xml');
+      expect(site._routes[3].path).to.equal('/-/v1/promoted.json');
+      expect(site._routes[3].handler).to.equal(promotedHandler);
+      expect(site._routes[4].path).to.equal('/sitemap.xml');
     });
     
     describe('and then binding content', function() {
@@ -83,8 +85,8 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
     
     describe('and then binding content', function() {
       var queue = new MockQueue();
@@ -144,8 +146,8 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
     
     describe('and then binding content', function() {
       var queue = new MockQueue();
@@ -203,8 +205,8 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
     
     describe('and then binding content', function() {
       var queue = new MockQueue();
@@ -288,8 +290,8 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
     
     describe('and then binding content', function() {
       var queue = new MockQueue();
@@ -374,8 +376,8 @@ describe('www/site', function() {
     
     function showHandler() {};
     function allHandler() {};
-    function featuredHandler() {};
-    var site = factory(showHandler, allHandler, featuredHandler, packageRegistry);
+    function promotedHandler() {};
+    var site = factory(showHandler, allHandler, promotedHandler, packageRegistry);
     
     describe('and then binding content', function() {
       var queue = new MockQueue();

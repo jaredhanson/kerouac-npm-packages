@@ -1,76 +1,42 @@
-var fs = require('fs')
-  , path = require('path')
-  , uri = require('url')
-  , YAML = require('js-yaml');
-
-
 exports = module.exports = function() {
-  var dir = 'data/packages';
-  var file = path.join(dir, '_feeds', 'featured.yaml');
-  
-  
-  function initialize(page, next) {
-    page._internals = {};
-    next();
-  }
-  
-  function load(page, next) {
-    fs.readFile(file, 'utf8', function(err, data) {
-      if (err) { return next(err); }
-      
-      var entries = YAML.safeLoad(data);
-      page._internals.entries = entries;
-      next();
-    });
-  }
+  var uri = require('url');
+
   
   function select(page, next) {
-    var entries = page._internals.entries
-      , pages = page.site.pages
-      , packages = []
-      , entry, pf, i, len;
+    var packages = page.site.pages.filter(function(p) {
+      return (p.meta && p.meta.package == true)
+        && (p.locals.flags && (p.locals.flags.featured || p.locals.flags.sponsored));
+    });
     
-    for (i = 0, len = entries.length; i < len; ++i) {
-      entry = entries[i];
-      pf = pages.find(function(p) {
-        return p.locals.name == entry.name;
-      });
-      if (pf) { packages.push(pf); }
-    }
     
-    page._internals.packages = packages;
-    next();
-  }
-  
-  function filter(page, next) {
-    var entries = page._internals.entries
-      , packages = page._internals.packages;
-    
-    var objects = packages.map(function(p, i) {
+    var objects = packages.map(function(p) {
       var json = {};
-      json._id = p.locals._id;
-      json.name = p.locals.name;
-      json.description = p.locals.description;
-      json.keywords = p.locals.keywords;
-      if (p.locals.version) {
-        json['dist-tags'] = { latest: p.locals.version };
+      json.package = {};
+      json.package.name = p.locals.name;
+      json.package.version = p.locals.version;
+      json.package.description = p.locals.description;
+      json.package.keywords = p.locals.keywords;
+      if (p.locals.publishedAt) {
+        json.package.date = p.locals.publishedAt.toISOString();
       }
-      json.homepage = p.locals.homepage;
+      json.package.links = {};
+      json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.locals.name);
+      json.package.links.homepage = p.locals.homepage;
       if (p.locals.repository) {
-        if (!json.homepage) { json.homepage = p.locals.repository.homepage; }
-        json.repository = {};
-        json.repository.type = p.locals.repository.type;
-        json.repository.url = p.locals.repository.url;
-        json.repository.favoriteCount = p.locals.repository.favoriteCount;
-        json.repository.subscriberCount = p.locals.repository.subscriberCount;
-        json.repository.forkCount = p.locals.repository.forkCount;
-        if (p.locals.repository.createdAt) { json.repository.created = p.locals.repository.createdAt.toISOString(); }
-        if (p.locals.repository.modifiedAt) { json.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
+        json.package.links.repository = p.locals.repository.url;
       }
-      json.license = p.locals.license;
-      json.time = {
-        created: p.locals.createdAt.toISOString(),
-        modified: p.locals.modifiedAt.toISOString()
+      if (p.locals.bugs) {
+        json.package.links.bugs = p.locals.bugs.url;
+      }
+      if (p.locals.flags) {
+        json.flags = p.locals.flags;
+      }
+      if (p.locals.count) {
+        json.count = {
+          favorites: p.locals.count.favorites,
+          subscribers: p.locals.count.subscribers,
+          forks: p.locals.count.forks
+        }
       }
       if (p.locals.downloads) {
         json.downloads = {
@@ -78,10 +44,6 @@ exports = module.exports = function() {
           'last-week': p.locals.downloads['last-week'],
           'last-month': p.locals.downloads['last-month']
         }
-      }
-      
-      if (entries[i].promoted) {
-        json._promoted = true;
       }
       
       return json;
@@ -104,10 +66,7 @@ exports = module.exports = function() {
   
   
   return [
-    initialize,
-    load,
     select,
-    filter,
     render
   ];
 }

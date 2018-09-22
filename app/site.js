@@ -1,9 +1,9 @@
-var kerouac = require('kerouac')
-  , fs = require('fs')
-  , path = require('path');
-
-
 exports = module.exports = function(showHandler, allHandler, promotedHandler, packageRegistry) {
+  var kerouac = require('kerouac')
+    , fs = require('fs')
+    , path = require('path');
+
+
   var dir = 'data/packages';
   var options = {};
   
@@ -27,9 +27,7 @@ exports = module.exports = function(showHandler, allHandler, promotedHandler, pa
   
   site.page('/-/v1/all.json', allHandler);
   site.page('/-/v1/all/:page.json', allHandler);
-  if (fs.existsSync(featured)) {
-    site.page('/-/v1/feeds/featured.json', promotedHandler);
-  }
+  site.page('/-/v1/promoted.json', promotedHandler);
   
   site.page('/sitemap.xml', require('kerouac-sitemap')());
   

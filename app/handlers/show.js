@@ -1,10 +1,7 @@
-var moment = require('moment')
-  , npmUser = require('npm-user')
-  , LICENSES = require('spdx-license-list');
-
-
 exports = module.exports = function(packageRegistry, project) {
-  var dir = 'data/packages';
+  var moment = require('moment')
+    , npmUser = require('npm-user')
+    , LICENSES = require('spdx-license-list');
   
   
   function initialize(page, next) {
@@ -41,6 +38,9 @@ exports = module.exports = function(packageRegistry, project) {
       }
       if (pkg.downloads) {
         page.locals.downloads = pkg.downloads;
+      }
+      if (pkg.flags) {
+        page.locals.flags = pkg.flags;
       }
       
       page.locals.createdAt = pkg.ctime;

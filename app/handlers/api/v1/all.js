@@ -1,5 +1,3 @@
-var uri = require('url');
-
 /**
  * API v1: List all packages.
  *
@@ -22,10 +20,13 @@ var uri = require('url');
  * specifcation, which is to be expected given the specification is not
  * particularly clear or consistent itself.
  */
-exports = module.exports = function(limit) {
+exports = module.exports = function() {
+  var uri = require('url');
+  
+  
   var limit = 25;
   
-  function filter(page, next) {
+  function select(page, next) {
     var packages = page.site.pages.filter(function(p) {
       return (p.meta && p.meta.package == true);
     });
@@ -101,7 +102,7 @@ exports = module.exports = function(limit) {
   
   
   return [
-    filter,
+    select,
     render
   ];
 };

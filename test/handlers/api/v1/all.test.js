@@ -71,7 +71,7 @@ describe('handlers/api/v1/all', function() {
           .dispatch();
       });
       
-      it('should write sitemap.xml', function() {
+      it('should write JSON', function() {
         var expected = [
           '{',
           '  "objects": [',
