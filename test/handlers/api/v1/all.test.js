@@ -112,9 +112,8 @@ describe('handlers/api/v1/all', function() {
       
         expect(page.body).to.equal(expected);
       });
-      
-    });
+    }); // with one package
     
-  });
+  }); // handler
   
 });

@@ -25,7 +25,7 @@ describe('handlers/show', function() {
     };
     
     
-    describe('passport with latest version', function() {
+    describe('package with latest version', function() {
       var page, layout, err;
       
       before(function() {
@@ -190,7 +190,7 @@ describe('handlers/show', function() {
       it('should render layout', function() {
         expect(layout).to.equal('package');
       });
-    }); // package
+    }); // package with latest version
     
     describe('package without dist-tags and license', function() {
       var page, layout, err;
@@ -302,7 +302,7 @@ describe('handlers/show', function() {
       it('should render layout', function() {
         expect(layout).to.equal('package');
       });
-    }); // package without license and versions
+    }); // package without dist-tags and license
     
   }); // handler
   

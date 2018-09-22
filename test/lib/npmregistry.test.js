@@ -12,7 +12,7 @@ describe('NpmRegistry', function() {
   
   describe('#read', function() {
     
-    describe('passport with latest version', function() {
+    describe('package with latest version', function() {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
@@ -269,7 +269,7 @@ describe('NpmRegistry', function() {
           ptime: new Date('2016-05-17T19:13:37.644Z')
         });
       });
-    }); // passport with latest version
+    }); // package with latest version
     
     describe('package without license and versions', function() {
       var packageJsonStub = sinon.stub().resolves({

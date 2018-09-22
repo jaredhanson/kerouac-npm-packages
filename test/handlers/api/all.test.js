@@ -115,6 +115,6 @@ describe('handlers/api/all', function() {
       });
     }); // with one featured package
     
-  });
+  }); // handler
   
 });
