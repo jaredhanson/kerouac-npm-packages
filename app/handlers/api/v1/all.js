@@ -50,34 +50,32 @@ exports = module.exports = function(limit) {
     
     var objects = packages.map(function(p) {
       var json = {};
-      json._id = p.locals._id;
-      json.name = p.locals.name;
-      json.description = p.locals.description;
-      json.keywords = p.locals.keywords;
-      if (p.locals.version) {
-        json['dist-tags'] = { latest: p.locals.version };
-      }
-      json.homepage = p.locals.homepage;
+      json.package = {};
+      json.package.name = p.locals.name;
+      json.package.version = p.locals.version;
+      json.package.description = p.locals.description;
+      json.package.keywords = p.locals.keywords;
+      json.package.homepage = p.locals.homepage;
       if (p.locals.repository) {
-        if (!json.homepage) { json.homepage = p.locals.repository.homepage; }
-        json.repository = {};
-        json.repository.type = p.locals.repository.type;
-        json.repository.url = p.locals.repository.url;
-        json.repository.favoriteCount = p.locals.repository.favoriteCount;
-        json.repository.subscriberCount = p.locals.repository.subscriberCount;
-        json.repository.forkCount = p.locals.repository.forkCount;
-        if (p.locals.repository.createdAt) { json.repository.created = p.locals.repository.createdAt.toISOString(); }
-        if (p.locals.repository.modifiedAt) { json.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
+        if (!json.package.homepage) { json.package.homepage = p.locals.repository.homepage; }
+        json.package.repository = {};
+        json.package.repository.type = p.locals.repository.type;
+        json.package.repository.url = p.locals.repository.url;
+        json.package.repository.favoriteCount = p.locals.repository.favoriteCount;
+        json.package.repository.subscriberCount = p.locals.repository.subscriberCount;
+        json.package.repository.forkCount = p.locals.repository.forkCount;
+        if (p.locals.repository.createdAt) { json.package.repository.created = p.locals.repository.createdAt.toISOString(); }
+        if (p.locals.repository.modifiedAt) { json.package.repository.modified = p.locals.repository.modifiedAt.toISOString(); }
       }
       if (p.locals.license) {
-        json.license = p.locals.license.type;
+        json.package.license = p.locals.license.type;
       }
-      json.time = {
+      json.package.time = {
         created: p.locals.createdAt.toISOString(),
         modified: p.locals.modifiedAt.toISOString()
       }
       if (p.locals.downloads) {
-        json.downloads = {
+        json.package.downloads = {
           'last-day': p.locals.downloads['last-day'],
           'last-week': p.locals.downloads['last-week'],
           'last-month': p.locals.downloads['last-month']
