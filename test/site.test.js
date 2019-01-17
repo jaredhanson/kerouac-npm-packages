@@ -14,10 +14,7 @@ describe('www/site', function() {
   });
   
   it('should be annotated', function() {
-    expect(factory['@implements']).to.deep.equal([
-      'http://i.kerouacjs.org/Site',
-      'http://schemas.modulate.io/js/comp/lang/javascript/packages/registry/WWWSite'
-    ]);
+    expect(factory['@implements']).to.deep.equal('http://i.kerouacjs.org/Site');
     expect(factory['@singleton']).to.be.undefined;
   });
   

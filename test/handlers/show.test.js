@@ -189,7 +189,7 @@ describe('handlers/show', function() {
           createdAt: new Date('2011-10-23T22:27:46.568Z'),
           modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
           publishedAt: new Date('2016-05-17T19:13:37.644Z'),
-          modifiedTimeAgo: '2 months ago'
+          modifiedTimeAgo: '5 months ago'
         });
       });
       

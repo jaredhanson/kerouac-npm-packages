@@ -98,10 +98,7 @@ exports = module.exports = function(showHandler, api_allHandler, api_v1_allHandl
   return site;
 };
 
-exports['@implements'] = [
-  'http://i.kerouacjs.org/Site',
-  'http://schemas.modulate.io/js/comp/lang/javascript/packages/registry/WWWSite'
-];
+exports['@implements'] = 'http://i.kerouacjs.org/Site';
 exports['@require'] = [
   './handlers/show',
   './handlers/api/all',
