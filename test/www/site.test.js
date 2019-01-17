@@ -2,9 +2,9 @@
 
 var $require = require('proxyquire');
 var sinon = require('sinon');
-var factory = require('../app/site');
-var MockSite = require('./mocks/site');
-var MockQueue = require('./mocks/queue');
+var factory = require('../../app/www/site');
+var MockSite = require('../mocks/site');
+var MockQueue = require('../mocks/queue');
 
 
 describe('www/site', function() {
@@ -22,7 +22,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [
@@ -73,7 +73,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [
@@ -113,7 +113,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [
@@ -172,7 +172,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [
@@ -234,7 +234,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [
@@ -320,7 +320,7 @@ describe('www/site', function() {
     function kerouac() {
       return new MockSite();
     }
-    var factory = $require('../app/site', { 'kerouac': kerouac });
+    var factory = $require('../../app/www/site', { 'kerouac': kerouac });
 
     var packageRegistry = {
       list: sinon.stub().yields(null, [

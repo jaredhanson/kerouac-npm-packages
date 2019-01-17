@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var factory = require('../../../../app/handlers/api/v1/promoted');
+var factory = require('../../../../../app/www/handlers/api/v1/promoted');
 
 
 describe('handlers/api/v1/promoted', function() {

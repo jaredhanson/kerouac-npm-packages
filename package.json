@@ -23,9 +23,9 @@
   ],
   "main": "./app",
   "assembly": {
-    "namespace": "io.modulate/comp/lang/javascript",
+    "namespace": "io.modulate/comp/lang/javascript/packages/registry",
     "components": [
-      "site",
+      "www/site",
       "packages/registry/local"
     ]
   },
