@@ -46,6 +46,7 @@ exports = module.exports = function(packageRegistry, project) {
       page.locals.createdAt = pkg.ctime;
       page.locals.modifiedAt = pkg.mtime;
       page.locals.publishedAt = pkg.ptime;
+      // TODO: Move this to a locals, so it can be invoked in the view
       page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
 
       next();
@@ -132,7 +133,7 @@ exports = module.exports = function(packageRegistry, project) {
       return next();
     }
     
-    var site = page.site
+    var site = page.app
       , engines = [ 'md' ];
     
     (function iter(i, err) {
