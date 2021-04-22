@@ -27,7 +27,7 @@
  * When generating a deprecated file, the ambiguity is resolved in favor of the
  * latest known format (a zero-length array).
  */
-exports = module.exports = function() {
+exports = module.exports = function(registry, project) {
   var uri = require('url');
   
   function deprecated(page) {
@@ -35,37 +35,65 @@ exports = module.exports = function() {
     page.end();
   }
   
-  function render(page, next) {
-    var packages = page.site.pages.filter(function(p) {
-      return (p.meta && p.meta.package == true);
-    });
+  function fetchRecords(page, next) {
+    page.internals = {};
     
+    registry.list(function(err, items) {
+      if (err) { return next(err); }
+      
+      var pkgs = []
+        , i = 0;
+      function iter() {
+        var item = items[i++];
+        if (!item) {
+          page.internals.packages = pkgs;
+          return next();
+        }
+        
+        registry.read(item.name, function(err, pkg) {
+          if (err) { return next(err); }
+          pkgs.push(pkg);
+          iter();
+        });
+      }
+      iter();
+    });
+  }
+  
+  function render(page, next) {
+    var packages = page.internals.packages;
     
     var json = {};
     
     packages.forEach(function(p) {
       var obj = {};
-      obj.name = p.locals.name;
-      obj.description = p.locals.description;
-      obj.keywords = p.locals.keywords;
-      obj['dist-tags'] = { latest: p.locals.version };
+      obj.name = p.name;
+      obj.description = p.description;
+      obj.keywords = p.keywords;
+      if (p['dist-tags']) {
+        obj['dist-tags'] = { latest: p['dist-tags']['latest'] };
+      }
       obj.versions = {};
-      obj.versions[p.locals.version] = 'latest';
-      if (p.locals.publishedAt) {
-        obj.time = { modified: p.locals.publishedAt.toISOString() };
+      if (p['dist-tags']) {
+        obj.versions[p['dist-tags']['latest']] = 'latest';
       }
-      
-      if (p.locals.flags) {
-        obj._flags = p.locals.flags;
+      if (p.ptime) {
+        obj.time = { modified: p.ptime.toISOString() };
       }
+      // TODO: Put this back in test case
+      if (p.flags) {
+        obj._flags = p.flags;
+      }
+      /*
       if (p.locals.count) {
         obj._count = p.locals.count;
       }
-      if (p.locals.downloads) {
-        obj._downloads = p.locals.downloads;
+      */
+      if (p.downloads) {
+        obj._downloads = p.downloads;
       }
       
-      json[p.locals.name] = obj;
+      json[p.name] = obj;
     });
     
     page.write(JSON.stringify(json, null, 2));
@@ -75,6 +103,7 @@ exports = module.exports = function() {
   
   return [
     //deprecated,
+    fetchRecords,
     render
   ];
 };
