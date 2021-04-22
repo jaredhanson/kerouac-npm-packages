@@ -20,16 +20,39 @@
  *   - https://registry.npmjs.org/-/v1/search?text=passport
  *   - https://registry.npmjs.org/-/v1/search?text=kerouac%20cname
  */
-exports = module.exports = function() {
+exports = module.exports = function(registry, project) {
   var uri = require('url');
   
   
   var limit = 25;
   
-  function select(page, next) {
-    var packages = page.site.pages.filter(function(p) {
-      return (p.meta && p.meta.package == true);
+  function fetchRecords(page, next) {
+    page.internals = {};
+    
+    registry.list(function(err, items) {
+      if (err) { return next(err); }
+      
+      var pkgs = []
+        , i = 0;
+      function iter() {
+        var item = items[i++];
+        if (!item) {
+          page.internals.packages = pkgs;
+          return next();
+        }
+        
+        registry.read(item.name, function(err, pkg) {
+          if (err) { return next(err); }
+          pkgs.push(pkg);
+          iter();
+        });
+      }
+      iter();
     });
+  }
+  
+  function select(page, next) {
+    var packages = page.internals.packages;
     
     var i = page.params.page ? parseInt(page.params.page - 1) : 0
       , offset = i * limit;
@@ -47,28 +70,31 @@ exports = module.exports = function() {
     page.locals.total = packages.length;
     page.locals.urls = urls;
     
+    // TODO: Move this slicing into data layer
     packages = packages.slice(offset, offset + limit);
     
     var objects = packages.map(function(p) {
       var json = {};
       json.package = {};
-      json.package.name = p.locals.name;
-      json.package.version = p.locals.version;
-      json.package.description = p.locals.description;
-      json.package.keywords = p.locals.keywords;
-      if (p.locals.publishedAt) {
-        json.package.date = p.locals.publishedAt.toISOString();
+      json.package.name = p.name;
+      if (p['dist-tags']) {
+        json.package.version = p['dist-tags']['latest'];
+      }
+      json.package.description = p.description;
+      json.package.keywords = p.keywords;
+      if (p.ptime) {
+        json.package.date = p.ptime.toISOString();
       }
       json.package.links = {};
-      json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.locals.name);
-      json.package.links.homepage = p.locals.homepage;
-      if (p.locals.repository) {
-        json.package.links.repository = p.locals.repository.url;
+      json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.name);
+      json.package.links.homepage = p.homepage;
+      if (p.repository) {
+        json.package.links.repository = p.repository.url;
       }
-      if (p.locals.bugs) {
-        json.package.links.bugs = p.locals.bugs.url;
+      if (p.bugs) {
+        json.package.links.bugs = p.bugs.url;
       }
-      if (p.locals.flags) {
+      if (p.flags) {
         // The "flags" property is not documented.  However, it's existence has
         // been witnessed in npm's implementation, with resposes including:
         //
@@ -82,23 +108,9 @@ exports = module.exports = function() {
         //     "insecure": 1,
         //     "unstable": true
         //   }
-        json.flags = p.locals.flags;
+        json.flags = p.flags;
       }
-      if (p.locals.count) {
-        // The "counts" property is not available in npm's implementation.  The
-        // keys available on this object are inspired by Schema.org's interaction
-        // statistics.
-        //   https://schema.org/interactionStatistic
-        //   https://schema.org/InteractionCounter
-        //   https://schema.org/SubscribeAction
-        //   https://schema.org/BookmarkAction
-        json.count = {
-          favorites: p.locals.count.favorites,
-          subscribers: p.locals.count.subscribers,
-          forks: p.locals.count.forks
-        }
-      }
-      if (p.locals.downloads) {
+      if (p.downloads) {
         // The "downloads" property is not available in npm's implementation.
         // The key name was chosen to mirror the path used by npm in their API
         // endpoint for obtaining download counts, `https://api.npmjs.org/downloads/point/{period}[/{package}]`.
@@ -109,16 +121,52 @@ exports = module.exports = function() {
         //   - [numeric precision matters: how npm download counts work](https://blog.npmjs.org/post/92574016600/numeric-precision-matters-how-npm-download-counts)
         //   - [npm/download-counts](https://github.com/npm/download-counts)
         json.downloads = {
-          'last-day': p.locals.downloads['last-day'],
-          'last-week': p.locals.downloads['last-week'],
-          'last-month': p.locals.downloads['last-month']
+          'last-day': p.downloads['last-day'],
+          'last-week': p.downloads['last-week'],
+          'last-month': p.downloads['last-month']
         }
       }
+      
       return json;
     });
     
     page.locals.objects = objects;
     next();
+  }
+  
+  function loadCounts(page, next) {
+    var packages = page.internals.packages;
+    
+    var i = 0;
+    function iter() {
+      var pkg = packages[i++];
+      if (!pkg) {
+        return next();
+      }
+      
+      var repo = pkg.repository
+      if (!repo) { return iter(); }
+      
+      project.info(repo.url, { protocol: repo.type }, function(err, proj) {
+        if (err) { return next(err); }
+        
+        // The "counts" property is not available in npm's implementation.  The
+        // keys available on this object are inspired by Schema.org's interaction
+        // statistics.
+        //   https://schema.org/interactionStatistic
+        //   https://schema.org/InteractionCounter
+        //   https://schema.org/SubscribeAction
+        //   https://schema.org/BookmarkAction
+        page.locals.objects[i - 1].count = {
+          favorites: proj.favoriteCount,
+          subscribers: proj.subscriberCount,
+          forks: proj.forkCount
+        }
+        
+        iter();
+      });
+    }
+    iter();
   }
   
   function render(page, next) {
@@ -136,7 +184,9 @@ exports = module.exports = function() {
   
   
   return [
+    fetchRecords,
     select,
+    loadCounts,
     render
   ];
 };

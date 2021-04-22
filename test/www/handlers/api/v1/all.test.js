@@ -16,52 +16,121 @@ describe('handlers/api/v1/all', function() {
   });
   
   describe('handler', function() {
+    var registry = {
+      list: function(){},
+      read: function(){}
+    };
+    var project = {
+      info: function(){}
+    };
+    
     
     describe('with one package', function() {
       var page, err;
       
+      before(function() {
+        sinon.stub(registry, 'list').yields(null, [
+          { name: 'passport-facebook' }
+        ]);
+        
+        sinon.stub(registry, 'read').withArgs('passport-facebook').yields(null, {
+          name: 'passport-facebook',
+          description: 'Facebook authentication strategy for Passport.',
+          keywords: [ 'passport', 'facebook', 'identity' ],
+          versions: {
+            '0.1.0': {
+              name: 'passport-facebook',
+              description: 'Facebook authentication strategy for Passport.',
+              keywords: 
+               [ 'passport',
+                 'facebook',
+                 'auth',
+                 'authn',
+                 'authentication',
+                 'identity' ],
+              homepage: undefined,
+              repository: {
+                type: 'git',
+                url: 'git://github.com/jaredhanson/passport-facebook.git'
+              },
+              author: 
+               { name: 'Jared Hanson',
+                 email: 'jaredhanson@gmail.com',
+                 url: 'http://www.jaredhanson.net/' },
+              readme: undefined
+            },
+            '2.1.1': {
+              name: 'passport-facebook',
+              description: 'Facebook authentication strategy for Passport.',
+              keywords: 
+               [ 'passport',
+                 'facebook',
+                 'auth',
+                 'authn',
+                 'authentication',
+                 'identity' ],
+              homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+              repository: {
+                type: 'git',
+                url: 'git://github.com/jaredhanson/passport-facebook.git'
+              },
+              author: 
+               { name: 'Jared Hanson',
+                 email: 'jaredhanson@gmail.com',
+                 url: 'http://www.jaredhanson.net/' },
+              license: { type: 'MIT' },
+              readme: undefined
+            }
+          },
+          'dist-tags': { latest: '2.1.1' },
+          homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
+          repository: {
+            type: 'git',
+            url: 'git://github.com/jaredhanson/passport-facebook.git'
+          },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-facebook/issues'
+          },
+          author: {
+            name: 'Jared Hanson',
+            email: 'jaredhanson@gmail.com',
+            url: 'http://www.jaredhanson.net/'
+          },
+          license: {
+            type: 'MIT'
+          },
+          //readme: '# passport-facebook\n\n',
+          downloads: {
+            'last-day': 7657,
+            'last-week': 28650,
+            'last-month': 183283
+          },
+          ctime: new Date('2011-10-23T22:27:46.568Z'),
+          mtime: new Date('2018-08-03T00:35:46.879Z'),
+          ptime: new Date('2016-05-17T19:13:37.644Z')
+        });
+        
+        sinon.stub(project, 'info').withArgs('git://github.com/jaredhanson/passport-facebook.git').yields(null, {
+          name: 'passport-facebook',
+          description: 'Facebook authentication strategy for Passport and Node.js.',
+          homepage: 'https://github.com/jaredhanson/passport-facebook',
+          favoriteCount: 1062,
+          subscriberCount: 49,
+          forkCount: 417,
+          createdAt: new Date('2011-10-18T03:44:47.000Z'),
+          modifiedAt: new Date('2018-09-20T10:59:45.000Z')
+        });
+      });
+    
+      after(function() {
+        project.info.restore();
+        registry.list.restore();
+        registry.read.restore();
+      });
+      
       before(function(done) {
-        chai.kerouac.handler(factory())
+        chai.kerouac.handler(factory(registry, project))
           .page(function(page) {
-            page.site = {};
-            page.site.pages = [
-              { meta: { package: true },
-                locals: {
-                  title: 'passport-facebook',
-                  name: 'passport-facebook',
-                  description: 'Facebook authentication strategy for Passport.',
-                  keywords: [ 'passport', 'facebook', 'identity' ],
-                  version: '2.1.1',
-                  homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-                  repository: {
-                    type: 'git',
-                    url: 'git://github.com/jaredhanson/passport-facebook.git',
-                  },
-                  bugs: {
-                    url: 'http://github.com/jaredhanson/passport-facebook/issues'
-                  },
-                  license: {
-                    type: 'MIT',
-                    name: 'MIT License',
-                    url: 'http://www.opensource.org/licenses/MIT'
-                  },
-                  downloads: {
-                    'last-day': 7657,
-                    'last-week': 28650,
-                    'last-month': 183283
-                  },
-                  count: {
-                    favorites: 1062,
-                    subscribers: 49,
-                    forks: 417
-                  },
-                  createdAt: new Date('2011-10-23T22:27:46.568Z'),
-                  modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
-                  publishedAt: new Date('2016-05-17T19:13:37.644Z')
-                }
-              }
-            ];
-            
             page.params = {};
           })
           .end(function(p) {
@@ -93,15 +162,15 @@ describe('handlers/api/v1/all', function() {
           '          "bugs": "http://github.com/jaredhanson/passport-facebook/issues"',
           '        }',
           '      },',
-          '      "count": {',
-          '        "favorites": 1062,',
-          '        "subscribers": 49,',
-          '        "forks": 417',
-          '      },',
           '      "downloads": {',
           '        "last-day": 7657,',
           '        "last-week": 28650,',
           '        "last-month": 183283',
+          '      },',
+          '      "count": {',
+          '        "favorites": 1062,',
+          '        "subscribers": 49,',
+          '        "forks": 417',
           '      }',
           '    }',
           '  ],',
