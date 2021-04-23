@@ -29,7 +29,10 @@ exports = module.exports = function(registry, project) {
   function fetchRecords(page, next) {
     page.internals = {};
     
-    registry.list(function(err, items) {
+    var i = page.params.page ? parseInt(page.params.page - 1) : 0
+      , offset = i * limit;
+    
+    registry.list({ limit: limit, offset: offset }, function(err, items) {
       if (err) { return next(err); }
       
       var pkgs = []
@@ -51,6 +54,14 @@ exports = module.exports = function(registry, project) {
     });
   }
   
+  function count(page, next) {
+    registry.list(function(err, records) {
+      if (err) { return next(err); }
+      page.locals.total = records.length;
+      next();
+    });
+  }
+  
   function select(page, next) {
     var packages = page.internals.packages;
     
@@ -67,11 +78,7 @@ exports = module.exports = function(registry, project) {
                         : uri.resolve(page.absoluteURL, '../all.json');
     }
     
-    page.locals.total = packages.length;
     page.locals.urls = urls;
-    
-    // TODO: Move this slicing into data layer
-    packages = packages.slice(offset, offset + limit);
     
     var objects = packages.map(function(p) {
       var json = {};
@@ -148,7 +155,11 @@ exports = module.exports = function(registry, project) {
       if (!repo) { return iter(); }
       
       project.info(repo.url, { protocol: repo.type }, function(err, proj) {
-        if (err) { return next(err); }
+        if (err && err.type == 'HostNotSupportedError') {
+          return iter();
+        } else if (err) { return next(err); }
+        
+        if (!proj) { return iter(); } // not found
         
         // The "counts" property is not available in npm's implementation.  The
         // keys available on this object are inspired by Schema.org's interaction
@@ -185,6 +196,7 @@ exports = module.exports = function(registry, project) {
   
   return [
     fetchRecords,
+    count,
     select,
     loadCounts,
     render
