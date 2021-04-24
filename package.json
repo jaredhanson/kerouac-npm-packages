@@ -21,7 +21,7 @@
       "url": "http://opensource.org/licenses/MIT"
     }
   ],
-  "main": "./app",
+  "main": "./lib",
   "assembly": {
     "namespace": "io.modulate/comp/lang/javascript/packages/registry",
     "components": [
@@ -30,8 +30,10 @@
     ]
   },
   "dependencies": {
+    "async-cache": "^1.1.0",
     "js-yaml": "^3.10.0",
     "kerouac-sitemap": "^0.4.2",
+    "lru-cache": "^6.0.0",
     "moment": "^2.20.1",
     "npm-user": "^3.0.1",
     "package-json": "^5.0.0",
