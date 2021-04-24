@@ -190,11 +190,10 @@ describe('NpmRegistry', function() {
       it('should yield package', function() {
         expect(pkg).to.deep.equal({
           name: 'passport-facebook',
-          description: 'Facebook authentication strategy for Passport.',
-          keywords: [ 'passport', 'facebook', 'identity' ],
           versions: {
             '0.1.0': {
               name: 'passport-facebook',
+              version: '0.1.0',
               description: 'Facebook authentication strategy for Passport.',
               keywords: 
                [ 'passport',
@@ -212,11 +211,16 @@ describe('NpmRegistry', function() {
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
-                 url: 'http://www.jaredhanson.net/' },
+                 web: 'http://www.jaredhanson.net/' },
+              maintainers: [{
+                name: 'jaredhanson',
+                email: 'jaredhanson@gmail.com'
+              }],
               readme: undefined
             },
             '2.1.1': {
               name: 'passport-facebook',
+              version: '2.1.1',
               description: 'Facebook authentication strategy for Passport.',
               keywords: 
                [ 'passport',
@@ -236,12 +240,18 @@ describe('NpmRegistry', function() {
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
-                 url: 'http://www.jaredhanson.net/' },
+                 web: 'http://www.jaredhanson.net/' },
+              maintainers: [{
+                name: 'jaredhanson',
+                email: 'jaredhanson@gmail.com'
+              }],
               license: { type: 'MIT' },
               readme: undefined
             }
           },
           'dist-tags': { latest: '2.1.1' },
+          description: 'Facebook authentication strategy for Passport.',
+          keywords: [ 'passport', 'facebook', 'identity' ],
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
@@ -250,8 +260,12 @@ describe('NpmRegistry', function() {
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
-            url: 'http://www.jaredhanson.net/'
+            web: 'http://www.jaredhanson.net/'
           },
+          maintainers: [{
+            name: 'jaredhanson',
+            email: 'jaredhanson@gmail.com'
+          }],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
@@ -364,8 +378,12 @@ describe('NpmRegistry', function() {
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
-            url: 'http://www.jaredhanson.net/'
+            web: 'http://www.jaredhanson.net/'
           },
+          maintainers: [{
+            name: 'jaredhanson',
+            email: 'jaredhanson@gmail.com'
+          }],
           readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
           downloads: {
             'last-day': 1029,
