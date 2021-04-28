@@ -495,6 +495,12 @@ describe('NpmRegistry', function() {
           bugs: {
             url: 'https://github.com/adobe/passport-adobe-oauth2/issues'
           },
+          contributors: [
+            { name: 'Dragos Dascalita Haut', web: 'https://github.com/ddragosd' },
+            { name: 'Audrey So', web: 'https://github.com/audreyeso' },
+            { name: 'Caryn Tran', web: 'https://github.com/carynbear' },
+            { name: 'Jesse MacFadyen', web: 'https://github.com/purplecabbage' },
+          ],
           maintainers: [
             { email: 'audreyeso@gmail.com', name: 'audreyeso' },
             { email: 'caryn.tran@berkeley.edu', name: 'carynbear' },
