@@ -45,10 +45,10 @@ describe('handlers/show', function() {
                  'authentication',
                  'identity' ],
               homepage: undefined,
-              repository: {
+              repositories: [ {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              } ],
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -66,10 +66,10 @@ describe('handlers/show', function() {
                  'authentication',
                  'identity' ],
               homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-              repository: {
+              repositories: [ {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              } ],
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -80,10 +80,10 @@ describe('handlers/show', function() {
           },
           'dist-tags': { latest: '2.1.1' },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-          repository: {
+          repositories: [ {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git'
-          },
+          } ],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
@@ -208,10 +208,10 @@ describe('handlers/show', function() {
           keywords: [ 'passport', 'openid', 'identity' ],
           versions: {},
           homepage: 'https://github.com/jaredhanson/passport-openid',
-          repository: {
+          repositories: [ {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git'
-          },
+          } ],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-openid/issues'
           },

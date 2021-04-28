@@ -26,7 +26,9 @@ exports = module.exports = function(packageRegistry, project) {
         page.locals.version = pkg['dist-tags']['latest'];
       }
       page.locals.homepage = pkg.homepage;
-      page.locals.repository = pkg.repository;
+      if (pkg.repositories) {
+        page.locals.repository = pkg.repositories[0];
+      }
       page.locals.bugs = pkg.bugs;
       if (pkg.license) {
         page.locals.license = pkg.license;

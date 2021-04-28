@@ -203,10 +203,10 @@ describe('NpmRegistry', function() {
                  'authentication',
                  'identity' ],
               homepage: undefined,
-              repository: {
+              repositories: [{
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              }],
               bugs: undefined,
               author: 
                { name: 'Jared Hanson',
@@ -230,10 +230,10 @@ describe('NpmRegistry', function() {
                  'authentication',
                  'identity' ],
               homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-              repository: {
+              repositories: [{
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              }],
               bugs: {
                 url: 'http://github.com/jaredhanson/passport-facebook/issues'
               },
@@ -253,10 +253,10 @@ describe('NpmRegistry', function() {
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-          repository: {
+          repositories: [{
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git'
-          },
+          }],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
@@ -368,10 +368,10 @@ describe('NpmRegistry', function() {
           description: 'OpenID authentication strategy for Passport.',
           keywords: [ 'passport', 'openid', 'identity' ],
           homepage: 'https://github.com/jaredhanson/passport-openid',
-          repository: {
+          repositories: [{
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-openid.git'
-          },
+          }],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-openid/issues'
           },

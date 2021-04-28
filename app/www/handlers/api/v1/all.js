@@ -55,30 +55,30 @@ exports = module.exports = function(registry, project) {
   }
   
   function count(page, next) {
-    registry.list(function(err, records) {
+    registry.list(function(err, pkgs) {
       if (err) { return next(err); }
-      page.locals.total = records.length;
+      
+      var i = page.params.page ? parseInt(page.params.page - 1) : 0
+        , offset = i * limit;
+    
+      var urls = {};
+      if (offset + limit < pkgs.length) {
+        urls.next = i > 0 ? uri.resolve(page.absoluteURL, (i + 2) + '.json')
+                          : uri.resolve(page.absoluteURL, 'all/' + (i + 2) + '.json'); // add 2 for 1-based indexing
+      }
+      if (i > 0) {
+        urls.prev = i > 1 ? uri.resolve(page.absoluteURL, i + '.json')
+                          : uri.resolve(page.absoluteURL, '../all.json');
+      }
+    
+      page.locals.total = pkgs.length;
+      page.locals.urls = urls;
       next();
     });
   }
   
   function select(page, next) {
     var packages = page.internals.packages;
-    
-    var i = page.params.page ? parseInt(page.params.page - 1) : 0
-      , offset = i * limit;
-    
-    var urls = {};
-    if (offset + limit < packages.length) {
-      urls.next = i > 0 ? uri.resolve(page.absoluteURL, (i + 2) + '.json')
-                        : uri.resolve(page.absoluteURL, 'all/' + (i + 2) + '.json'); // add 2 for 1-based indexing
-    }
-    if (i > 0) {
-      urls.prev = i > 1 ? uri.resolve(page.absoluteURL, i + '.json')
-                        : uri.resolve(page.absoluteURL, '../all.json');
-    }
-    
-    page.locals.urls = urls;
     
     var objects = packages.map(function(p) {
       var json = {};
@@ -95,8 +95,8 @@ exports = module.exports = function(registry, project) {
       json.package.links = {};
       json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.name);
       json.package.links.homepage = p.homepage;
-      if (p.repository) {
-        json.package.links.repository = p.repository.url;
+      if (p.repositories) {
+        json.package.links.repository = p.repositories[0].url;
       }
       if (p.bugs) {
         json.package.links.bugs = p.bugs.url;
@@ -151,8 +151,11 @@ exports = module.exports = function(registry, project) {
         return next();
       }
       
-      var repo = pkg.repository
-      if (!repo) { return iter(); }
+      if (!pkg.repositories) {
+        return iter();
+      }
+      
+      var repo = pkg.repositories[0];
       
       project.info(repo.url, { protocol: repo.type }, function(err, proj) {
         if (err && err.type == 'HostNotSupportedError') {
