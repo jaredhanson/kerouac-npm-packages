@@ -396,6 +396,126 @@ describe('NpmRegistry', function() {
       });
     }); // package without versions and license
     
+    describe('package with contributors and no author', function() {
+      var packageJsonStub = sinon.stub().resolves({
+        name: 'passport-adobe-oauth2',
+        time: {
+          modified: '2018-03-30T22:05:57.398Z',
+          created: '2018-02-23T21:47:14.303Z',
+        },
+        maintainers: [
+          { email: 'audreyeso@gmail.com', name: 'audreyeso' },
+          { email: 'caryn.tran@berkeley.edu', name: 'carynbear' },
+          { email: 'ddragosd@gmail.com', name: 'ddragosd' },
+          { email: 'purplecabbage@gmail.com', name: 'purplecabbage' }
+        ],
+        description: 'Adobe OAuth 2.0 authentication strategy for Passport.',
+        homepage: 'https://github.com/adobe/passport-adobe-oauth2#readme',
+        keywords: [
+          'passport',
+          'adobe',
+          'oauth2',
+          'auth',
+          'authentication',
+          'identity',
+        ],
+        repository: {
+          type: 'git',
+          url: 'git+https://github.com/adobe/passport-adobe-oauth2.git'
+        },
+        contributors: [
+          { name: 'Dragos Dascalita Haut', url: 'https://github.com/ddragosd' },
+          { name: 'Audrey So', url: 'https://github.com/audreyeso' },
+          { name: 'Caryn Tran', url: 'https://github.com/carynbear' },
+          { name: 'Jesse MacFadyen', url: 'https://github.com/purplecabbage' },
+        ],
+        bugs: { url: 'https://github.com/adobe/passport-adobe-oauth2/issues' },
+        license: 'Apache-2.0',
+        readme: '# Passport-Adobe-OAuth2\n\n',
+      });
+      
+      var pkgDownloadsStub = sinon.stub()
+      pkgDownloadsStub.onFirstCall().resolves(1);
+      pkgDownloadsStub.onSecondCall().resolves(7);
+      pkgDownloadsStub.onThirdCall().resolves(30);
+      
+      var NpmRegistry = $require('../../lib/npmregistry',
+        { 'package-json': packageJsonStub,
+          'pkg-downloads': pkgDownloadsStub });
+      var registry = new NpmRegistry();
+      
+      
+      var pkg;
+      before(function(done) {
+        registry.read('passport-adobe-oauth2', function(err, p) {
+          if (err) { return done(err); }
+          pkg = p;
+          done();
+        })
+      })
+      
+      it('should call package-json correctly', function() {
+        expect(packageJsonStub.callCount).to.equal(1);
+        var call = packageJsonStub.getCall(0)
+        expect(call.args[0]).to.equal('passport-adobe-oauth2');
+        expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
+      });
+      
+      it('should call pkg-downloads correctly', function() {
+        expect(pkgDownloadsStub.callCount).to.equal(3);
+        var call = pkgDownloadsStub.getCall(0)
+        expect(call.args[0]).to.equal('passport-adobe-oauth2');
+        expect(call.args[1]).to.deep.equal({ period: 'day' });
+        call = pkgDownloadsStub.getCall(1)
+        expect(call.args[0]).to.equal('passport-adobe-oauth2');
+        expect(call.args[1]).to.deep.equal({ period: 'week' });
+        call = pkgDownloadsStub.getCall(2)
+        expect(call.args[0]).to.equal('passport-adobe-oauth2');
+        expect(call.args[1]).to.deep.equal({ period: 'month' });
+      });
+      
+      it('should yield package', function() {
+        expect(pkg).to.deep.equal({
+          name: 'passport-adobe-oauth2',
+          versions: {},
+          description: 'Adobe OAuth 2.0 authentication strategy for Passport.',
+          keywords: [
+            'passport',
+            'adobe',
+            'oauth2',
+            'auth',
+            'authentication',
+            'identity',
+          ],
+          homepage: 'https://github.com/adobe/passport-adobe-oauth2#readme',
+          repositories: [{
+            type: 'git',
+            url: 'git+https://github.com/adobe/passport-adobe-oauth2.git'
+          }],
+          bugs: {
+            url: 'https://github.com/adobe/passport-adobe-oauth2/issues'
+          },
+          maintainers: [
+            { email: 'audreyeso@gmail.com', name: 'audreyeso' },
+            { email: 'caryn.tran@berkeley.edu', name: 'carynbear' },
+            { email: 'ddragosd@gmail.com', name: 'ddragosd' },
+            { email: 'purplecabbage@gmail.com', name: 'purplecabbage' }
+          ],
+          licenses: [
+            { type: 'Apache-2.0' }
+          ],
+          readme: '# Passport-Adobe-OAuth2\n\n',
+          downloads: {
+            'last-day': 1,
+            'last-week': 7,
+            'last-month': 30
+          },
+          ctime: new Date('2018-02-23T21:47:14.303Z'),
+          mtime: new Date('2018-03-30T22:05:57.398Z')
+        });
+      });
+    }); // package without author
+    
   }); // #read
     
   
