@@ -149,12 +149,6 @@ describe('handlers/show', function() {
         expect(call.args[1]).to.deep.equal({ protocol: 'git' });
       });
       
-      it('should set meta', function() {
-        expect(page.meta).to.deep.equal({
-          package: true,
-        });
-      });
-      
       it('should set locals', function() {
         expect(page.locals).to.deep.equal({
           title: 'passport-facebook',

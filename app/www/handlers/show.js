@@ -1,3 +1,12 @@
+/**
+ * Package page handler.
+ *
+ * This component provides a handler that generates an HTML page with package
+ * information.  This page is suitable for viewing by a person using a web
+ * browser.
+ *
+ * @returns {Function[]}
+ */
 exports = module.exports = function(packageRegistry, project) {
   var moment = require('moment')
     , npmUser = require('npm-user')
@@ -6,15 +15,13 @@ exports = module.exports = function(packageRegistry, project) {
   
   function initialize(page, next) {
     page._internals = {};
-    
-    page.meta = {
-      package: true
-    }
     next();
   }
   
   function fetchPackage(page, next) {
     packageRegistry.read(page.params.name, function(err, pkg) {
+      if (err) { return next(err); }
+      
       //page.locals._id = page.params.name;
       if (pkg.unpublished || pkg.ignore) { return page.skip(); }
 
