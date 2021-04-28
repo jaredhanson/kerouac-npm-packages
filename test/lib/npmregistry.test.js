@@ -257,6 +257,9 @@ describe('NpmRegistry', function() {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git'
           },
+          bugs: {
+            url: 'http://github.com/jaredhanson/passport-facebook/issues'
+          },
           author: {
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
@@ -266,9 +269,6 @@ describe('NpmRegistry', function() {
             name: 'jaredhanson',
             email: 'jaredhanson@gmail.com'
           }],
-          bugs: {
-            url: 'http://github.com/jaredhanson/passport-facebook/issues'
-          },
           license: {
             type: 'MIT'
           },
@@ -364,9 +364,9 @@ describe('NpmRegistry', function() {
       it('should yield package', function() {
         expect(pkg).to.deep.equal({
           name: 'passport-openid',
+          versions: {},
           description: 'OpenID authentication strategy for Passport.',
           keywords: [ 'passport', 'openid', 'identity' ],
-          versions: {},
           homepage: 'https://github.com/jaredhanson/passport-openid',
           repository: {
             type: 'git',
