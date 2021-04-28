@@ -74,7 +74,7 @@ describe('handlers/show', function() {
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
                  url: 'http://www.jaredhanson.net/' },
-              license: { type: 'MIT' },
+              licenses: [ { type: 'MIT' } ],
               readme: undefined
             }
           },
@@ -92,9 +92,9 @@ describe('handlers/show', function() {
             email: 'jaredhanson@gmail.com',
             url: 'http://www.jaredhanson.net/'
           },
-          license: {
+          licenses: [ {
             type: 'MIT'
-          },
+          } ],
           //readme: '# passport-facebook\n\n',
           downloads: {
             'last-day': 7657,

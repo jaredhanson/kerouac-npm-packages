@@ -245,7 +245,7 @@ describe('NpmRegistry', function() {
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
               }],
-              license: { type: 'MIT' },
+              licenses: [ { type: 'MIT' } ],
               readme: undefined
             }
           },
@@ -269,9 +269,9 @@ describe('NpmRegistry', function() {
             name: 'jaredhanson',
             email: 'jaredhanson@gmail.com'
           }],
-          license: {
+          licenses: [{
             type: 'MIT'
-          },
+          }],
           readme: '# passport-facebook\n\n',
           downloads: {
             'last-day': 7657,
@@ -285,7 +285,7 @@ describe('NpmRegistry', function() {
       });
     }); // package with latest version
     
-    describe('package without license and versions', function() {
+    describe('package without versions and license', function() {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-openid',
         description: 'OpenID authentication strategy for Passport.',
@@ -394,7 +394,7 @@ describe('NpmRegistry', function() {
           mtime: new Date('2017-08-30T14:29:54.769Z')
         });
       });
-    }); // package without license and versions
+    }); // package without versions and license
     
   }); // #read
     
