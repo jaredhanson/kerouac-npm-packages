@@ -8,8 +8,7 @@
  * @returns {Function[]}
  */
 exports = module.exports = function(packageRegistry, project) {
-  var moment = require('moment')
-    , npmUser = require('npm-user')
+  var npmUser = require('npm-user')
     , LICENSES = require('spdx-license-list');
   
   
@@ -27,11 +26,11 @@ exports = module.exports = function(packageRegistry, project) {
 
       page._internals.package = pkg;
       page.locals.name = pkg.name;
-      page.locals.description = pkg.description;
-      page.locals.keywords = pkg.keywords;
       if (pkg['dist-tags']) {
         page.locals.version = pkg['dist-tags']['latest'];
       }
+      page.locals.description = pkg.description;
+      page.locals.keywords = pkg.keywords;
       page.locals.homepage = pkg.homepage;
       if (pkg.repositories) {
         page.locals.repository = pkg.repositories[0];
@@ -39,7 +38,7 @@ exports = module.exports = function(packageRegistry, project) {
       page.locals.bugs = pkg.bugs;
       if (pkg.licenses) {
         page.locals.license = pkg.licenses[0];
-        var license = LICENSES[pkg.licenses[0].type];
+        var license = LICENSES[page.locals.license.type];
         if (license) {
           page.locals.license.name = license.name;
           page.locals.license.url = license.url;
@@ -55,8 +54,6 @@ exports = module.exports = function(packageRegistry, project) {
       page.locals.createdAt = pkg.ctime;
       page.locals.modifiedAt = pkg.mtime;
       page.locals.publishedAt = pkg.ptime;
-      // TODO: Move this to a locals, so it can be invoked in the view
-      page.locals.modifiedTimeAgo = moment(page.locals.modifiedAt).fromNow();
 
       next();
     });

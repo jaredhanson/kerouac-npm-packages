@@ -34,7 +34,6 @@
     "js-yaml": "^3.10.0",
     "kerouac-sitemap": "^0.4.2",
     "lru-cache": "^6.0.0",
-    "moment": "^2.20.1",
     "npm-user": "^3.0.1",
     "package-json": "^5.0.0",
     "pkg-downloads": "^2.3.1",

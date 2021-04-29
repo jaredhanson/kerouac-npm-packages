@@ -153,9 +153,9 @@ describe('handlers/show', function() {
         expect(page.locals).to.deep.equal({
           title: 'passport-facebook',
           name: 'passport-facebook',
+          version: '2.1.1',
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
-          version: '2.1.1',
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
@@ -182,8 +182,7 @@ describe('handlers/show', function() {
           },
           createdAt: new Date('2011-10-23T22:27:46.568Z'),
           modifiedAt: new Date('2018-08-03T00:35:46.879Z'),
-          publishedAt: new Date('2016-05-17T19:13:37.644Z'),
-          modifiedTimeAgo: '3 years ago'
+          publishedAt: new Date('2016-05-17T19:13:37.644Z')
         });
       });
       
@@ -294,8 +293,7 @@ describe('handlers/show', function() {
           },
           createdAt: new Date('2011-11-04T00:28:17.973Z'),
           modifiedAt: new Date('2017-08-30T14:29:54.769Z'),
-          publishedAt: undefined,
-          modifiedTimeAgo: '4 years ago'
+          publishedAt: undefined
         });
       });
       
