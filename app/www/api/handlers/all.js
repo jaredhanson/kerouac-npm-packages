@@ -27,7 +27,7 @@
  * When generating a deprecated file, the ambiguity is resolved in favor of the
  * latest known format (a zero-length array).
  */
-exports = module.exports = function(registry, project) {
+exports = module.exports = function(registry, vc) {
   var uri = require('url');
   
   function deprecated(page) {
@@ -108,4 +108,6 @@ exports = module.exports = function(registry, project) {
   ];
 };
 
-exports['@require'] = [];
+exports['@require'] = [
+  'http://js.modulate.io/comp/lang/javascript/PackageRegistry'
+];
