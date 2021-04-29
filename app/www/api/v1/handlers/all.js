@@ -20,7 +20,7 @@
  *   - https://registry.npmjs.org/-/v1/search?text=passport
  *   - https://registry.npmjs.org/-/v1/search?text=kerouac%20cname
  */
-exports = module.exports = function(registry, project) {
+exports = module.exports = function(registry, vc) {
   var uri = require('url');
   
   
@@ -157,7 +157,7 @@ exports = module.exports = function(registry, project) {
       
       var repo = pkg.repositories[0];
       
-      project.info(repo.url, { protocol: repo.type }, function(err, proj) {
+      vc.info(repo.url, { protocol: repo.type }, function(err, proj) {
         if (err && err.type == 'HostNotSupportedError') {
           return iter();
         } else if (err) { return next(err); }
@@ -206,4 +206,6 @@ exports = module.exports = function(registry, project) {
   ];
 };
 
-exports['@require'] = [];
+exports['@require'] = [
+  'http://schemas.modulate.io/js/comp/lang/javascript/PackageRegistry'
+];
