@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var factory = require('../../../../../app/www/handlers/api/v1/promoted');
+var factory = require('../../../../../app/www/api/v1/handlers/promoted');
 
 
 describe('handlers/api/v1/promoted', function() {
@@ -23,8 +23,8 @@ describe('handlers/api/v1/promoted', function() {
       before(function(done) {
         chai.kerouac.handler(factory())
           .page(function(page) {
-            page.site = {};
-            page.site.pages = [
+            page.app = {};
+            page.app.pages = [
               { meta: { package: true },
                 locals: {
                   title: 'passport-facebook',
@@ -125,8 +125,8 @@ describe('handlers/api/v1/promoted', function() {
       before(function(done) {
         chai.kerouac.handler(factory())
           .page(function(page) {
-            page.site = {};
-            page.site.pages = [
+            page.app = {};
+            page.app.pages = [
               { meta: { package: true },
                 locals: {
                   title: 'passport-facebook',
