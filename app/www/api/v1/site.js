@@ -5,7 +5,7 @@ exports = module.exports = function(allHandler) {
   var site = new kerouac.Router();
   
   site.page('/all.json', allHandler);
-  site.page('/:page.json', allHandler);
+  site.page('/all/:page.json', allHandler);
   
   return site;
 };
