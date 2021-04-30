@@ -1,3 +1,9 @@
+/**
+ * npm Public Registry API site.
+ *
+ * @param {Function|Function[]} allHandler - All handler.
+ * @returns {Function}
+ */
 exports = module.exports = function(allHandler) {
   var kerouac = require('kerouac')
 
