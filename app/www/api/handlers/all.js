@@ -65,6 +65,42 @@ exports = module.exports = function(registry, vc) {
     });
   }
   
+  function loadCounts(page, next) {
+    var packages = page.internals.packages;
+    
+    var i = 0;
+    function iter() {
+      var pkg = packages[i++];
+      if (!pkg) {
+        return next();
+      }
+      
+      if (!pkg.repositories) {
+        return iter();
+      }
+      
+      var repo = pkg.repositories[0];
+      
+      vc.info(repo.url, { protocol: repo.type }, function(err, proj) {
+        if (err && err.type == 'HostNotSupportedError') {
+          return iter();
+        } else if (err) { return next(err); }
+        
+        if (!proj) { return iter(); } // not found
+        
+        // TODO: set this on locals, rather than package object
+        pkg._count = {
+          favorites: proj.favoriteCount,
+          subscribers: proj.subscriberCount,
+          forks: proj.forkCount
+        };
+        
+        iter();
+      });
+    }
+    iter();
+  }
+  
   function render(page, next) {
     var packages = page.internals.packages;
     
@@ -89,11 +125,9 @@ exports = module.exports = function(registry, vc) {
       if (p.flags) {
         obj._flags = p.flags;
       }
-      /*
-      if (p.locals.count) {
-        obj._count = p.locals.count;
+      if (p._count) {
+        obj._count = p._count;
       }
-      */
       if (p.downloads) {
         obj._downloads = p.downloads;
       }
@@ -109,6 +143,7 @@ exports = module.exports = function(registry, vc) {
   return [
     //deprecated,
     fetchRecords,
+    loadCounts,
     render
   ];
 };

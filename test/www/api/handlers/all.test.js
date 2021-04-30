@@ -49,10 +49,10 @@ describe('handlers/api/all', function() {
                  'authentication',
                  'identity' ],
               homepage: undefined,
-              repository: {
+              repositories: [ {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              } ],
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -70,10 +70,10 @@ describe('handlers/api/all', function() {
                  'authentication',
                  'identity' ],
               homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-              repository: {
+              repositories: [ {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
-              },
+              } ],
               author: 
                { name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -84,10 +84,10 @@ describe('handlers/api/all', function() {
           },
           'dist-tags': { latest: '2.1.1' },
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
-          repository: {
+          repositories: [ {
             type: 'git',
             url: 'git://github.com/jaredhanson/passport-facebook.git'
-          },
+          } ],
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
@@ -163,11 +163,11 @@ describe('handlers/api/all', function() {
           //'    "_flags": {',
           //'      "featured": true',
           //'    },',
-          //'    "_count": {',
-          //'      "favorites": 1062,',
-          //'      "subscribers": 49,',
-          //'      "forks": 417',
-          //'    },',
+          '    "_count": {',
+          '      "favorites": 1062,',
+          '      "subscribers": 49,',
+          '      "forks": 417',
+          '    },',
           '    "_downloads": {',
           '      "last-day": 7657,',
           '      "last-week": 28650,',
