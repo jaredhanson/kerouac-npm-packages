@@ -155,6 +155,39 @@ describe('handlers/api/all', function() {
         .dispatch();
     }); // with one featured package
     
+    it('should error when failing to list packages in registry', function(done) {
+      var registry = new Object();
+      registry.list = sinon.stub().yieldsAsync(new Error('something went wrong'));
+      
+      var forge = new Object();
+  
+      chai.kerouac.handler(factory(registry, forge))
+        .next(function(err) {
+          expect(err).to.be.an.instanceof(Error);
+          expect(err.message).to.equal('something went wrong');
+          done();
+        })
+        .dispatch();
+    }); // should error when failing to list packages in registry
+    
+    it('should error when failing to read package in registry', function(done) {
+      var registry = new Object();
+      registry.list = sinon.stub().yieldsAsync(null, [
+        { name: 'passport-facebook' }
+      ]);
+      registry.read = sinon.stub().yieldsAsync(new Error('something went wrong'));
+      
+      var forge = new Object();
+  
+      chai.kerouac.handler(factory(registry, forge))
+        .next(function(err) {
+          expect(err).to.be.an.instanceof(Error);
+          expect(err.message).to.equal('something went wrong');
+          done();
+        })
+        .dispatch();
+    }); // should error when failing to read package in registry
+    
   }); // handler
   
 });

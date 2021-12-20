@@ -45,7 +45,7 @@ exports = module.exports = function(registry, forge) {
     page.end();
   }
   
-  function fetchRecords(page, next) {
+  function fetchPackages(page, next) {
     registry.list(function(err, ps) {
       if (err) { return next(err); }
       
@@ -69,22 +69,19 @@ exports = module.exports = function(registry, forge) {
   }
   
   function loadCounts(page, next) {
-    var packages = page.locals.packages;
+    var pkgs = page.locals.packages;
     
     var i = 0;
     function iter() {
-      var pkg = packages[i++];
-      if (!pkg) {
-        return next();
-      }
+      var pkg = pkgs[i++];
+      if (!pkg) { return next(); }
       
       if (!pkg.repositories) {
         return iter();
       }
       
       var repo = pkg.repositories[0];
-      
-      forge.info(repo.url, { protocol: repo.type }, function(err, proj) {
+      forge.info(repo.url, function(err, proj) {
         if (err && err.type == 'HostNotSupportedError') {
           return iter();
         } else if (err) { return next(err); }
@@ -145,7 +142,7 @@ exports = module.exports = function(registry, forge) {
   
   return [
     //deprecated,
-    fetchRecords,
+    fetchPackages,
     loadCounts,
     render
   ];
