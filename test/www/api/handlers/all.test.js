@@ -146,7 +146,6 @@ describe('handlers/api/all', function() {
           ].join("\n");
   
           expect(page.body).to.equal(expected);
-          
           done();
         })
         .dispatch();

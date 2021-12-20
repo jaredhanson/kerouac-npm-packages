@@ -12,23 +12,13 @@ describe('handlers/api/v1/all', function() {
   });
   
   describe('handler', function() {
-    var registry = {
-      list: function(){},
-      read: function(){}
-    };
-    var project = {
-      info: function(){}
-    };
     
-    
-    it('with one package', function(done) {
-      var page, err;
-      
-      sinon.stub(registry, 'list').yields(null, [
+    it('should render one package', function(done) {
+      var registry = new Object();
+      registry.list = sinon.stub().yieldsAsync(null, [
         { name: 'passport-facebook' }
       ]);
-      
-      sinon.stub(registry, 'read').withArgs('passport-facebook').yields(null, {
+      registry.read = sinon.stub().withArgs('passport-facebook').yieldsAsync(null, {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
         keywords: [ 'passport', 'facebook', 'identity' ],
@@ -105,7 +95,8 @@ describe('handlers/api/v1/all', function() {
         ptime: new Date('2016-05-17T19:13:37.644Z')
       });
       
-      sinon.stub(project, 'info').withArgs('git://github.com/jaredhanson/passport-facebook.git').yields(null, {
+      var forge = new Object();
+      forge.info = sinon.stub().withArgs('git://github.com/jaredhanson/passport-facebook.git').yieldsAsync(null, {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport and Node.js.',
         homepage: 'https://github.com/jaredhanson/passport-facebook',
@@ -116,13 +107,11 @@ describe('handlers/api/v1/all', function() {
         modifiedAt: new Date('2018-09-20T10:59:45.000Z')
       });
     
-      chai.kerouac.handler(factory(registry, project))
+      chai.kerouac.handler(factory(registry, forge))
         .page(function(page) {
           page.params = {};
         })
-        .end(function(p) {
-          page = p;
-          
+        .end(function(page) {
           var expected = [
             '{',
             '  "objects": [',
@@ -162,11 +151,10 @@ describe('handlers/api/v1/all', function() {
           ].join("\n");
     
           expect(page.body).to.equal(expected);
-          
           done();
         })
         .dispatch();
-    }); // with one package
+    }); // should render one package
     
   }); // handler
   
