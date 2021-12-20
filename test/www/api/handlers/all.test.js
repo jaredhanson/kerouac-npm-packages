@@ -6,10 +6,6 @@ var factory = require('../../../../app/www/api/handlers/all');
 
 describe('handlers/api/all', function() {
   
-  it('should export factory function', function() {
-    expect(factory).to.be.a('function');
-  });
-  
   it('should be annotated', function() {
     expect(factory['@implements']).to.be.undefined;
     expect(factory['@singleton']).to.be.undefined;
@@ -123,9 +119,9 @@ describe('handlers/api/all', function() {
       });
     
       after(function() {
-        project.info.restore();
-        registry.list.restore();
-        registry.read.restore();
+        //project.info.restore();
+        //registry.list.restore();
+        //registry.read.restore();
       });
     
       before(function(done) {

@@ -13,14 +13,19 @@
  *   - 2012/08/24 - https://web.archive.org/web/20120824150709/https://registry.npmjs.org/-/all
  *   - 2015/05/15 - https://web.archive.org/web/20150515053712/https://registry.npmjs.org/-/all
  *
- * After the deprecation, the Internet Archive recorded a response in the following format:
+ * After the deprecation, the Internet Archive recorded a response in the
+ * following format:
+ *
  *   ```
  *   {"message":"deprecated"}
  *   ```
  *   - 2018/02/18 - https://web.archive.org/web/20180218131402/https://registry.npmjs.org/-/all
  *
- * However, when fetching the endpoint directly at time of writing, a response in the
- * following format is returned:
+ * However, when fetching the endpoint directly at time of writing, a response
+ * in the following format is returned.  It can be assumed that the change was
+ * made in order to avoid breaking clients that expected a top-level array,
+ * rather than an object.
+ *
  *   ```
  *   []
  *   ```
