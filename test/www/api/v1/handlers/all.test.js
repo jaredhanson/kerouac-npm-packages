@@ -1,14 +1,10 @@
-var chai = require('chai');
 var expect = require('chai').expect;
+var chai = require('chai');
 var sinon = require('sinon');
 var factory = require('../../../../../app/www/api/v1/handlers/all');
 
 
 describe('handlers/api/v1/all', function() {
-  
-  it('should export factory function', function() {
-    expect(factory).to.be.a('function');
-  });
   
   it('should be annotated', function() {
     expect(factory['@implements']).to.be.undefined;
@@ -123,9 +119,9 @@ describe('handlers/api/v1/all', function() {
       });
     
       after(function() {
-        project.info.restore();
-        registry.list.restore();
-        registry.read.restore();
+        //project.info.restore();
+        //registry.list.restore();
+        //registry.read.restore();
       });
       
       before(function(done) {

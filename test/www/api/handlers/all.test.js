@@ -1,5 +1,5 @@
-var chai = require('chai');
 var expect = require('chai').expect;
+var chai = require('chai');
 var sinon = require('sinon');
 var factory = require('../../../../app/www/api/handlers/all');
 
@@ -13,7 +13,7 @@ describe('handlers/api/all', function() {
   
   describe('handler', function() {
     
-    it('with one featured package', function(done) {
+    it('should render one package', function(done) {
       var registry = new Object();
       registry.list = sinon.stub().yieldsAsync(null, [
         { name: 'passport-facebook' }
@@ -108,9 +108,6 @@ describe('handlers/api/all', function() {
       });
   
       chai.kerouac.handler(factory(registry, forge))
-        .page(function(page) {
-          page.params = {};
-        })
         .end(function(page) {
           var expected = [
             '{',
@@ -153,7 +150,7 @@ describe('handlers/api/all', function() {
           done();
         })
         .dispatch();
-    }); // with one featured package
+    }); // should render one package
     
     it('should error when failing to list packages in registry', function(done) {
       var registry = new Object();
