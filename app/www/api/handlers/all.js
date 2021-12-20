@@ -46,21 +46,19 @@ exports = module.exports = function(registry, forge) {
   }
   
   function fetchRecords(page, next) {
-    page.internals = {};
-    
-    registry.list(function(err, items) {
+    registry.list(function(err, ps) {
       if (err) { return next(err); }
       
       var pkgs = []
         , i = 0;
       function iter() {
-        var item = items[i++];
-        if (!item) {
-          page.internals.packages = pkgs;
+        var p = ps[i++];
+        if (!p) {
+          page.locals.packages = pkgs;
           return next();
         }
         
-        registry.read(item.name, function(err, pkg) {
+        registry.read(p.name, function(err, pkg) {
           if (err) { return next(err); }
           pkgs.push(pkg);
           iter();
@@ -71,7 +69,7 @@ exports = module.exports = function(registry, forge) {
   }
   
   function loadCounts(page, next) {
-    var packages = page.internals.packages;
+    var packages = page.locals.packages;
     
     var i = 0;
     function iter() {
@@ -107,7 +105,7 @@ exports = module.exports = function(registry, forge) {
   }
   
   function render(page, next) {
-    var packages = page.internals.packages;
+    var packages = page.locals.packages;
     
     var json = {};
     
