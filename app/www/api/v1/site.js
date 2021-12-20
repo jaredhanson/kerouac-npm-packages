@@ -1,5 +1,5 @@
 exports = module.exports = function(allHandler) {
-  var kerouac = require('kerouac')
+  var kerouac = require('kerouac');
 
 
   var site = new kerouac.Router();
