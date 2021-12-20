@@ -20,8 +20,9 @@
  *
  * However, when fetching the endpoint directly at time of writing, a response
  * in the following format is returned.  It can be assumed that the change was
- * made in order to avoid breaking clients that expected a top-level array,
- * rather than an object.
+ * made in order to avoid breaking clients, which would have assumed that the
+ * key `message` was a package, but its value wasn't a package object as
+ * expected.
  *
  *   ```
  *   []
