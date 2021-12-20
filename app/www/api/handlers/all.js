@@ -36,7 +36,7 @@
  *
  * @returns {Function[]}
  */
-exports = module.exports = function(registry, vc) {
+exports = module.exports = function(registry, forge) {
   var uri = require('url');
   
   
@@ -86,7 +86,7 @@ exports = module.exports = function(registry, vc) {
       
       var repo = pkg.repositories[0];
       
-      vc.info(repo.url, { protocol: repo.type }, function(err, proj) {
+      forge.info(repo.url, { protocol: repo.type }, function(err, proj) {
         if (err && err.type == 'HostNotSupportedError') {
           return iter();
         } else if (err) { return next(err); }
