@@ -4,7 +4,7 @@ var sinon = require('sinon');
 var factory = require('../../../../../../app/api/esc/v1/www/handlers/all');
 
 
-describe('handlers/api/v1/all', function() {
+describe('api/esc/v1/www/handlers/all', function() {
   
   it('should be annotated', function() {
     expect(factory['@implements']).to.be.undefined;
