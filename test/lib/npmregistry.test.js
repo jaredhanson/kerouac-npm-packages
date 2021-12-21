@@ -373,7 +373,7 @@ describe('NpmRegistry', function() {
       });
     }); // should normalize package without versions or license
     
-    describe('package with contributors and no author', function() {
+    it('should normalize package with contributors but no author', function(done) {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-adobe-oauth2',
         time: {
@@ -421,24 +421,14 @@ describe('NpmRegistry', function() {
           'pkg-downloads': pkgDownloadsStub });
       var registry = new NpmRegistry();
       
-      
-      var pkg;
-      before(function(done) {
-        registry.read('passport-adobe-oauth2', function(err, p) {
-          if (err) { return done(err); }
-          pkg = p;
-          done();
-        })
-      })
-      
-      it('should call package-json correctly', function() {
+      registry.read('passport-adobe-oauth2', function(err, pkg) {
+        if (err) { return done(err); }
+        
         expect(packageJsonStub.callCount).to.equal(1);
         var call = packageJsonStub.getCall(0)
         expect(call.args[0]).to.equal('passport-adobe-oauth2');
         expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
-      });
-      
-      it('should call pkg-downloads correctly', function() {
+        
         expect(pkgDownloadsStub.callCount).to.equal(3);
         var call = pkgDownloadsStub.getCall(0)
         expect(call.args[0]).to.equal('passport-adobe-oauth2');
@@ -449,9 +439,7 @@ describe('NpmRegistry', function() {
         call = pkgDownloadsStub.getCall(2)
         expect(call.args[0]).to.equal('passport-adobe-oauth2');
         expect(call.args[1]).to.deep.equal({ period: 'month' });
-      });
-      
-      it('should yield package', function() {
+        
         expect(pkg).to.deep.equal({
           name: 'passport-adobe-oauth2',
           versions: {},
@@ -496,10 +484,11 @@ describe('NpmRegistry', function() {
           ctime: new Date('2018-02-23T21:47:14.303Z'),
           mtime: new Date('2018-03-30T22:05:57.398Z')
         });
+        
+        done();
       });
-    }); // package without author
+    }); //should normalize package with contributors but no author
     
   }); // #read
-    
   
 });
