@@ -206,7 +206,6 @@ describe('NpmRegistry', function() {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
               }],
-              bugs: undefined,
               contributors: 
                [{ name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
@@ -214,8 +213,7 @@ describe('NpmRegistry', function() {
               maintainers: [{
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
-              }],
-              readme: undefined
+              }]
             },
             '2.1.1': {
               name: 'passport-facebook',
@@ -244,8 +242,7 @@ describe('NpmRegistry', function() {
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
               }],
-              licenses: [ { type: 'MIT' } ],
-              readme: undefined
+              licenses: [ { type: 'MIT' } ]
             }
           },
           'dist-tags': { latest: '2.1.1' },
