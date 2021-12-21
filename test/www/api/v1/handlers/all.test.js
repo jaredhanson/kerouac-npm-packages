@@ -176,7 +176,10 @@ describe('handlers/api/v1/all', function() {
     
     it('should error when failing to read package in registry', function(done) {
       var registry = new Object();
-      registry.list = sinon.stub().yieldsAsync(new Error('something went wrong'));
+      registry.list = sinon.stub().yieldsAsync(null, [
+        { name: 'passport-facebook' }
+      ]);
+      registry.read = sinon.stub().yieldsAsync(new Error('something went wrong'));
     
       var forge = new Object();
     
