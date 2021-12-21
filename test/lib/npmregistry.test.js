@@ -207,10 +207,10 @@ describe('NpmRegistry', function() {
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
               }],
               bugs: undefined,
-              author: 
-               { name: 'Jared Hanson',
+              contributors: 
+               [{ name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
-                 web: 'http://www.jaredhanson.net/' },
+                 web: 'http://www.jaredhanson.net/' }],
               maintainers: [{
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
@@ -236,10 +236,10 @@ describe('NpmRegistry', function() {
               bugs: {
                 url: 'http://github.com/jaredhanson/passport-facebook/issues'
               },
-              author: 
-               { name: 'Jared Hanson',
+              contributors: 
+               [{ name: 'Jared Hanson',
                  email: 'jaredhanson@gmail.com',
-                 web: 'http://www.jaredhanson.net/' },
+                 web: 'http://www.jaredhanson.net/' }],
               maintainers: [{
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
@@ -259,11 +259,11 @@ describe('NpmRegistry', function() {
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
           },
-          author: {
+          contributors: [{
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
             web: 'http://www.jaredhanson.net/'
-          },
+          }],
           maintainers: [{
             name: 'jaredhanson',
             email: 'jaredhanson@gmail.com'
@@ -374,11 +374,11 @@ describe('NpmRegistry', function() {
           bugs: {
             url: 'http://github.com/jaredhanson/passport-openid/issues'
           },
-          author: {
+          contributors: [{
             name: 'Jared Hanson',
             email: 'jaredhanson@gmail.com',
             web: 'http://www.jaredhanson.net/'
-          },
+          }],
           maintainers: [{
             name: 'jaredhanson',
             email: 'jaredhanson@gmail.com'
