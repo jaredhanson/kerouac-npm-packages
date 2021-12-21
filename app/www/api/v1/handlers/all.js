@@ -55,6 +55,7 @@ exports = module.exports = function(registry, vc) {
   }
   
   function count(page, next) {
+    // TODO: Pass counting info in response to `list` above, to avoid duplicate calls
     registry.list(function(err, pkgs) {
       if (err) { return next(err); }
       
