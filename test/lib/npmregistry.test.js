@@ -202,7 +202,6 @@ describe('NpmRegistry', function() {
                  'authn',
                  'authentication',
                  'identity' ],
-              homepage: undefined,
               repositories: [{
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
