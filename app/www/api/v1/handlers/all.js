@@ -26,25 +26,23 @@ exports = module.exports = function(registry, vc) {
   
   var limit = 25;
   
-  function fetchRecords(page, next) {
-    page.internals = {};
-    
+  function fetchPackages(page, next) {
     var i = page.params.page ? parseInt(page.params.page - 1) : 0
       , offset = i * limit;
     
-    registry.list({ limit: limit, offset: offset }, function(err, items) {
+    registry.list({ limit: limit, offset: offset }, function(err, ps) {
       if (err) { return next(err); }
       
       var pkgs = []
         , i = 0;
       function iter() {
-        var item = items[i++];
-        if (!item) {
-          page.internals.packages = pkgs;
+        var p = ps[i++];
+        if (!p) {
+          page.locals.packages = pkgs;
           return next();
         }
         
-        registry.read(item.name, function(err, pkg) {
+        registry.read(p.name, function(err, pkg) {
           if (err) { return next(err); }
           pkgs.push(pkg);
           iter();
@@ -79,7 +77,7 @@ exports = module.exports = function(registry, vc) {
   }
   
   function select(page, next) {
-    var packages = page.internals.packages;
+    var packages = page.locals.packages;
     
     var objects = packages.map(function(p) {
       var json = {};
@@ -143,7 +141,7 @@ exports = module.exports = function(registry, vc) {
   }
   
   function loadCounts(page, next) {
-    var packages = page.internals.packages;
+    var packages = page.locals.packages;
     
     var i = 0;
     function iter() {
@@ -199,7 +197,7 @@ exports = module.exports = function(registry, vc) {
   
   
   return [
-    fetchRecords,
+    fetchPackages,
     count,
     select,
     loadCounts,
