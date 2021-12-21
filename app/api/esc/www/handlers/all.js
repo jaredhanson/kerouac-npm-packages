@@ -116,16 +116,24 @@ exports = module.exports = function(registry, forge) {
       obj.name = p.name;
       obj.description = p.description;
       obj.keywords = p.keywords;
-      if (p['dist-tags']) {
+      if (p['dist-tags'] && p['dist-tags']['latest']) {
         obj['dist-tags'] = { latest: p['dist-tags']['latest'] };
       }
-      obj.versions = {};
-      if (p['dist-tags']) {
-        obj.versions[p['dist-tags']['latest']] = 'latest';
-      }
+      // TODO: maintainers
+      // TODO: author
+      // TODO: contributors
+      // TODO: homepage
+      // TODO: repository
+      // TODO: bugs
+      // TODO: license
       if (p.ptime) {
         obj.time = { modified: p.ptime.toISOString() };
       }
+      if (p['dist-tags'] && p['dist-tags']['latest']) {
+        obj.versions = {};
+        obj.versions[p['dist-tags']['latest']] = 'latest';
+      }
+      
       // TODO: Put this back in test case
       if (p.flags) {
         obj._flags = p.flags;
