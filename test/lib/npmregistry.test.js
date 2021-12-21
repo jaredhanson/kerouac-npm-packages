@@ -12,7 +12,7 @@ describe('NpmRegistry', function() {
   
   describe('#read', function() {
     
-    describe('package with latest version', function() {
+    it('should normalize package with latest version', function(done) {
       var packageJsonStub = sinon.stub().resolves({
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
@@ -159,22 +159,16 @@ describe('NpmRegistry', function() {
       
       
       var pkg;
-      before(function(done) {
-        registry.read('passport-facebook', function(err, p) {
-          if (err) { return done(err); }
-          pkg = p;
-          done();
-        })
-      })
       
-      it('should call package-json correctly', function() {
+      registry.read('passport-facebook', function(err, p) {
+        if (err) { return done(err); }
+        pkg = p;
+        
         expect(packageJsonStub.callCount).to.equal(1);
         var call = packageJsonStub.getCall(0)
         expect(call.args[0]).to.equal('passport-facebook');
         expect(call.args[1]).to.deep.equal({ fullMetadata: true, allVersions: true });
-      });
-      
-      it('should call pkg-downloads correctly', function() {
+        
         expect(pkgDownloadsStub.callCount).to.equal(3);
         var call = pkgDownloadsStub.getCall(0)
         expect(call.args[0]).to.equal('passport-facebook');
@@ -185,9 +179,7 @@ describe('NpmRegistry', function() {
         call = pkgDownloadsStub.getCall(2)
         expect(call.args[0]).to.equal('passport-facebook');
         expect(call.args[1]).to.deep.equal({ period: 'month' });
-      });
-      
-      it('should yield package', function() {
+        
         expect(pkg).to.deep.equal({
           name: 'passport-facebook',
           versions: {
@@ -277,8 +269,10 @@ describe('NpmRegistry', function() {
           ctime: new Date('2011-10-23T22:27:46.568Z'),
           mtime: new Date('2018-08-03T00:35:46.879Z')
         });
+        
+        done();
       });
-    }); // package with latest version
+    }); // should normalize package with latest version
     
     describe('package without versions and license', function() {
       var packageJsonStub = sinon.stub().resolves({
