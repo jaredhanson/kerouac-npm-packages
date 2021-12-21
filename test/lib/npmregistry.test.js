@@ -157,12 +157,8 @@ describe('NpmRegistry', function() {
           'pkg-downloads': pkgDownloadsStub });
       var registry = new NpmRegistry();
       
-      
-      var pkg;
-      
-      registry.read('passport-facebook', function(err, p) {
+      registry.read('passport-facebook', function(err, pkg) {
         if (err) { return done(err); }
-        pkg = p;
         
         expect(packageJsonStub.callCount).to.equal(1);
         var call = packageJsonStub.getCall(0)
@@ -198,10 +194,11 @@ describe('NpmRegistry', function() {
                 type: 'git',
                 url: 'git://github.com/jaredhanson/passport-facebook.git'
               }],
-              contributors: 
-               [{ name: 'Jared Hanson',
-                 email: 'jaredhanson@gmail.com',
-                 web: 'http://www.jaredhanson.net/' }],
+              contributors: [{
+                name: 'Jared Hanson',
+                email: 'jaredhanson@gmail.com',
+                web: 'http://www.jaredhanson.net/'
+              }],
               maintainers: [{
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
@@ -226,10 +223,11 @@ describe('NpmRegistry', function() {
               bugs: {
                 url: 'http://github.com/jaredhanson/passport-facebook/issues'
               },
-              contributors: 
-               [{ name: 'Jared Hanson',
-                 email: 'jaredhanson@gmail.com',
-                 web: 'http://www.jaredhanson.net/' }],
+              contributors: [{
+                name: 'Jared Hanson',
+                email: 'jaredhanson@gmail.com',
+                web: 'http://www.jaredhanson.net/'
+              }],
               maintainers: [{
                 name: 'jaredhanson',
                 email: 'jaredhanson@gmail.com'
