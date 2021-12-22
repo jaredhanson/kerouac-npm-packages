@@ -69,6 +69,47 @@ exports = module.exports = function(registry, forge) {
     });
   }
   
+  function augmentWithInfoFromForge(page, next) {
+    var packages = page.locals.packages;
+    
+    var i = 0;
+    function iter() {
+      var pkg = packages[i++];
+      if (!pkg) {
+        return next();
+      }
+      
+      if (!pkg.repositories) {
+        return iter();
+      }
+      
+      var repo = pkg.repositories[0];
+      forge.info(repo.url, function(err, proj) {
+        if (err && err.type == 'HostNotSupportedError') {
+          return iter();
+        } else if (err) { return next(err); }
+        
+        if (!proj) { return iter(); } // not found
+        
+        // The "counts" property is not available in npm's implementation.  The
+        // keys available on this object are inspired by Schema.org's interaction
+        // statistics.
+        //   https://schema.org/interactionStatistic
+        //   https://schema.org/InteractionCounter
+        //   https://schema.org/SubscribeAction
+        //   https://schema.org/BookmarkAction
+        pkg._count = {
+          favorites: proj.favoriteCount,
+          subscribers: proj.subscriberCount,
+          forks: proj.forkCount
+        }
+        
+        iter();
+      });
+    }
+    iter();
+  }
+  
   function select(page, next) {
     var packages = page.locals.packages;
     
@@ -125,53 +166,15 @@ exports = module.exports = function(registry, forge) {
           'last-month': p.downloads['last-month']
         }
       }
+      if (p._count) {
+        json.count = p._count;
+      }
       
       return json;
     });
     
     page.locals.objects = objects;
     next();
-  }
-  
-  function augmentWithInfoFromForge(page, next) {
-    var packages = page.locals.packages;
-    
-    var i = 0;
-    function iter() {
-      var pkg = packages[i++];
-      if (!pkg) {
-        return next();
-      }
-      
-      if (!pkg.repositories) {
-        return iter();
-      }
-      
-      var repo = pkg.repositories[0];
-      forge.info(repo.url, function(err, proj) {
-        if (err && err.type == 'HostNotSupportedError') {
-          return iter();
-        } else if (err) { return next(err); }
-        
-        if (!proj) { return iter(); } // not found
-        
-        // The "counts" property is not available in npm's implementation.  The
-        // keys available on this object are inspired by Schema.org's interaction
-        // statistics.
-        //   https://schema.org/interactionStatistic
-        //   https://schema.org/InteractionCounter
-        //   https://schema.org/SubscribeAction
-        //   https://schema.org/BookmarkAction
-        page.locals.objects[i - 1].count = {
-          favorites: proj.favoriteCount,
-          subscribers: proj.subscriberCount,
-          forks: proj.forkCount
-        }
-        
-        iter();
-      });
-    }
-    iter();
   }
   
   function render(page, next) {
@@ -191,8 +194,8 @@ exports = module.exports = function(registry, forge) {
   return [
     fetchPackages,
     count,
-    select,
     augmentWithInfoFromForge,
+    select,
     render
   ];
 };
