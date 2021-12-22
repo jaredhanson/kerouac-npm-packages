@@ -17,7 +17,7 @@ describe('api/esc/v1/www/handlers/all', function() {
       var registry = new Object();
       registry.list = sinon.stub().yieldsAsync(null, [
         { name: 'passport-facebook' }
-      ]);
+      ], { count: 1 });
       registry.read = sinon.stub().withArgs('passport-facebook').yieldsAsync(null, {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
@@ -85,7 +85,7 @@ describe('api/esc/v1/www/handlers/all', function() {
           type: 'MIT'
         },
         //readme: '# passport-facebook\n\n',
-        downloads: {
+        downloadCounts: {
           'last-day': 7657,
           'last-week': 28650,
           'last-month': 183283
@@ -178,7 +178,7 @@ describe('api/esc/v1/www/handlers/all', function() {
       var registry = new Object();
       registry.list = sinon.stub().yieldsAsync(null, [
         { name: 'passport-facebook' }
-      ]);
+      ], { count: 1 });
       registry.read = sinon.stub().yieldsAsync(new Error('something went wrong'));
     
       var forge = new Object();

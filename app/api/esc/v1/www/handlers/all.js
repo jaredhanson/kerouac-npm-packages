@@ -90,7 +90,7 @@ exports = module.exports = function(registry, forge) {
         //   https://schema.org/InteractionCounter
         //   https://schema.org/SubscribeAction
         //   https://schema.org/BookmarkAction
-        pkg._count = {
+        pkg.interactionCounts = {
           favorites: proj.favoriteCount,
           subscribers: proj.subscriberCount,
           forks: proj.forkCount
@@ -142,24 +142,14 @@ exports = module.exports = function(registry, forge) {
         //   }
         obj.flags = p.flags;
       }
-      if (p.downloads) {
+      if (p.downloadCounts) {
         // The "downloads" property is not available in npm's implementation.
         // The key name was chosen to mirror the path used by npm in their API
         // endpoint for obtaining download counts, `https://api.npmjs.org/downloads/point/{period}[/{package}]`.
-        //
-        // Information regarding how npm calculates download counts can be found at:
-        //   - [package download counts](https://github.com/npm/registry/blob/master/docs/download-counts.md)
-        //   - [Download counts are back!](https://blog.npmjs.org/post/78719826768/download-counts-are-back)
-        //   - [numeric precision matters: how npm download counts work](https://blog.npmjs.org/post/92574016600/numeric-precision-matters-how-npm-download-counts)
-        //   - [npm/download-counts](https://github.com/npm/download-counts)
-        obj.downloads = {
-          'last-day': p.downloads['last-day'],
-          'last-week': p.downloads['last-week'],
-          'last-month': p.downloads['last-month']
-        }
+        obj.downloads = p.downloadCounts;
       }
-      if (p._count) {
-        obj.count = p._count;
+      if (p.interactionCounts) {
+        obj.count = p.interactionCounts;
       }
       
       return obj;

@@ -138,8 +138,8 @@ exports = module.exports = function(registry, forge) {
       if (p._count) {
         obj._count = p._count;
       }
-      if (p.downloads) {
-        obj._downloads = p.downloads;
+      if (p.downloadCounts) {
+        obj._downloads = p.downloadCounts;
       }
       
       json[p.name] = obj;

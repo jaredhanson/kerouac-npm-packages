@@ -85,7 +85,7 @@ describe('api/esc/www/handlers/all', function() {
           type: 'MIT'
         },
         //readme: '# passport-facebook\n\n',
-        downloads: {
+        downloadCounts: {
           'last-day': 7657,
           'last-week': 28650,
           'last-month': 183283

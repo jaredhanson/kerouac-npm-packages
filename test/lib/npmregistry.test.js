@@ -259,7 +259,7 @@ describe('NpmRegistry', function() {
             type: 'MIT'
           }],
           readme: '# passport-facebook\n\n',
-          downloads: {
+          downloadCounts: {
             'last-day': 7657,
             'last-week': 28650,
             'last-month': 183283
@@ -361,7 +361,7 @@ describe('NpmRegistry', function() {
             email: 'jaredhanson@gmail.com'
           }],
           readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
-          downloads: {
+          downloadCounts: {
             'last-day': 1029,
             'last-week': 4004,
             'last-month': 23844
@@ -477,7 +477,7 @@ describe('NpmRegistry', function() {
             { type: 'Apache-2.0' }
           ],
           readme: '# Passport-Adobe-OAuth2\n\n',
-          downloads: {
+          downloadCounts: {
             'last-day': 1,
             'last-week': 7,
             'last-month': 30
