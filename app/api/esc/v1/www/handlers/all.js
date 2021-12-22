@@ -113,11 +113,15 @@ exports = module.exports = function(registry, forge) {
       obj.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.name);
       obj.package.links.homepage = p.homepage;
       if (p.repositories) {
+        // TODO: Should this be normalized to web-based URL?
         obj.package.links.repository = p.repositories[0].url;
       }
       if (p.bugs) {
         obj.package.links.bugs = p.bugs.url;
       }
+      // TODO: author
+      // TODO: publisher
+      // TODO: maintainers
       if (p.flags) {
         // The "flags" property is not documented.  However, it's existence has
         // been witnessed in npm's implementation, with resposes including:
@@ -135,10 +139,9 @@ exports = module.exports = function(registry, forge) {
         obj.flags = p.flags;
       }
       if (p.downloadCounts) {
-        // The "downloads" property is not available in npm's implementation.
-        // The key name was chosen to mirror the path used by npm in their API
-        // endpoint for obtaining download counts, `https://api.npmjs.org/downloads/point/{period}[/{package}]`.
-        obj.downloads = p.downloadCounts;
+        // The `downloadCounts` property is not present in npm's API.  This is
+        // an extension.
+        obj.downloadCounts = p.downloadCounts;
       }
       if (p.interactionCounts) {
         // The `interactionCounts` property is not present in npm's API.  This

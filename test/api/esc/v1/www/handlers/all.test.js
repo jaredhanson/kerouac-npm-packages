@@ -133,7 +133,7 @@ describe('api/esc/v1/www/handlers/all', function() {
             '          "bugs": "http://github.com/jaredhanson/passport-facebook/issues"',
             '        }',
             '      },',
-            '      "downloads": {',
+            '      "downloadCounts": {',
             '        "last-day": 7657,',
             '        "last-week": 28650,',
             '        "last-month": 183283',
