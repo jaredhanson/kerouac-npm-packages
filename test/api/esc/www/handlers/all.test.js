@@ -100,8 +100,8 @@ describe('api/esc/www/handlers/all', function() {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport and Node.js.',
         homepage: 'https://github.com/jaredhanson/passport-facebook',
-        favoriteCount: 1062,
-        subscriberCount: 49,
+        bookmarkCount: 1062,
+        subscribeCount: 49,
         forkCount: 417,
         createdAt: new Date('2011-10-18T03:44:47.000Z'),
         modifiedAt: new Date('2018-09-20T10:59:45.000Z')

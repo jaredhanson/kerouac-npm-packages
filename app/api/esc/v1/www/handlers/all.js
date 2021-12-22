@@ -83,19 +83,11 @@ exports = module.exports = function(registry, forge) {
         
         if (!proj) { return iter(); } // not found
         
-        // The "counts" property is not available in npm's implementation.  The
-        // keys available on this object are inspired by Schema.org's interaction
-        // statistics.
-        //   https://schema.org/interactionStatistic
-        //   https://schema.org/InteractionCounter
-        //   https://schema.org/SubscribeAction
-        //   https://schema.org/BookmarkAction
         pkg.interactionCounts = {
-          favorites: proj.favoriteCount,
-          subscribers: proj.subscriberCount,
+          bookmarks: proj.bookmarkCount,
+          subscribers: proj.subscribeCount,
           forks: proj.forkCount
         }
-        
         iter();
       });
     }
@@ -149,7 +141,16 @@ exports = module.exports = function(registry, forge) {
         obj.downloads = p.downloadCounts;
       }
       if (p.interactionCounts) {
-        obj.count = p.interactionCounts;
+        // The `interactionCounts` property is not present in npm's API.  This
+        // is an extension, with the name chosen to bear similarity to the
+        // Schema.org [`interactionCount`](https://schema.org/interactionCount)
+        // property.
+        //
+        // The keys available on this object derive their names from the
+        // relevant Schema.org actions:
+        //   https://schema.org/BookmarkAction
+        //   https://schema.org/SubscribeAction
+        obj.interactionCounts = p.interactionCounts;
       }
       
       return obj;
