@@ -109,9 +109,13 @@ describe('api/www/handlers/package', function() {
     
       chai.kerouac.handler(factory(registry, forge))
         .page(function(page) {
-          page.params = {};
+          page.params = { name: 'passport-facebook' };
         })
         .end(function(page) {
+          expect(registry.read.callCount).to.equal(1);
+          var call = registry.read.getCall(0)
+          expect(call.args[0]).to.equal('passport-facebook');
+          
           var expected = [
             '{',
             '  "name": "passport-facebook",',
@@ -130,6 +134,27 @@ describe('api/www/handlers/package', function() {
         .dispatch();
     }); // should render package
     
-  });
+    it('should error when failing to read package in registry', function(done) {
+      var registry = new Object();
+      registry.list = sinon.stub().yieldsAsync(null, [
+        { name: 'passport-facebook' }
+      ]);
+      registry.read = sinon.stub().yieldsAsync(new Error('something went wrong'));
+      
+      var forge = new Object();
+  
+      chai.kerouac.handler(factory(registry, forge))
+        .page(function(page) {
+          page.params = { name: 'passport-facebook' };
+        })
+        .next(function(err) {
+          expect(err).to.be.an.instanceof(Error);
+          expect(err.message).to.equal('something went wrong');
+          done();
+        })
+        .dispatch();
+    }); // should error when failing to read package in registry
+    
+  }); // handler
   
 });
