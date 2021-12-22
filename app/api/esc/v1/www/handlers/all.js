@@ -87,7 +87,7 @@ exports = module.exports = function(registry, forge) {
           bookmarks: proj.bookmarkCount,
           subscribers: proj.subscribeCount,
           forks: proj.forkCount
-        }
+        };
         iter();
       });
     }
@@ -167,8 +167,8 @@ exports = module.exports = function(registry, forge) {
     var json = {};
     json.objects = page.locals.objects;
     json.total = page.locals.total;
-    // The "urls" property is not available in npm's implementation.  It is,
-    // however, used in accordance with their REST conventions for [list](https://github.com/npm/registry/blob/master/docs/restful-api-conventions.md#list)
+    // The `urls` property is not present in npm's API.  It is, however, used in
+    // accordance with their REST conventions for [list](https://github.com/npm/registry/blob/master/docs/restful-api-conventions.md#list)
     // endpoints.
     json.urls = page.locals.urls;
     

@@ -91,13 +91,11 @@ exports = module.exports = function(registry, forge) {
         
         if (!proj) { return iter(); } // not found
         
-        // TODO: set this on locals, rather than package object
-        pkg._count = {
-          favorites: proj.favoriteCount,
-          subscribers: proj.subscriberCount,
+        pkg.interactionCounts = {
+          bookmarks: proj.bookmarkCount,
+          subscribers: proj.subscribeCount,
           forks: proj.forkCount
         };
-        
         iter();
       });
     }
@@ -135,11 +133,11 @@ exports = module.exports = function(registry, forge) {
       if (p.flags) {
         obj._flags = p.flags;
       }
-      if (p._count) {
-        obj._count = p._count;
-      }
       if (p.downloadCounts) {
         obj._downloads = p.downloadCounts;
+      }
+      if (p.interactionCounts) {
+        obj._counts = p.interactionCounts;
       }
       
       json[p.name] = obj;
