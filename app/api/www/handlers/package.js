@@ -1,7 +1,7 @@
 exports = module.exports = function(registry, forge) {
   
   function fetchPackage(page, next) {
-    registry.read(page.params.name, function(err, pkg) {
+    registry.read(page.params.package, function(err, pkg) {
       if (err) { return next(err); }
       page.locals.package = pkg;
       next();

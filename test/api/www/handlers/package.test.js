@@ -15,9 +15,6 @@ describe('api/www/handlers/package', function() {
     
     it('should render package', function(done) {
       var registry = new Object();
-      registry.list = sinon.stub().yieldsAsync(null, [
-        { name: 'passport-facebook' }
-      ]);
       registry.read = sinon.stub().withArgs('passport-facebook').yieldsAsync(null, {
         name: 'passport-facebook',
         description: 'Facebook authentication strategy for Passport.',
@@ -109,7 +106,7 @@ describe('api/www/handlers/package', function() {
     
       chai.kerouac.handler(factory(registry, forge))
         .page(function(page) {
-          page.params = { name: 'passport-facebook' };
+          page.params = { package: 'passport-facebook' };
         })
         .end(function(page) {
           expect(registry.read.callCount).to.equal(1);
@@ -145,7 +142,7 @@ describe('api/www/handlers/package', function() {
   
       chai.kerouac.handler(factory(registry, forge))
         .page(function(page) {
-          page.params = { name: 'passport-facebook' };
+          page.params = { package: 'passport-facebook' };
         })
         .next(function(err) {
           expect(err).to.be.an.instanceof(Error);

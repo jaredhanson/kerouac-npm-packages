@@ -13,9 +13,10 @@ describe('api/www/site', function() {
   });
   
   it('should create service', function() {
+    function dbHandler() {};
     function packageHandler() {};
   
-    var service = factory(packageHandler);
+    var service = factory(dbHandler, packageHandler);
     
     expect(service).to.be.a('function');
     expect(service.length).to.equal(2);
