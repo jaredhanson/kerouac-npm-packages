@@ -40,8 +40,6 @@
  * @returns {Function[]}
  */
 exports = module.exports = function(registry, forge) {
-  var uri = require('url');
-  
   
   /*
   function deprecated(page) {
@@ -73,7 +71,7 @@ exports = module.exports = function(registry, forge) {
     });
   }
   
-  function loadCounts(page, next) {
+  function augmentWithInfoFromForge(page, next) {
     var pkgs = page.locals.packages;
     
     var i = 0;
@@ -156,7 +154,7 @@ exports = module.exports = function(registry, forge) {
   return [
     //deprecated,
     fetchPackages,
-    loadCounts,
+    augmentWithInfoFromForge,
     render
   ];
 };

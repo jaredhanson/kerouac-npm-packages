@@ -13,7 +13,7 @@
  * generates a static site and is not capable of dyanamic search, this endpoint
  * is provided as an alternative.
  */
-exports = module.exports = function(registry, vc) {
+exports = module.exports = function(registry, forge) {
   var uri = require('url');
   
   
@@ -133,7 +133,7 @@ exports = module.exports = function(registry, vc) {
     next();
   }
   
-  function loadCounts(page, next) {
+  function augmentWithInfoFromForge(page, next) {
     var packages = page.locals.packages;
     
     var i = 0;
@@ -148,8 +148,7 @@ exports = module.exports = function(registry, vc) {
       }
       
       var repo = pkg.repositories[0];
-      
-      vc.info(repo.url, { protocol: repo.type }, function(err, proj) {
+      forge.info(repo.url, function(err, proj) {
         if (err && err.type == 'HostNotSupportedError') {
           return iter();
         } else if (err) { return next(err); }
@@ -193,7 +192,7 @@ exports = module.exports = function(registry, vc) {
     fetchPackages,
     count,
     select,
-    loadCounts,
+    augmentWithInfoFromForge,
     render
   ];
 };
