@@ -1,24 +1,17 @@
 exports = module.exports = function(registry) {
   
   function fetchPackages(page, next) {
-    console.log('DB INFO!');
-    
-    registry.list(function(err, pkgs) {
+    registry.list(function(err, pkgs, info) {
       if (err) { return next(err); }
-      page.locals.packages = pkgs;
+      page.locals.count = info.count;
       next();
     });
   }
   
   function render(page, next) {
-    //var pkg = page.locals.package;
     var obj = {};
-    
-    obj.doc_count = 2;
-    
-    //obj.name = pkg.name;
-    //obj.description = pkg.description;
-    //obj.keywords = pkg.keywords;
+    obj.db_name = 'registry';
+    obj.doc_count = page.locals.count;
     
     page.write(JSON.stringify(obj, null, 2));
     page.end();
