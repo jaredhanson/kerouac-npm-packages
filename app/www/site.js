@@ -4,7 +4,7 @@
  * This component provides a site that allows people to browse and search
  * JavaScript packages.
  */
-exports = module.exports = function(showHandler, api_allHandler, api_v1_allHandler, api_v1_promotedHandler, registry, project) {
+exports = module.exports = function(showHandler, registry) {
   var kerouac = require('kerouac')
     , fs = require('fs')
     , path = require('path');
@@ -23,7 +23,7 @@ exports = module.exports = function(showHandler, api_allHandler, api_v1_allHandl
   //var site = kerouac();
   var site = new kerouac.Router();
   
-  site.page('/:name.html', require('./handlers/show')(registry, project));
+  site.page('/:name.html', showHandler);
   
   site.driver = driver;
   

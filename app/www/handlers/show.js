@@ -7,7 +7,7 @@
  *
  * @returns {Function[]}
  */
-exports = module.exports = function(packageRegistry, project) {
+exports = module.exports = function(registry, forge) {
   var npmUser = require('npm-user')
     , LICENSES = require('spdx-license-list');
   
@@ -20,7 +20,7 @@ exports = module.exports = function(packageRegistry, project) {
   function fetchPackage(page, next) {
     console.log(page.params.name)
     
-    packageRegistry.read(page.params.name, function(err, pkg) {
+    registry.read(page.params.name, function(err, pkg) {
       if (err) { return next(err); }
       
       //page.locals._id = page.params.name;
@@ -108,7 +108,7 @@ exports = module.exports = function(packageRegistry, project) {
     var repo = page.locals.repository
     if (!repo) { return next(); }
     
-    project.info(repo.url, { protocol: repo.type }, function(err, proj) {
+    forge.info(repo.url, { protocol: repo.type }, function(err, proj) {
       if (err && err.type == 'HostNotSupportedError') {
         return next();
       } else if (err) { return next(err); }
