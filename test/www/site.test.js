@@ -7,7 +7,7 @@ var MockSite = require('../mocks/site');
 var MockQueue = require('../mocks/queue');
 
 
-describe('www/site', function() {
+describe.skip('www/site', function() {
   
   it('should export factory function', function() {
     expect(factory).to.be.a('function');

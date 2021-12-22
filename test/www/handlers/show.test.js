@@ -28,8 +28,11 @@ describe('handlers/show', function() {
     describe('package with latest version', function() {
       var page, layout, err;
       
+      var packageRegistry = new Object();
+      var project = new Object();
+      
       before(function() {
-        sinon.stub(packageRegistry, 'read').yields(null, {
+        packageRegistry.read = sinon.stub().yields(null, {
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport.',
           keywords: [ 'passport', 'facebook', 'identity' ],
@@ -96,7 +99,7 @@ describe('handlers/show', function() {
             type: 'MIT'
           } ],
           //readme: '# passport-facebook\n\n',
-          downloads: {
+          downloadCounts: {
             'last-day': 7657,
             'last-week': 28650,
             'last-month': 183283
@@ -106,7 +109,7 @@ describe('handlers/show', function() {
           ptime: new Date('2016-05-17T19:13:37.644Z')
         });
         
-        sinon.stub(project, 'info').yields(null, {
+        project.info = sinon.stub().yields(null, {
           name: 'passport-facebook',
           description: 'Facebook authentication strategy for Passport and Node.js.',
           homepage: 'https://github.com/jaredhanson/passport-facebook',
@@ -119,8 +122,8 @@ describe('handlers/show', function() {
       });
     
       after(function() {
-        project.info.restore();
-        packageRegistry.read.restore();
+        //project.info.restore();
+        //packageRegistry.read.restore();
       });
       
       before(function(done) {
@@ -214,7 +217,7 @@ describe('handlers/show', function() {
             url: 'http://www.jaredhanson.net/'
           },
           //readme: '# Passport-OpenID\n\n[Passport](https://github.com/jaredhanson/passport) strategy for authenticating\nwith [OpenID](http://openid.net/).\n\nThis module lets you authenticate using OpenID in your Node.js applications.  By\nplugging into Passport, OpenID authentication can be easily and unobtrusively\nintegrated into any application or framework that supports\n[Connect](http://www.senchalabs.org/connect/)-style middleware, including\n[Express](http://expressjs.com/).\n\n',
-          downloads: {
+          downloadCounts: {
             'last-day': 1029,
             'last-week': 4004,
             'last-month': 23844
@@ -236,8 +239,8 @@ describe('handlers/show', function() {
       });
     
       after(function() {
-        project.info.restore();
-        packageRegistry.read.restore();
+        //project.info.restore();
+        //packageRegistry.read.restore();
       });
       
       before(function(done) {

@@ -18,6 +18,8 @@ exports = module.exports = function(packageRegistry, project) {
   }
   
   function fetchPackage(page, next) {
+    console.log(page.params.name)
+    
     packageRegistry.read(page.params.name, function(err, pkg) {
       if (err) { return next(err); }
       
@@ -44,8 +46,8 @@ exports = module.exports = function(packageRegistry, project) {
           page.locals.license.url = license.url;
         }
       }
-      if (pkg.downloads) {
-        page.locals.downloads = pkg.downloads;
+      if (pkg.downloadCounts) {
+        page.locals.downloads = pkg.downloadCounts;
       }
       if (pkg.flags) {
         page.locals.flags = pkg.flags;
@@ -141,7 +143,7 @@ exports = module.exports = function(packageRegistry, project) {
       , engines = [ 'md' ];
     
     (function iter(i, err) {
-      if (err) { console.log(err); return cb(err); }
+      if (err) { return cb(err); }
       
       var engine = engines[i];
       if (!engine) { return next(); } // done
