@@ -20,11 +20,27 @@ exports = module.exports = function(registry, forge) {
   var limit = 25;
   
   function fetchPackages(page, next) {
-    var i = page.params.page ? parseInt(page.params.page - 1) : 0
-      , offset = i * limit;
+    var pi = page.params.page ? parseInt(page.params.page - 1) : 0
+      , offset = pi * limit;
     
-    registry.list({ limit: limit, offset: offset }, function(err, ps) {
+    registry.list({ limit: limit, offset: offset }, function(err, ps, inf) {
       if (err) { return next(err); }
+  
+      //console.log('ABS URL: ' + page.absoluteURL);
+      // /packages/-/v1/all.json
+      // /packages/-/v1/all/2.json
+  
+      var urls = {};
+      if (offset + limit < inf.count) {
+        urls.next = pi > 0 ? uri.resolve(page.absoluteURL, (pi + 2) + '.json')
+                           : uri.resolve(page.absoluteURL, 'all/' + (pi + 2) + '.json'); // add 2 for 1-based indexing
+      }
+      if (pi > 0) {
+        urls.prev = pi > 1 ? uri.resolve(page.absoluteURL, pi + '.json')
+                           : uri.resolve(page.absoluteURL, '../all.json');
+      }
+      page.locals.total = inf.count;
+      page.locals.urls = urls;
       
       var pkgs = []
         , i = 0;
@@ -42,30 +58,6 @@ exports = module.exports = function(registry, forge) {
         });
       }
       iter();
-    });
-  }
-  
-  function count(page, next) {
-    // TODO: Pass counting info in response to `list` above, to avoid duplicate calls
-    registry.list(function(err, pkgs) {
-      if (err) { return next(err); }
-      
-      var i = page.params.page ? parseInt(page.params.page - 1) : 0
-        , offset = i * limit;
-    
-      var urls = {};
-      if (offset + limit < pkgs.length) {
-        urls.next = i > 0 ? uri.resolve(page.absoluteURL, (i + 2) + '.json')
-                          : uri.resolve(page.absoluteURL, 'all/' + (i + 2) + '.json'); // add 2 for 1-based indexing
-      }
-      if (i > 0) {
-        urls.prev = i > 1 ? uri.resolve(page.absoluteURL, i + '.json')
-                          : uri.resolve(page.absoluteURL, '../all.json');
-      }
-    
-      page.locals.total = pkgs.length;
-      page.locals.urls = urls;
-      next();
     });
   }
   
@@ -193,7 +185,6 @@ exports = module.exports = function(registry, forge) {
   
   return [
     fetchPackages,
-    count,
     augmentWithInfoFromForge,
     mapFormat,
     render
