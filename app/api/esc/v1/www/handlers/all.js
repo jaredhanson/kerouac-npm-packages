@@ -110,29 +110,29 @@ exports = module.exports = function(registry, forge) {
     iter();
   }
   
-  function select(page, next) {
+  function mapFormat(page, next) {
     var packages = page.locals.packages;
     
     var objects = packages.map(function(p) {
-      var json = {};
-      json.package = {};
-      json.package.name = p.name;
+      var obj = {};
+      obj.package = {};
+      obj.package.name = p.name;
       if (p['dist-tags']) {
-        json.package.version = p['dist-tags']['latest'];
+        obj.package.version = p['dist-tags']['latest'];
       }
-      json.package.description = p.description;
-      json.package.keywords = p.keywords;
+      obj.package.description = p.description;
+      obj.package.keywords = p.keywords;
       if (p.ptime) {
-        json.package.date = p.ptime.toISOString();
+        obj.package.date = p.ptime.toISOString();
       }
-      json.package.links = {};
-      json.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.name);
-      json.package.links.homepage = p.homepage;
+      obj.package.links = {};
+      obj.package.links.npm = 'https://www.npmjs.com/package/' + encodeURIComponent(p.name);
+      obj.package.links.homepage = p.homepage;
       if (p.repositories) {
-        json.package.links.repository = p.repositories[0].url;
+        obj.package.links.repository = p.repositories[0].url;
       }
       if (p.bugs) {
-        json.package.links.bugs = p.bugs.url;
+        obj.package.links.bugs = p.bugs.url;
       }
       if (p.flags) {
         // The "flags" property is not documented.  However, it's existence has
@@ -148,7 +148,7 @@ exports = module.exports = function(registry, forge) {
         //     "insecure": 1,
         //     "unstable": true
         //   }
-        json.flags = p.flags;
+        obj.flags = p.flags;
       }
       if (p.downloads) {
         // The "downloads" property is not available in npm's implementation.
@@ -160,17 +160,17 @@ exports = module.exports = function(registry, forge) {
         //   - [Download counts are back!](https://blog.npmjs.org/post/78719826768/download-counts-are-back)
         //   - [numeric precision matters: how npm download counts work](https://blog.npmjs.org/post/92574016600/numeric-precision-matters-how-npm-download-counts)
         //   - [npm/download-counts](https://github.com/npm/download-counts)
-        json.downloads = {
+        obj.downloads = {
           'last-day': p.downloads['last-day'],
           'last-week': p.downloads['last-week'],
           'last-month': p.downloads['last-month']
         }
       }
       if (p._count) {
-        json.count = p._count;
+        obj.count = p._count;
       }
       
-      return json;
+      return obj;
     });
     
     page.locals.objects = objects;
@@ -195,7 +195,7 @@ exports = module.exports = function(registry, forge) {
     fetchPackages,
     count,
     augmentWithInfoFromForge,
-    select,
+    mapFormat,
     render
   ];
 };

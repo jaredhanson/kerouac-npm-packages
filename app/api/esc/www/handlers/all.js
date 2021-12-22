@@ -106,7 +106,6 @@ exports = module.exports = function(registry, forge) {
   
   function render(page, next) {
     var packages = page.locals.packages;
-    
     var json = {};
     
     packages.forEach(function(p) {
