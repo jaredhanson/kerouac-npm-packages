@@ -162,7 +162,7 @@ describe('handlers/show', function() {
           homepage: 'https://github.com/jaredhanson/passport-facebook#readme',
           repository: {
             type: 'git',
-            url: 'git://github.com/jaredhanson/passport-facebook.git',
+            url: 'https://github.com/jaredhanson/passport-facebook',
           },
           bugs: {
             url: 'http://github.com/jaredhanson/passport-facebook/issues'
@@ -278,7 +278,7 @@ describe('handlers/show', function() {
           homepage: 'https://github.com/jaredhanson/passport-openid',
           repository: {
             type: 'git',
-            url: 'git://github.com/jaredhanson/passport-openid.git',
+            url: 'https://github.com/jaredhanson/passport-openid',
           },
           bugs: {
             url: 'http://github.com/jaredhanson/passport-openid/issues'

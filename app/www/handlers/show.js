@@ -104,7 +104,7 @@ exports = module.exports = function(registry, forge) {
     //console.log(require('util').inspect(pkg, false, null))
   }
   
-  function loadRepositoryMetadata(page, next) {
+  function fetchForgeInfo(page, next) {
     var repo = page.locals.repository
     if (!repo) { return next(); }
     
@@ -116,6 +116,8 @@ exports = module.exports = function(registry, forge) {
       if (!proj) { return next(); }
       
       // TODO: set favorite counts and the like as locals
+      
+      if (proj.homepage) { page.locals.repository.url = proj.homepage; }
       
       page.locals.count = {};
       page.locals.count.favorites = proj.favoriteCount;
@@ -174,7 +176,7 @@ exports = module.exports = function(registry, forge) {
     initialize,
     fetchPackage,
     //loadUserMetadata,
-    loadRepositoryMetadata,
+    fetchForgeInfo,
     renderReadMe,
     render,
     errorHandler
