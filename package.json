@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "async-cache": "^1.1.0",
+    "clone": "^2.1.2",
     "js-yaml": "^3.10.0",
     "kerouac-sitemap": "^0.4.2",
     "lru-cache": "^6.0.0",

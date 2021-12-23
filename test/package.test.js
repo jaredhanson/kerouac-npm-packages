@@ -1,6 +1,7 @@
 /* global describe, it */
 
 var expect = require('chai').expect;
+var sinon = require('sinon');
 
 
 describe('kerouac-npm-packages', function() {
@@ -17,10 +18,17 @@ describe('kerouac-npm-packages', function() {
     });
   });
   
+  /*
   it('should throw if required', function() {
     expect(function() {
       var pkg = require('..');
     }).to.throw(Error).with.property('code', 'MODULE_NOT_FOUND');
   });
+  */
   
+});
+
+afterEach(function() {
+  //if (sinon.restore) { sinon.restore(); }
+  //sinon.restore();
 });
