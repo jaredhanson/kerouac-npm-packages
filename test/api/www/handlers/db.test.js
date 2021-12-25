@@ -19,7 +19,7 @@ describe('api/www/handlers/db', function() {
         { name: 'passport-facebook' }
       ], { count: 1 });
     
-      chai.kerouac.handler(factory(registry))
+      chai.kerouac.use(factory(registry))
         .end(function(page) {
           var expected = [
             '{',
@@ -41,7 +41,7 @@ describe('api/www/handlers/db', function() {
         { name: 'passport-google' }
       ], { count: 2 });
     
-      chai.kerouac.handler(factory(registry))
+      chai.kerouac.use(factory(registry))
         .end(function(page) {
           var expected = [
             '{',
@@ -59,10 +59,8 @@ describe('api/www/handlers/db', function() {
     it('should error when failing to list packages in registry', function(done) {
       var registry = new Object();
       registry.list = sinon.stub().yieldsAsync(new Error('something went wrong'));
-      
-      var forge = new Object();
   
-      chai.kerouac.handler(factory(registry, forge))
+      chai.kerouac.use(factory(registry))
         .page(function(page) {
           page.params = { package: 'passport-facebook' };
         })

@@ -107,7 +107,7 @@ describe('api/esc/www/handlers/all', function() {
         modifiedAt: new Date('2018-09-20T10:59:45.000Z')
       });
   
-      chai.kerouac.handler(factory(registry, forge))
+      chai.kerouac.use(factory(registry, forge))
         .end(function(page) {
           var expected = [
             '{',
@@ -157,7 +157,7 @@ describe('api/esc/www/handlers/all', function() {
       
       var forge = new Object();
   
-      chai.kerouac.handler(factory(registry, forge))
+      chai.kerouac.use(factory(registry, forge))
         .next(function(err) {
           expect(err).to.be.an.instanceof(Error);
           expect(err.message).to.equal('something went wrong');
@@ -175,7 +175,7 @@ describe('api/esc/www/handlers/all', function() {
       
       var forge = new Object();
   
-      chai.kerouac.handler(factory(registry, forge))
+      chai.kerouac.use(factory(registry, forge))
         .next(function(err) {
           expect(err).to.be.an.instanceof(Error);
           expect(err.message).to.equal('something went wrong');

@@ -127,7 +127,7 @@ describe('handlers/show', function() {
       });
       
       before(function(done) {
-        chai.kerouac.handler(factory(packageRegistry, project))
+        chai.kerouac.use(factory(packageRegistry, project))
           .page(function(page) {
             page.params = { name: 'passport-facebook' };
           })
@@ -244,7 +244,7 @@ describe('handlers/show', function() {
       });
       
       before(function(done) {
-        chai.kerouac.handler(factory(packageRegistry, project))
+        chai.kerouac.use(factory(packageRegistry, project))
           .page(function(page) {
             page.params = { name: 'passport-openid' };
           })
