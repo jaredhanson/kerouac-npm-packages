@@ -31,7 +31,7 @@ describe('api/www/handlers/db', function() {
           expect(this.body).to.equal(expected);
           done();
         })
-        .dispatch();
+        .generate();
     }); // should render info for db with one package
     
     it('should render info for db with two packages', function(done) {
@@ -53,7 +53,7 @@ describe('api/www/handlers/db', function() {
           expect(this.body).to.equal(expected);
           done();
         })
-        .dispatch();
+        .generate();
     }); // should render info for db with two packages
     
     it('should error when failing to list packages in registry', function(done) {
@@ -66,7 +66,7 @@ describe('api/www/handlers/db', function() {
           expect(err.message).to.equal('something went wrong');
           done();
         })
-        .dispatch();
+        .generate();
     }); // should error when failing to list packages in registry
     
   }); // handler

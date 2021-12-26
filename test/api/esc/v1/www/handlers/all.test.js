@@ -153,7 +153,7 @@ describe('api/esc/v1/www/handlers/all', function() {
           expect(this.body).to.equal(expected);
           done();
         })
-        .dispatch();
+        .generate();
     }); // should render one package
     
     it('should error when failing to list packages in registry', function(done) {
@@ -171,7 +171,7 @@ describe('api/esc/v1/www/handlers/all', function() {
           expect(err.message).to.equal('something went wrong');
           done();
         })
-        .dispatch();
+        .generate();
     }); // should error when failing to list packages in registry
     
     it('should error when failing to read package in registry', function(done) {
@@ -192,7 +192,7 @@ describe('api/esc/v1/www/handlers/all', function() {
           expect(err.message).to.equal('something went wrong');
           done();
         })
-        .dispatch();
+        .generate();
     }); // should error when failing to read package in registry
     
   }); // handler

@@ -136,7 +136,7 @@ describe('handlers/show', function() {
             layout = this._layout;
             done();
           })
-          .dispatch();
+          .generate();
       });
       
       it('should read package from repository', function() {
@@ -253,7 +253,7 @@ describe('handlers/show', function() {
             layout = this._layout;
             done();
           })
-          .dispatch();
+          .generate();
       });
       
       it('should read package from repository', function() {
