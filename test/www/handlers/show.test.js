@@ -128,12 +128,12 @@ describe('handlers/show', function() {
       
       before(function(done) {
         chai.kerouac.use(factory(packageRegistry, project))
-          .page(function(page) {
+          .request(function(page) {
             page.params = { name: 'passport-facebook' };
           })
-          .render(function(p, l) {
-            page = p;
-            layout = l;
+          .finish(function() {
+            page = this;
+            layout = this._layout;
             done();
           })
           .dispatch();
@@ -245,12 +245,12 @@ describe('handlers/show', function() {
       
       before(function(done) {
         chai.kerouac.use(factory(packageRegistry, project))
-          .page(function(page) {
+          .request(function(page) {
             page.params = { name: 'passport-openid' };
           })
-          .render(function(p, l) {
-            page = p;
-            layout = l;
+          .finish(function() {
+            page = this;
+            layout = this._layout;
             done();
           })
           .dispatch();

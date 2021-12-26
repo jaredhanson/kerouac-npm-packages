@@ -108,10 +108,10 @@ describe('api/esc/v1/www/handlers/all', function() {
       });
     
       chai.kerouac.use(factory(registry, forge))
-        .page(function(page) {
+        .request(function(page) {
           page.params = {};
         })
-        .end(function(page) {
+        .finish(function() {
           var expected = [
             '{',
             '  "objects": [',
@@ -150,7 +150,7 @@ describe('api/esc/v1/www/handlers/all', function() {
             '}'
           ].join("\n");
     
-          expect(page.body).to.equal(expected);
+          expect(this.body).to.equal(expected);
           done();
         })
         .dispatch();
@@ -163,7 +163,7 @@ describe('api/esc/v1/www/handlers/all', function() {
       var forge = new Object();
     
       chai.kerouac.use(factory(registry, forge))
-        .page(function(page) {
+        .request(function(page) {
           page.params = {};
         })
         .next(function(err) {
@@ -184,7 +184,7 @@ describe('api/esc/v1/www/handlers/all', function() {
       var forge = new Object();
     
       chai.kerouac.use(factory(registry, forge))
-        .page(function(page) {
+        .request(function(page) {
           page.params = {};
         })
         .next(function(err) {

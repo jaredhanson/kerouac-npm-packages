@@ -108,7 +108,7 @@ describe('api/esc/www/handlers/all', function() {
       });
   
       chai.kerouac.use(factory(registry, forge))
-        .end(function(page) {
+        .finish(function() {
           var expected = [
             '{',
             '  "passport-facebook": {',
@@ -145,7 +145,7 @@ describe('api/esc/www/handlers/all', function() {
             '}'
           ].join("\n");
   
-          expect(page.body).to.equal(expected);
+          expect(this.body).to.equal(expected);
           done();
         })
         .dispatch();

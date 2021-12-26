@@ -20,7 +20,7 @@ describe('api/www/handlers/db', function() {
       ], { count: 1 });
     
       chai.kerouac.use(factory(registry))
-        .end(function(page) {
+        .finish(function() {
           var expected = [
             '{',
             '  "db_name": "registry",',
@@ -28,7 +28,7 @@ describe('api/www/handlers/db', function() {
             '}'
           ].join("\n");
     
-          expect(page.body).to.equal(expected);
+          expect(this.body).to.equal(expected);
           done();
         })
         .dispatch();
@@ -42,7 +42,7 @@ describe('api/www/handlers/db', function() {
       ], { count: 2 });
     
       chai.kerouac.use(factory(registry))
-        .end(function(page) {
+        .finish(function() {
           var expected = [
             '{',
             '  "db_name": "registry",',
@@ -50,7 +50,7 @@ describe('api/www/handlers/db', function() {
             '}'
           ].join("\n");
     
-          expect(page.body).to.equal(expected);
+          expect(this.body).to.equal(expected);
           done();
         })
         .dispatch();
@@ -61,9 +61,6 @@ describe('api/www/handlers/db', function() {
       registry.list = sinon.stub().yieldsAsync(new Error('something went wrong'));
   
       chai.kerouac.use(factory(registry))
-        .page(function(page) {
-          page.params = { package: 'passport-facebook' };
-        })
         .next(function(err) {
           expect(err).to.be.an.instanceof(Error);
           expect(err.message).to.equal('something went wrong');

@@ -105,10 +105,10 @@ describe('api/www/handlers/package', function() {
       });
     
       chai.kerouac.use(factory(registry, forge))
-        .page(function(page) {
+        .request(function(page) {
           page.params = { package: 'passport-facebook' };
         })
-        .end(function(page) {
+        .finish(function() {
           expect(registry.read.callCount).to.equal(1);
           var call = registry.read.getCall(0)
           expect(call.args[0]).to.equal('passport-facebook');
@@ -125,7 +125,7 @@ describe('api/www/handlers/package', function() {
             '}'
           ].join("\n");
     
-          expect(page.body).to.equal(expected);
+          expect(this.body).to.equal(expected);
           done();
         })
         .dispatch();
@@ -141,7 +141,7 @@ describe('api/www/handlers/package', function() {
       var forge = new Object();
   
       chai.kerouac.use(factory(registry, forge))
-        .page(function(page) {
+        .request(function(page) {
           page.params = { package: 'passport-facebook' };
         })
         .next(function(err) {
