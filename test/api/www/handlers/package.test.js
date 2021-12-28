@@ -104,7 +104,7 @@ describe('api/www/handlers/package', function() {
         modifiedAt: new Date('2018-09-20T10:59:45.000Z')
       });
     
-      chai.kerouac.use(factory(registry, forge))
+      chai.kerouac.page(factory(registry, forge))
         .request(function(page) {
           page.params = { package: 'passport-facebook' };
         })
@@ -140,7 +140,7 @@ describe('api/www/handlers/package', function() {
       
       var forge = new Object();
   
-      chai.kerouac.use(factory(registry, forge))
+      chai.kerouac.page(factory(registry, forge))
         .request(function(page) {
           page.params = { package: 'passport-facebook' };
         })

@@ -19,7 +19,7 @@ describe('api/www/handlers/db', function() {
         { name: 'passport-facebook' }
       ], { count: 1 });
     
-      chai.kerouac.use(factory(registry))
+      chai.kerouac.page(factory(registry))
         .finish(function() {
           var expected = [
             '{',
@@ -41,7 +41,7 @@ describe('api/www/handlers/db', function() {
         { name: 'passport-google' }
       ], { count: 2 });
     
-      chai.kerouac.use(factory(registry))
+      chai.kerouac.page(factory(registry))
         .finish(function() {
           var expected = [
             '{',
@@ -60,7 +60,7 @@ describe('api/www/handlers/db', function() {
       var registry = new Object();
       registry.list = sinon.stub().yieldsAsync(new Error('something went wrong'));
   
-      chai.kerouac.use(factory(registry))
+      chai.kerouac.page(factory(registry))
         .next(function(err) {
           expect(err).to.be.an.instanceof(Error);
           expect(err.message).to.equal('something went wrong');
