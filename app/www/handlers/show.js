@@ -150,7 +150,7 @@ exports = module.exports = function(registry, forge) {
       var engine = engines[i];
       if (!engine) { return next(); } // done
       
-      site.render(readme, { engine: engine }, function(err, html) {
+      site.convert(readme, engine, function(err, html) {
         if (err) { return iter(i + 1, err); }
         
         page.locals.readme = html;
