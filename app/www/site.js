@@ -9,7 +9,7 @@ exports = module.exports = function(showHandler, registry) {
     , fs = require('fs')
     , path = require('path');
 
-  var Driver = require('../../lib/driver');
+  var Driver = require('../../lib/mapper');
 
   
   //var dir = 'data/packages';
