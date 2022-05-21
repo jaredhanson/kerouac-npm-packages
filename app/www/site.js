@@ -9,7 +9,6 @@ exports = module.exports = function(showHandler, registry) {
     , fs = require('fs')
     , path = require('path');
 
-  var Driver = require('../../lib/mapper');
 
   
   //var dir = 'data/packages';
@@ -18,14 +17,10 @@ exports = module.exports = function(showHandler, registry) {
   //var limit = options.limit || 25
   //  , featured = path.join(dir, '_feeds', 'featured.yaml');
   
-  var driver = new Driver(registry);
-  
   //var site = kerouac();
   var site = new kerouac.Router();
   
   site.page('/:name.html', showHandler);
-  
-  site.driver = driver;
   
   /*
   site.on('mount', function onmount(parent) {
