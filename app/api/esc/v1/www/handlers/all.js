@@ -52,7 +52,8 @@ exports = module.exports = function(registry, forge) {
         }
         
         registry.read(p.name, function(err, pkg) {
-          if (err) { return next(err); }
+          //if (err) { return next(err); }
+          if (err) { return iter(); }
           pkgs.push(pkg);
           iter();
         });
